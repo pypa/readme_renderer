@@ -59,5 +59,10 @@ setuptools.setup(
         "Programming Language :: Python :: Implementation :: PyPy",
     ],
 
+    install_requires=[
+        "docutils",
+        "six",
+    ],
+
     packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
 )
