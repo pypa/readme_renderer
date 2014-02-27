@@ -60,6 +60,7 @@ setuptools.setup(
     ],
 
     install_requires=[
+        "bleach",
         "docutils",
         "six",
     ],

@@ -19,7 +19,7 @@ from docutils.core import publish_parts
 from docutils.writers.html4css1 import HTMLTranslator, Writer
 from docutils.utils import SystemMessage
 
-from .utils import Rendered
+from .clean import clean
 
 
 SETTINGS = {
@@ -68,7 +68,7 @@ SETTINGS = {
 }
 
 
-def render(markup):
+def render(raw):
     # Use a io.StringIO as the warning stream to prevent warnings from being
     # printed to sys.stderr.
     settings = SETTINGS.copy()
@@ -78,14 +78,10 @@ def render(markup):
     writer.translator_class = HTMLTranslator
 
     try:
-        parts = publish_parts(
-            markup,
-            writer=writer,
-            settings_overrides=settings,
-        )
+        parts = publish_parts(raw, writer=writer, settings_overrides=settings)
     except SystemMessage:
         rendered = None
     else:
         rendered = parts.get("fragment")
 
-    return Rendered.from_rendered(markup, rendered)
+    return clean(rendered or raw)
