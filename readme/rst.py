@@ -84,4 +84,4 @@ def render(raw):
     else:
         rendered = parts.get("fragment")
 
-    return clean(rendered or raw)
+    return clean(rendered or raw), bool(rendered)
