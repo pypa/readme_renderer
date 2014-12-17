@@ -1,6 +1,9 @@
 language: python
 
+# Use Travis's shiny new Docker infrastructure
+# should result in faster build times
 sudo: false
+
 env:
     - TOXENV=py27
     - TOXENV=py33
