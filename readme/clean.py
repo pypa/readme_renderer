@@ -34,9 +34,8 @@ ALLOWED_ATTRIBUTES = {
     "acronym": ["title"],
 
     # Custom Additions
-    "*": ["id"],
+    "*": ["id", "class"],
     "img": ["src"],
-    "span": ["class"],
 }
 
 ALLOWED_STYLES = []
