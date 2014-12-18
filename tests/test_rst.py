@@ -9,10 +9,7 @@ def test_rst_001():
 
 
 def test_rst_002():
-    assert render('http://mymalicioussite.com/') == (
-        ('<p><a href="http://mymalicioussite.com/" rel="nofollow">' +
-         'http://mymalicioussite.com/</a></p>\n'),
-        True)
+    _do_test_with_files('test_rst_002')
 
 
 def test_rst_003():
