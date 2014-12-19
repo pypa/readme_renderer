@@ -43,30 +43,10 @@ ALLOWED_STYLES = []
 
 
 def clean(html):
-    def nofollow(attrs, new=False):
-        if attrs["href"].startswith("mailto:"):
-            return attrs
-        attrs["rel"] = "nofollow"
-        return attrs
-
     # Clean the output using Bleach
-    cleaned = bleach.clean(
+    return bleach.clean(
         html,
         tags=ALLOWED_TAGS,
         attributes=ALLOWED_ATTRIBUTES,
         styles=ALLOWED_STYLES,
     )
-
-    # Bleach Linkify makes it easy to modify links, however, we will not be
-    # using it to create additional links.
-    cleaned = bleach.linkify(
-        cleaned,
-        callbacks=[
-            lambda attrs, new: attrs if not new else None,
-            nofollow,
-        ],
-        skip_pre=True,
-        parse_email=False,
-    )
-
-    return cleaned
