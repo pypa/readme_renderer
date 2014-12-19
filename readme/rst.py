@@ -33,7 +33,7 @@ SETTINGS = {
     "doctitle_xform": True,
 
     # Set our initial header level
-    "initial_header_level": 2,
+    # "initial_header_level": 2,
 
     # Prevent local files from being included into the rendered output.
     # This is a security concern because people can insert files
