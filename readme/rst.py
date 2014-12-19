@@ -57,7 +57,7 @@ SETTINGS = {
 
     # Use typographic quotes, and transform --, ---, and ... into their
     # typographic counterparts.
-    "smart_quotes": True,
+    # "smart_quotes": True,
 
     # Strip all comments from the rendered output.
     "strip_comments": True,
