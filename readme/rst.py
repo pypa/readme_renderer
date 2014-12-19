@@ -20,6 +20,7 @@ from docutils.writers.html4css1 import HTMLTranslator, Writer
 from docutils.utils import SystemMessage
 
 from .clean import clean
+from .linkify import linkify
 
 
 SETTINGS = {
@@ -68,7 +69,7 @@ SETTINGS = {
 }
 
 
-def render(raw):
+def render(raw, clean=clean, linkify=linkify):
     # Use a io.StringIO as the warning stream to prevent warnings from being
     # printed to sys.stderr.
     settings = SETTINGS.copy()
@@ -84,4 +85,11 @@ def render(raw):
     else:
         rendered = parts.get("fragment")
 
-    return clean(rendered or raw), bool(rendered)
+    doc = rendered or raw
+
+    if clean:
+        doc = clean(doc)
+    if linkify:
+        doc = linkify(doc)
+
+    return doc, bool(rendered)
