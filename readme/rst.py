@@ -14,12 +14,38 @@
 from __future__ import absolute_import, division, print_function
 
 import io
+import os.path
 
 from docutils.core import publish_parts
 from docutils.writers.html4css1 import HTMLTranslator, Writer
 from docutils.utils import SystemMessage
 
 from .clean import clean
+
+
+class ReadMeHTMLTranslator(HTMLTranslator):
+
+    def depart_image(self, node):
+        uri = node["uri"]
+        ext = os.path.splitext(uri)[1].lower()
+        # we need to swap RST's use of `object` with `img` tags
+        # see http://git.io/5me3dA
+        if ext == ".svg":
+            # preserve essential attributes
+            atts = {}
+            for attribute, value in node.attributes.items():
+                # we have no time for empty values
+                if value:
+                    if attribute == "uri":
+                        atts["src"] = value
+                    else:
+                        atts[attribute] = value
+
+            # toss off `object` tag
+            self.body.pop()
+            # add on `img` with attributes
+            self.body.append(self.starttag(node, "img", **atts))
+        self.body.append(self.context.pop())
 
 
 SETTINGS = {
@@ -31,6 +57,11 @@ SETTINGS = {
     # title, and thus second level headings from being promoted to top
     # level.
     "doctitle_xform": True,
+
+    # Prevent a lone subsection heading from being promoted to section
+    # title, and thus second level headings from being promoted to top
+    # level.
+    "sectsubtitle_xform": True,
 
     # Set our initial header level
     "initial_header_level": 2,
@@ -75,7 +106,7 @@ def render(raw):
     settings["warning_stream"] = io.StringIO()
 
     writer = Writer()
-    writer.translator_class = HTMLTranslator
+    writer.translator_class = ReadMeHTMLTranslator
 
     try:
         parts = publish_parts(raw, writer=writer, settings_overrides=settings)
