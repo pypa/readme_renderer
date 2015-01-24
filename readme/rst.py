@@ -32,6 +32,11 @@ SETTINGS = {
     # level.
     "doctitle_xform": True,
 
+    # Prevent a lone subsection heading from being promoted to section
+    # title, and thus second level headings from being promoted to top
+    # level.
+    "sectsubtitle_xform": True,
+
     # Set our initial header level
     "initial_header_level": 2,
 
