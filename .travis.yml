@@ -1,17 +1,25 @@
 language: python
+python: 3.4
 
-# Use Travis's shiny new Docker infrastructure
-# should result in faster build times
 sudo: false
 
 env:
-    - TOXENV=py27
-    - TOXENV=py33
-    - TOXENV=py34
-    - TOXENV=pypy
+  - TOXENV=py26
+  - TOXENV=py27
+  - TOXENV=py33
+  - TOXENV=py34
+  - TOXENV=pypy
+  - TOXENV=pep8
+  - TOXENV=py2pep8
+  - TOXENV=packaging
 
-install:
-    - travis_retry pip install tox
+install: pip install tox
 
-script:
-    - travis_retry tox
+script: tox
+
+notifications:
+  irc:
+    channels:
+      - "irc.freenode.org#pypa-dev"
+    use_notice: true
+    skip_join: true
