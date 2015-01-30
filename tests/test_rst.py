@@ -1,4 +1,4 @@
-import codecs
+import io
 import glob
 import os.path
 
@@ -18,11 +18,11 @@ from readme.rst import render
 )
 def test_rst_fixtures(rst_filename, html_filename):
     # Get our Markup
-    with codecs.open(rst_filename, encoding='utf-8') as f:
+    with io.open(rst_filename, encoding='utf-8') as f:
         rst_markup = f.read()
 
     # Get our expected
-    with codecs.open(html_filename, encoding="utf-8") as f:
+    with io.open(html_filename, encoding="utf-8") as f:
         expected = f.read()
 
     out, rendered = render(rst_markup)
