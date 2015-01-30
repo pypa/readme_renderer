@@ -22,6 +22,7 @@ def render(raw):
     rendered = markdown.markdown(
         raw,
         extensions=[
+            'markdown.extensions.codehilite',
             'markdown.extensions.fenced_code',
             'markdown.extensions.smart_strong',
         ])

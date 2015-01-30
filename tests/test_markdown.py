@@ -72,11 +72,11 @@ def read(fn):
     out, rendered = render(markdown_markup)
     expected_html = """\
 <p>Here is some Python:</p>
-<pre><code>import os
+<div><pre><span class="kn">import</span> <span class="nn">os</span>
 
-def read(fn):
-    return open(fn).read()
-</code></pre>"""
+<span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">open</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>"""
     assert rendered
     assert out == expected_html
 
