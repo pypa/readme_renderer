@@ -59,34 +59,16 @@ def test_a_tag_gets_nofollow():
     assert out in expected_htmls
 
 
-def test_github_backtick_syntax_for_code():
-    markdown_markup = """\
-Here is some Python:
-
-```python
-import os
-
-def read(fn):
-    return open(fn).read()
-```"""
-    out, rendered = render(markdown_markup)
-    expected_html = """\
-<p>Here is some Python:</p>
-<div><pre><span class="kn">import</span> <span class="nn">os</span>
-
-<span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
-    <span class="k">return</span> <span class="nb">open</span><span class="p">(</span><span class="n">fn</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</pre></div>"""
-    assert rendered
-    assert out == expected_html
-
-
 def test_smart_strong():
     markdown_markup = 'Text with double__underscore__words.'
     out, rendered = render(markdown_markup)
     expected_html = '<p>Text with double__underscore__words.</p>'
     assert rendered
     assert out == expected_html
+
+
+def test_github_backtick_syntax_for_code():
+    _do_test_with_files('code')
 
 
 def test_headings_and_paragraphs():
