@@ -81,6 +81,14 @@ def read(fn):
     assert out == expected_html
 
 
+def test_smart_strong():
+    markdown_markup = 'Text with double__underscore__words.'
+    out, rendered = render(markdown_markup)
+    expected_html = '<p>Text with double__underscore__words.</p>'
+    assert rendered
+    assert out == expected_html
+
+
 def test_headings_and_paragraphs():
     _do_test_with_files('headings_and_paragraphs')
 
