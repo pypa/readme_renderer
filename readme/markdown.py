@@ -19,5 +19,7 @@ from .clean import clean
 
 
 def render(raw):
-    rendered = markdown.markdown(raw)
+    rendered = markdown.markdown(
+        raw,
+        extensions=['markdown.extensions.fenced_code'])
     return clean(rendered or raw), bool(rendered)

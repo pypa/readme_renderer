@@ -59,6 +59,28 @@ def test_a_tag_gets_nofollow():
     assert out in expected_htmls
 
 
+def test_github_backtick_syntax_for_code():
+    markdown_markup = """\
+Here is some Python:
+
+```python
+import os
+
+def read(fn):
+    return open(fn).read()
+```"""
+    out, rendered = render(markdown_markup)
+    expected_html = """\
+<p>Here is some Python:</p>
+<pre><code>import os
+
+def read(fn):
+    return open(fn).read()
+</code></pre>"""
+    assert rendered
+    assert out == expected_html
+
+
 def test_headings_and_paragraphs():
     _do_test_with_files('headings_and_paragraphs')
 
