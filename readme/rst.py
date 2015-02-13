@@ -99,11 +99,14 @@ SETTINGS = {
 }
 
 
-def render(raw):
-    # Use a io.StringIO as the warning stream to prevent warnings from being
-    # printed to sys.stderr.
+def render(raw, stream=None):
+    if stream is None:
+        # Use a io.StringIO as the warning stream to prevent warnings from
+        # being printed to sys.stderr.
+        stream = io.StringIO()
+
     settings = SETTINGS.copy()
-    settings["warning_stream"] = io.StringIO()
+    settings["warning_stream"] = stream
 
     writer = Writer()
     writer.translator_class = ReadMeHTMLTranslator
