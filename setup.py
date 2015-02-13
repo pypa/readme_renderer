@@ -66,5 +66,11 @@ setuptools.setup(
         "six",
     ],
 
+    entry_points={
+        "distutils.commands": [
+            "check = readme.integration.distutils:Check",
+        ],
+    },
+
     packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
 )
