@@ -25,18 +25,20 @@ def test_rst_fixtures(rst_filename, html_filename):
     with io.open(html_filename, encoding="utf-8") as f:
         expected = f.read()
 
-    out, rendered = render(rst_markup)
+    out = render(rst_markup)
 
-    assert out == expected
-    assert rendered == ("<" in expected)
+    if "<" in expected:
+        assert out == expected
+    else:
+        assert out is None
 
 
 def test_rst_001():
-    assert render('Hello') == ('<p>Hello</p>\n', True)
+    assert render('Hello') == '<p>Hello</p>\n'
 
 
 def test_rst_002():
     assert render('http://mymalicioussite.com/') == (
-        ('<p><a href="http://mymalicioussite.com/" rel="nofollow">' +
-         'http://mymalicioussite.com/</a></p>\n'),
-        True)
+        '<p><a href="http://mymalicioussite.com/" rel="nofollow">'
+        'http://mymalicioussite.com/</a></p>\n'
+    )

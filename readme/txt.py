@@ -13,26 +13,9 @@
 # limitations under the License.
 from __future__ import absolute_import, division, print_function
 
-import io
-
-from distutils.command.check import check as _check
-
-from readme.rst import render
+from .clean import clean
 
 
-class Check(_check):
-    def check_restructuredtext(self):
-        """
-        Checks if the long string fields are reST-compliant.
-        """
-        data = self.distribution.get_long_description()
-        stream = io.StringIO()
-        markup = render(data, stream=stream)
-
-        for line in stream.getvalue().splitlines():
-            if line.startswith("<string>"):
-                line = line[8:]
-            self.warn(line)
-
-        if markup is None:
-            self.warn("Invalid markup which will not be rendered on PyPI.")
+def render(raw):
+    rendered = raw.replace("\n", "<br>")
+    return clean(rendered, tags=["br"])
