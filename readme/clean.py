@@ -43,7 +43,14 @@ ALLOWED_ATTRIBUTES = {
 ALLOWED_STYLES = []
 
 
-def clean(html):
+def clean(html, tags=None, attributes=None, styles=None):
+    if tags is None:
+        tags = ALLOWED_TAGS
+    if attributes is None:
+        attributes = ALLOWED_ATTRIBUTES
+    if styles is None:
+        styles = ALLOWED_STYLES
+
     def nofollow(attrs, new=False):
         if attrs["href"].startswith("mailto:"):
             return attrs
@@ -53,9 +60,9 @@ def clean(html):
     # Clean the output using Bleach
     cleaned = bleach.clean(
         html,
-        tags=ALLOWED_TAGS,
-        attributes=ALLOWED_ATTRIBUTES,
-        styles=ALLOWED_STYLES,
+        tags=tags,
+        attributes=attributes,
+        styles=styles,
     )
 
     # Bleach Linkify makes it easy to modify links, however, we will not be
