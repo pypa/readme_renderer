@@ -23,8 +23,8 @@ ALLOWED_TAGS = [
 
     # Custom Additions
     "br", "cite", "col", "colgroup", "dd", "div", "dl", "dt", "h1", "h2", "h3",
-    "h4", "h5", "h6", "hr", "img", "p", "pre", "span", "table", "tbody", "td",
-    "th", "thead", "tr", "tt", "kbd", "var",
+    "h4", "h5", "h6", "hr", "img", "p", "pre", "span", "sub", "sup", "table",
+    "tbody", "td", "th", "thead", "tr", "tt", "kbd", "var",
 ]
 
 ALLOWED_ATTRIBUTES = {
