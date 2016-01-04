@@ -1,4 +1,4 @@
-include LICENSE README.rst
+include LICENSE README.rst CHANGES.rst
 include tox.ini .coveragerc
 
 recursive-include tests *.html

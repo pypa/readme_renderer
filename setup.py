@@ -19,7 +19,7 @@ import setuptools
 
 base_dir = os.path.dirname(__file__)
 
-with open(os.path.join(base_dir, "readme", "__about__.py")) as f:
+with open(os.path.join(base_dir, "readme_renderer", "__about__.py")) as f:
     about = {}
     exec(f.read(), about)
 
@@ -68,7 +68,7 @@ setuptools.setup(
 
     entry_points={
         "distutils.commands": [
-            "check = readme.integration.distutils:Check",
+            "check = readme_renderer.integration.distutils:Check",
         ],
     },
 

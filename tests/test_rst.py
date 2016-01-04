@@ -4,7 +4,7 @@ import os.path
 
 import pytest
 
-from readme.rst import render
+from readme_renderer.rst import render
 
 
 @pytest.mark.parametrize(

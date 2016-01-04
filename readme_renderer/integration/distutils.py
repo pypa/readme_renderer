@@ -17,7 +17,7 @@ import io
 
 from distutils.command.check import check as _check
 
-from readme.rst import render
+from ..rst import render
 
 
 class Check(_check):

@@ -18,12 +18,12 @@ __all__ = [
     "__email__", "__license__", "__copyright__",
 ]
 
-__title__ = "readme"
-__summary__ = ('readme is a library for rendering "readme" descriptions for '
-               'Warehouse')
-__uri__ = "https://github.com/pypa/readme"
+__title__ = "readme_renderer"
+__summary__ = ('readme_renderer is a library for rendering "readme" '
+               'descriptions for Warehouse')
+__uri__ = "https://github.com/pypa/readme_renderer"
 
-__version__ = "0.6.0"
+__version__ = "0.7.0"
 
 __author__ = "Donald Stufft"
 __email__ = "donald@stufft.io"
