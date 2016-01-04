@@ -14,10 +14,21 @@
 from __future__ import absolute_import, division, print_function
 
 import os
-
+import textwrap
 import setuptools
 
 base_dir = os.path.dirname(__file__)
+
+if 'RUN_README_SETUP' not in os.environ:
+    raise SystemExit(textwrap.dedent("""
+        The "readme" library was renamed to "readme_renderer"
+        to work around an installation issue that could prevent
+        it from being installed on some systems.
+
+        Please install the "readme_renderer" library instead:
+        https://pypi.python.org/pypi/readme_renderer
+    """))
+
 
 with open(os.path.join(base_dir, "readme", "__about__.py")) as f:
     about = {}
@@ -50,27 +61,15 @@ setuptools.setup(
         "Operating System :: Microsoft :: Windows",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.2",
         "Programming Language :: Python :: 3.3",
+        "Programming Language :: Python :: 3.4",
+        "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
     ],
 
-    install_requires=[
-        "bleach",
-        "docutils",
-        "Pygments",
-        "six",
-    ],
-
-    entry_points={
-        "distutils.commands": [
-            "check = readme.integration.distutils:Check",
-        ],
-    },
-
-    packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
+    packages=setuptools.find_packages(),
 )

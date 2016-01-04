@@ -1,1 +1,0 @@
-<iframe src="http://mymalicioussite.com/">Click here</iframe>
