@@ -16,39 +16,35 @@ from __future__ import absolute_import, division, print_function
 import os
 import textwrap
 import setuptools
+import warnings
 
 base_dir = os.path.dirname(__file__)
 
-if 'RUN_README_SETUP' not in os.environ:
-    raise SystemExit(textwrap.dedent("""
-        The "readme" library was renamed to "readme_renderer"
-        to work around an installation issue that could prevent
-        it from being installed on some systems.
+warnings.warn(textwrap.dedent("""
+    The "readme" library was renamed to "readme_renderer"
+    to work around an installation issue that could prevent
+    it from being installed on some systems.
 
-        Please install the "readme_renderer" library instead:
-        https://pypi.python.org/pypi/readme_renderer
-    """))
+    Please install the "readme_renderer" library instead:
+    https://pypi.python.org/pypi/readme_renderer"""))
 
-
-with open(os.path.join(base_dir, "readme", "__about__.py")) as f:
-    about = {}
-    exec(f.read(), about)
 
 with open(os.path.join(base_dir, "README.rst")) as f:
     long_description = f.read()
 
 
 setuptools.setup(
-    name=about["__title__"],
-    version=about["__version__"],
+    name='readme',
+    version='0.7.1',
 
-    description=about["__summary__"],
+    description=('readme is a library for rendering "readme" descriptions for '
+                 'Warehouse'),
     long_description=long_description,
-    license=about["__license__"],
-    url=about["__uri__"],
+    license='Apache License, Version 2.0',
+    url='https://github.com/pypa/readme',
 
-    author=about["__author__"],
-    author_email=about["__email__"],
+    author='Donald Stufft',
+    author_email='donald@stufft.io',
 
     classifiers=[
         "Intended Audience :: Developers",
@@ -71,5 +67,6 @@ setuptools.setup(
         "Programming Language :: Python :: Implementation :: PyPy",
     ],
 
-    packages=setuptools.find_packages(),
+    py_modules=['wheel-platform-tag-is-broken-on-empty-wheels-see-issue-141'],
+    install_requires=['readme_renderer']
 )
