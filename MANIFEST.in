@@ -4,3 +4,4 @@ include tox.ini .coveragerc
 recursive-include tests *.html
 recursive-include tests *.py
 recursive-include tests *.rst
+recursive-include tests *.md
