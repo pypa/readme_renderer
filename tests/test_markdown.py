@@ -2,7 +2,7 @@ import io
 import os
 import textwrap
 
-from readme.markdown import render
+from readme_renderer.markdown import render
 
 
 def test_simple():
