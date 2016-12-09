@@ -45,7 +45,6 @@ class ReadMeHTMLTranslator(HTMLTranslator):
             self.body.pop()
             # add on `img` with attributes
             self.body.append(self.starttag(node, "img", **atts))
-        self.body.append(self.context.pop())
 
 
 SETTINGS = {
