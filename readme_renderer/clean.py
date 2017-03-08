@@ -52,9 +52,9 @@ def clean(html, tags=None, attributes=None, styles=None):
         styles = ALLOWED_STYLES
 
     def nofollow(attrs, new=False):
-        if attrs["href"].startswith("mailto:"):
+        if attrs[(None, u"href")].startswith("mailto:"):
             return attrs
-        attrs["rel"] = "nofollow"
+        attrs[(None, u"rel")] = "nofollow"
         return attrs
 
     # Clean the output using Bleach
@@ -73,7 +73,7 @@ def clean(html, tags=None, attributes=None, styles=None):
             lambda attrs, new: attrs if not new else None,
             nofollow,
         ],
-        skip_pre=True,
+        skip_tags=['pre'],
         parse_email=False,
     )
 
