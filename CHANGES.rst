@@ -1,6 +1,12 @@
 Changes
 =======
 
+17.1 (2017-03-09)
+-----------------
+
+* Fix an issue attempting to clean data that had ``<a>`` tags without a href.
+
+
 17.0 (2017-03-08)
 -----------------
 
