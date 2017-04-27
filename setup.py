@@ -60,7 +60,7 @@ setuptools.setup(
     ],
 
     install_requires=[
-        "markdown",
+        "markdown>=2.6.8",
         "bleach>=2.0.0",
         "docutils>=0.13.1",
         "Pygments",
