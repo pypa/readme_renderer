@@ -65,6 +65,7 @@ setuptools.setup(
         "docutils>=0.13.1",
         "Pygments",
         "six",
+        "mdorrst>=0.4.0"
     ],
 
     entry_points={
