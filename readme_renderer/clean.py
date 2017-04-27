@@ -13,7 +13,12 @@
 # limitations under the License.
 from __future__ import absolute_import, division, print_function
 
+import functools
+
 import bleach
+import bleach.callbacks
+import bleach.linkifier
+import bleach.sanitizer
 
 
 ALLOWED_TAGS = [
@@ -51,30 +56,25 @@ def clean(html, tags=None, attributes=None, styles=None):
     if styles is None:
         styles = ALLOWED_STYLES
 
-    def nofollow(attrs, new=False):
-        if attrs["href"].startswith("mailto:"):
-            return attrs
-        attrs["rel"] = "nofollow"
-        return attrs
-
     # Clean the output using Bleach
-    cleaned = bleach.clean(
-        html,
+    cleaner = bleach.sanitizer.Cleaner(
         tags=tags,
         attributes=attributes,
         styles=styles,
-    )
-
-    # Bleach Linkify makes it easy to modify links, however, we will not be
-    # using it to create additional links.
-    cleaned = bleach.linkify(
-        cleaned,
-        callbacks=[
-            lambda attrs, new: attrs if not new else None,
-            nofollow,
+        filters=[
+            # Bleach Linkify makes it easy to modify links, however, we will
+            # not be using it to create additional links.
+            functools.partial(
+                bleach.linkifier.LinkifyFilter,
+                callbacks=[
+                    lambda attrs, new: attrs if not new else None,
+                    bleach.callbacks.nofollow,
+                ],
+                skip_tags=["pre"],
+                parse_email=False,
+            ),
         ],
-        skip_pre=True,
-        parse_email=False,
     )
+    cleaned = cleaner.clean(html)
 
     return cleaned

@@ -1,0 +1,48 @@
+<a href="https://travis-ci.org/tulsawebdevs/django-multi-gtfs" rel="nofollow"><img src="https://travis-ci.org/tulsawebdevs/django-multi-gtfs.svg?branch=master"></a>
+<a href="https://coveralls.io/github/tulsawebdevs/django-multi-gtfs" rel="nofollow"><img src="https://coveralls.io/repos/github/tulsawebdevs/django-multi-gtfs/badge.svg?branch=django19"></a>
+<p><strong>multigtfs</strong> is an <a href="http://choosealicense.com/licenses/apache/" rel="nofollow">Apache 2.0</a>-licensed Django app that supports importing
+and exporting of GTFS feeds.  All features of the <a href="https://developers.google.com/transit/gtfs/reference" rel="nofollow">June 20, 2012 reference</a>
+are supported, including <a href="https://developers.google.com/transit/gtfs/changes#RevisionHistory" rel="nofollow">all changes</a> up to February 17, 2014.
+It allows multiple feeds to be stored in the database at once.</p>
+<p>It requires a spatial databases compatible with <a href="https://docs.djangoproject.com/en/dev/ref/contrib/gis/" rel="nofollow">GeoDjango</a>.  <a href="http://www.postgresql.org" rel="nofollow">PostgreSQL</a> 9.x
+and <a href="http://postgis.refractions.net" rel="nofollow">PostGIS</a> 2.x are recommended for development and production, since these
+support all the GeoDjango features.</p>
+<div id="status">
+<h2>Status</h2>
+<p>multigtfs is ready for your GTFS project.</p>
+<p>Point releases (0.4.1 to 0.4.2) should be safe, only adding features or fixing
+bugs.  Minor updates (0.3.3 to 0.4.0) may include significant changes that will
+break relying code.  In the worst case scenario, you may need to export your
+GTFS feeds in the original version, update multigtfs and your code, and
+re-import.</p>
+<p>multigtfs works with Django 1.5 through 1.9. In the next version, support
+will be limited to Django’s supported releases, so if you are using an old
+version you will want to update to at least 1.8, the long-term support (LTS)
+release.</p>
+<p>All valid GTFS feeds are supported for import and export.  This includes
+feeds with extra columns not yet included in the GTFS spec, and feeds that
+omit <tt>calendar.txt</tt> in favor of <tt>calendar_dates.txt</tt> (such as the TriMet
+archive feeds).  If you find a feed that doesn’t work, <a href="https://github.com/tulsawebdevs/django-multi-gtfs/issues" rel="nofollow">file a bug</a>!</p>
+<p>See the <a href="https://github.com/tulsawebdevs/django-multi-gtfs/issues?state=open" rel="nofollow">issues list</a> for more details on bugs and feature requests.</p>
+</div>
+<div id="example-project">
+<h2>Example project</h2>
+<p>Check out the <a href="examples/explore/README.md" rel="nofollow">example project</a>.</p>
+</div>
+<div id="development">
+<h2>Development</h2>
+<table>
+<colgroup><col>
+<col>
+</colgroup><tbody>
+<tr><th>Code:</th><td><a href="https://github.com/tulsawebdevs/django-multi-gtfs" rel="nofollow">https://github.com/tulsawebdevs/django-multi-gtfs</a></td>
+</tr>
+<tr><th>Issues:</th><td><a href="https://github.com/tulsawebdevs/django-multi-gtfs/issues" rel="nofollow">https://github.com/tulsawebdevs/django-multi-gtfs/issues</a></td>
+</tr>
+<tr><th>Dev Docs:</th><td><a href="http://multigtfs.readthedocs.org/" rel="nofollow">http://multigtfs.readthedocs.org/</a></td>
+</tr>
+<tr><th>IRC:</th><td><a>irc://irc.freenode.net/tulsawebdevs</a></td>
+</tr>
+</tbody>
+</table>
+</div>

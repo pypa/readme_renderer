@@ -1,6 +1,30 @@
 Changes
 =======
 
+17.2 (2017-03-11)
+-----------------
+
+* Fix an issue cleaning plaintext values.
+
+
+17.1 (2017-03-09)
+-----------------
+
+* Fix an issue attempting to clean data that had ``<a>`` tags without a href.
+
+
+17.0 (2017-03-08)
+-----------------
+
+* Fix issue with bleach >= 2.0.
+
+
+16.0 (2016-12-09)
+-----------------
+
+* Fix issue with docutils >= 0.13.1.
+
+
 0.7.0 (2016-01-04)
 ------------------
 
