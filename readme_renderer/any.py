@@ -13,17 +13,11 @@
 # limitations under the License.
 from __future__ import absolute_import, division, print_function
 
-import io
-import os.path
-
-from docutils.core import publish_parts
-from docutils.writers.html4css1 import HTMLTranslator, Writer
-from docutils.utils import SystemMessage
+import mdorrst
 
 from .rst import render as rst_renderer
 from .markdown import render as md_renderer
 from .txt import render as txt_renderer
-import mdorrst
 
 RENDERERS = {'rst': rst_renderer,
              'md': md_renderer,
@@ -32,4 +26,4 @@ RENDERERS = {'rst': rst_renderer,
 
 def render(raw):
     sniffed_format = mdorrst.sniff(raw)
-    return RENDERERS[sniffed_format](raw) or txt.render(raw)
+    return RENDERERS[sniffed_format](raw) or txt_renderer(raw)
