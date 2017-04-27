@@ -19,11 +19,16 @@ from .clean import clean
 
 
 def render(raw):
-    rendered = markdown.markdown(
-        raw,
-        extensions=[
-            'markdown.extensions.codehilite',
-            'markdown.extensions.fenced_code',
-            'markdown.extensions.smart_strong',
-        ])
-    return clean(rendered or raw), bool(rendered)
+    try:
+        rendered = markdown.markdown(
+            raw,
+            extensions=[
+                'markdown.extensions.codehilite',
+                'markdown.extensions.fenced_code',
+                'markdown.extensions.smart_strong',
+            ])
+    except ValueError:
+        # Markdown failed to strip top-level tags.
+        return None
+    else:
+        return clean(rendered)
