@@ -4,7 +4,7 @@ import os.path
 
 import pytest
 
-from readme_renderer.any import render
+from readme_renderer.base import render
 
 
 @pytest.mark.parametrize(
@@ -20,7 +20,7 @@ from readme_renderer.any import render
         )
     ],
 )
-def test_any_fixtures(src_filename, html_filename):
+def test_base_fixtures(src_filename, html_filename):
     too_short = {
         'misc.md',
         'test_rst_004.rst',
