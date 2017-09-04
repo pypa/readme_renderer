@@ -26,4 +26,7 @@ def render(raw):
             'markdown.extensions.fenced_code',
             'markdown.extensions.smart_strong',
         ])
-    return clean(rendered or raw), bool(rendered)
+    if rendered:
+        return clean(rendered)
+    else:
+        return None
