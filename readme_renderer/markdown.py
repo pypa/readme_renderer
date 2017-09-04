@@ -13,19 +13,20 @@
 # limitations under the License.
 from __future__ import absolute_import, division, print_function
 
-import markdown
+from CommonMark import commonmark
 
 from .clean import clean
 
 
-def render(raw):
-    rendered = markdown.markdown(
-        raw,
-        extensions=[
-            'markdown.extensions.codehilite',
-            'markdown.extensions.fenced_code',
-            'markdown.extensions.smart_strong',
-        ])
+variants = {
+    "CommonMark": commonmark,
+}
+
+
+def render(raw, variant="CommonMark"):
+    renderer = variants.get(variant, commonmark)
+    rendered = renderer(raw)
+
     if rendered:
         return clean(rendered)
     else:
