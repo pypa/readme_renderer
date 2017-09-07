@@ -24,10 +24,12 @@ variants = {
 
 
 def render(raw, variant="CommonMark"):
-    renderer = variants.get(variant, commonmark)
-    rendered = renderer(raw)
+    renderer = variants.get(variant)
 
-    if rendered:
-        return clean(rendered)
-    else:
-        return None
+    if renderer:
+        rendered = renderer(raw)
+
+        if rendered:
+            return clean(rendered)
+
+    return None

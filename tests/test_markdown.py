@@ -31,3 +31,7 @@ def test_md_fixtures(md_filename, html_filename, variant):
         expected = f.read()
 
     assert render(md_markup, variant=variant) == expected
+
+
+def test_missing_variant():
+    assert render('Hello', variant="InvalidVariant") is None
