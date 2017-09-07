@@ -62,6 +62,7 @@ setuptools.setup(
     ],
 
     install_requires=[
+        "commonmark>=0.7.4",
         "bleach>=2.0.0",
         "docutils>=0.13.1",
         "Pygments",
