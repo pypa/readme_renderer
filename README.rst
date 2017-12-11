@@ -3,9 +3,10 @@ Readme Renderer
 
 Readme Renderer is a library that will safely render arbitrary ``README`` files
 into HTML. It is designed to be used in Warehouse_ to render the
-``long_description`` for packages.
+``long_description`` for packages (`replacing Docutils on PyPI`_).
 
 .. _Warehouse: https://github.com/pypa/warehouse
+.. _replacing Docutils on PyPI: https://bitbucket.org/pypa/pypi/commits/e2ea08abfb48f05a82f82548e5052843b246b8ac
 
 
 Check Description Locally
