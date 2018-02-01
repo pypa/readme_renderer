@@ -49,7 +49,7 @@ Development
 
 :Code:           https://github.com/tulsawebdevs/django-multi-gtfs
 :Issues:         https://github.com/tulsawebdevs/django-multi-gtfs/issues
-:Dev Docs:       http://multigtfs.readthedocs.org/
+:Dev Docs:       https://multigtfs.readthedocs.io/
 :IRC:            irc://irc.freenode.net/tulsawebdevs
 
 
