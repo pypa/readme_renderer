@@ -75,6 +75,8 @@ def clean(html, tags=None, attributes=None, styles=None):
             ),
         ],
     )
-    cleaned = cleaner.clean(html)
-
-    return cleaned
+    try:
+        cleaned = cleaner.clean(html)
+        return cleaned
+    except ValueError:
+        return None
