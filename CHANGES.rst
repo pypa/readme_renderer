@@ -1,6 +1,12 @@
 Changes
 =======
 
+17.3 (2018-03-08)
+-----------------
+
+* Gracefully handle new exceptions from bleach.
+
+
 17.2 (2017-03-11)
 -----------------
 
