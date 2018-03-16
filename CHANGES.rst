@@ -1,6 +1,12 @@
 Changes
 =======
 
+17.4 (2018-03-16)
+-----------------
+
+* All renderers now accept arbitrary ``kwargs`` for future-proofing.
+
+
 17.3 (2018-03-08)
 -----------------
 
