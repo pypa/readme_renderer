@@ -25,6 +25,6 @@ except ImportError:
 from .clean import clean
 
 
-def render(raw):
+def render(raw, **kwargs):
     rendered = html_escape(raw).replace("\n", "<br>")
     return clean(rendered, tags=["br"])

@@ -98,7 +98,7 @@ SETTINGS = {
 }
 
 
-def render(raw, stream=None):
+def render(raw, stream=None, **kwargs):
     if stream is None:
         # Use a io.StringIO as the warning stream to prevent warnings from
         # being printed to sys.stderr.
