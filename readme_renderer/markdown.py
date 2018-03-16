@@ -23,7 +23,7 @@ variants = {
 }
 
 
-def render(raw, variant="CommonMark"):
+def render(raw, variant="CommonMark", **kwargs):
     renderer = variants.get(variant)
 
     if renderer:
