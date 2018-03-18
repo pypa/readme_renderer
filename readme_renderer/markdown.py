@@ -18,9 +18,20 @@ from CommonMark import commonmark
 from .clean import clean
 
 
-variants = {
-    "CommonMark": commonmark,
-}
+try:
+    import cmarkgfm
+except ImportError:
+    cmarkgfm = None
+
+
+variants = {}
+
+if cmarkgfm is not None:
+    variants["gfm"] = cmarkgfm.github_flavored_markdown_to_html
+    # Preferentially use cmarkgfm for CommonMark.
+    variants["CommonMark"] = cmarkgfm.markdown_to_html
+else:
+    variants["CommonMark"] = commonmark
 
 
 def render(raw, variant="CommonMark", **kwargs):

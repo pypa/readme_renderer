@@ -27,9 +27,9 @@ ALLOWED_TAGS = [
     "strong", "ul",
 
     # Custom Additions
-    "br", "cite", "col", "colgroup", "dd", "div", "dl", "dt", "h1", "h2", "h3",
-    "h4", "h5", "h6", "hr", "img", "p", "pre", "span", "sub", "sup", "table",
-    "tbody", "td", "th", "thead", "tr", "tt", "kbd", "var",
+    "br", "cite", "col", "colgroup", "dd", "del", "div", "dl", "dt", "h1",
+    "h2", "h3", "h4", "h5", "h6", "hr", "img", "p", "pre", "span", "sub",
+    "sup", "table", "tbody", "td", "th", "thead", "tr", "tt", "kbd", "var",
 ]
 
 ALLOWED_ATTRIBUTES = {
@@ -43,6 +43,8 @@ ALLOWED_ATTRIBUTES = {
     "hr": ["class"],
     "img": ["src"],
     "span": ["class"],
+    "th": ["align"],
+    "td": ["align"],
 }
 
 ALLOWED_STYLES = []
