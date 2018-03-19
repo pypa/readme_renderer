@@ -67,6 +67,10 @@ setuptools.setup(
         "six",
     ],
 
+    extras_require={
+        "gfm": "cmarkgfm>=0.1.0"
+    },
+
     entry_points={
         "distutils.commands": [
             "check = readme_renderer.integration.distutils:Check",
