@@ -63,6 +63,7 @@ setuptools.setup(
         "bleach>=2.1.0",
         "cmarkgfm>=0.2.0",
         "docutils>=0.13.1",
+        "future",
         "Pygments",
         "six",
     ],

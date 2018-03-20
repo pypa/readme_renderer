@@ -13,14 +13,7 @@
 # limitations under the License.
 from __future__ import absolute_import, division, print_function
 
-try:
-    from html import escape as html_escape
-except ImportError:
-    from cgi import escape as _html_escape
-
-    def html_escape(s, quote=True):
-        return _html_escape(s, quote=quote)
-
+from html import escape as html_escape
 
 from .clean import clean
 
