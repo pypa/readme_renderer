@@ -60,16 +60,12 @@ setuptools.setup(
     ],
 
     install_requires=[
-        "commonmark>=0.7.4",
         "bleach>=2.1.0",
+        "cmarkgfm>=0.2.0",
         "docutils>=0.13.1",
         "Pygments",
         "six",
     ],
-
-    extras_require={
-        "gfm": "cmarkgfm>=0.1.0"
-    },
 
     entry_points={
         "distutils.commands": [

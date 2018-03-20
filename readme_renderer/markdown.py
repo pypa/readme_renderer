@@ -13,25 +13,15 @@
 # limitations under the License.
 from __future__ import absolute_import, division, print_function
 
-from CommonMark import commonmark
+import cmarkgfm
 
 from .clean import clean
 
 
-try:
-    import cmarkgfm
-except ImportError:
-    cmarkgfm = None
-
-
-variants = {}
-
-if cmarkgfm is not None:
-    variants["gfm"] = cmarkgfm.github_flavored_markdown_to_html
-    # Preferentially use cmarkgfm for CommonMark.
-    variants["CommonMark"] = cmarkgfm.markdown_to_html
-else:
-    variants["CommonMark"] = commonmark
+variants = {
+    "gfm": cmarkgfm.github_flavored_markdown_to_html,
+    "CommonMark": cmarkgfm.markdown_to_html,
+}
 
 
 def render(raw, variant="CommonMark", **kwargs):
