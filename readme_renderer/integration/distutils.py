@@ -26,6 +26,13 @@ class Check(_check):
         Checks if the long string fields are reST-compliant.
         """
         data = self.distribution.get_long_description()
+
+        # None or empty string should both trigger this branch.
+        if not data or data == 'UNKNOWN':
+            self.warn(
+                "The project's long_description is either missing or empty.")
+            return
+
         stream = io.StringIO()
         markup = render(data, stream=stream)
 
@@ -35,4 +42,6 @@ class Check(_check):
             self.warn(line)
 
         if markup is None:
-            self.warn("Invalid markup which will not be rendered on PyPI.")
+            self.warn(
+                "The project's long_description has invalid markup which will "
+                "not be rendered on PyPI.")
