@@ -2,7 +2,6 @@ import io
 import glob
 import os
 
-import cmarkgfm
 import pytest
 
 from readme_renderer.markdown import render, variants
@@ -39,7 +38,3 @@ def test_md_fixtures(md_filename, html_filename, variant):
 
 def test_missing_variant():
     assert render('Hello', variant="InvalidVariant") is None
-
-
-def test_cmarkgfm_is_preferred():
-    assert variants['CommonMark'] is cmarkgfm.markdown_to_html
