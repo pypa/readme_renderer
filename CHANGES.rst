@@ -1,6 +1,15 @@
 Changes
 =======
 
+18.0 (2018-03-30)
+-----------------
+
+* Add support for GitHub-flavored Markdown. (#67)
+* Switch to cmarkgfm completely for rendering Markdown. (#68)
+* Warn about missing long description. (#69)
+* Make Github-Flavored Markdown the default variant (#73)
+
+
 17.4 (2018-03-16)
 -----------------
 
