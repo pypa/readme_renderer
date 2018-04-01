@@ -19,12 +19,12 @@ from .clean import clean
 
 
 variants = {
-    "gfm": cmarkgfm.github_flavored_markdown_to_html,
+    "GFM": cmarkgfm.github_flavored_markdown_to_html,
     "CommonMark": cmarkgfm.markdown_to_html,
 }
 
 
-def render(raw, variant="gfm", **kwargs):
+def render(raw, variant="GFM", **kwargs):
     renderer = variants.get(variant)
 
     if renderer:
