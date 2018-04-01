@@ -1,6 +1,12 @@
 Changes
 =======
 
+18.1 (2018-04-01)
+-----------------
+
+* Change Github-flavored Markdown identifier from ``gfm`` to ``GFM``.
+
+
 18.0 (2018-03-30)
 -----------------
 
