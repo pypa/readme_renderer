@@ -12,8 +12,11 @@ reStructuredText (``.rst``), and plain text.
 Check Description Locally
 -------------------------
 
-To check your long descriptions locally simply install the
-``readme_renderer`` library using:
+reStructuredText
+~~~~~~~~~~~~~~~~
+
+To locally check whether your reStructuredText long descriptions will render on
+PyPI, simply install the ``readme_renderer`` library using:
 
 .. code-block:: console
 
@@ -24,6 +27,16 @@ To check your long descriptions locally simply install the
 If there's a problem rendering your ``long_description``, the check
 will tell you. If your ``long_description`` is fine, you'll get no
 output.
+
+
+Markdown
+~~~~~~~~
+
+Checking your Markdown long descriptions is unecessary, because unlike rST,
+where a properly rendered description is all-or-nothing, PyPI will still render
+your Markdown description as Markdown if it has some invalid or incorrect
+syntax.
+
 
 Code of Conduct
 ---------------
