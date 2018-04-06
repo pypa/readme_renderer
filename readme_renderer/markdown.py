@@ -13,7 +13,12 @@
 # limitations under the License.
 from __future__ import absolute_import, division, print_function
 
+import re
+
 import cmarkgfm
+import pygments
+import pygments.lexers
+import pygments.formatters
 
 from .clean import clean
 
@@ -27,10 +32,49 @@ variants = {
 def render(raw, variant="GFM", **kwargs):
     renderer = variants.get(variant)
 
-    if renderer:
-        rendered = renderer(raw)
+    if not renderer:
+        return None
 
-        if rendered:
-            return clean(rendered)
+    rendered = renderer(raw)
 
-    return None
+    if not rendered:
+        return None
+
+    cleaned = clean(rendered)
+    highlighted = _highlight(cleaned)
+    return highlighted
+
+
+def _highlight(html):
+    """Syntax-highlights HTML-rendered Markdown.
+
+    Plucks sections to highlight that conform the the GitHub fenced code info
+    string as defined at https://github.github.com/gfm/#info-string.
+
+    Args:
+        html (str): The rendered HTML.
+
+    Returns:
+        str: The HTML with Pygments syntax highlighting applied to all code
+            blocks.
+    """
+
+    formatter = pygments.formatters.HtmlFormatter(nowrap=True)
+
+    code_expr = re.compile(
+        r'<pre><code class="language-(?P<lang>.+?)">(?P<code>.+?)'
+        r'</code></pre>', re.DOTALL)
+
+    def replacer(match):
+        try:
+            lexer = pygments.lexers.get_lexer_by_name(match.group('lang'))
+        except ValueError:
+            lexer = pygments.lexers.TextLexer()
+
+        highlighted = pygments.highlight(
+            match.group('code'), lexer, formatter)
+        return '<pre>{}</pre>'.format(highlighted)
+
+    result = code_expr.sub(replacer, html)
+
+    return result
