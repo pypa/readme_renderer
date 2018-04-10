@@ -27,7 +27,7 @@ ALLOWED_TAGS = [
     "strong", "ul",
 
     # Custom Additions
-    "br", "cite", "col", "colgroup", "dd", "del", "details", "div", "dl", 
+    "br", "cite", "col", "colgroup", "dd", "del", "details", "div", "dl",
     "dt", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "img", "p", "pre", "span",
     "sub", "summary", "sup", "table", "tbody", "td", "th", "thead", "tr",
     "tt", "kbd", "var",
