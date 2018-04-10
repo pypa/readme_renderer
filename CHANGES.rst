@@ -4,12 +4,12 @@ Changes
 19.0 (2018-04-10)
 -----------------
 
-* Allow details and summary tags (#77)
+* Allow details and summary tags. (#77)
 * Add .pytest_cache to .gitignore. (#85)
-* Warn about markdown content type when checking RST (#83)
-* Update pep8 tox env to use py3.6 (#84)
-* Add Pygments-based syntax highlighting for Markdown (#82)
-* Update docs about check to talk about Markdown (#80)
+* Warn about Markdown content type when checking RST. (#83)
+* Update pep8 tox env to use py3.6. (#84)
+* Add Pygments-based syntax highlighting for Markdown. (#82)
+* Update docs about check to talk about Markdown. (#80)
 
 
 18.1 (2018-04-01)
