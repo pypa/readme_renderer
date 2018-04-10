@@ -23,7 +23,7 @@ __summary__ = ('readme_renderer is a library for rendering "readme" '
                'descriptions for Warehouse')
 __uri__ = "https://github.com/pypa/readme_renderer"
 
-__version__ = "18.1"
+__version__ = "19.0"
 
 __author__ = "Donald Stufft"
 __email__ = "donald@stufft.io"
