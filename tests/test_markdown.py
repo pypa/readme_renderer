@@ -10,7 +10,7 @@ from readme_renderer.markdown import render, variants
 MD_FIXTURES = [
     (fn, os.path.splitext(fn)[0] + ".html", variant)
     for variant in variants
-    for fn in glob.glob(
+    for fn in glob.iglob(
         os.path.join(
             os.path.dirname(__file__),
             "fixtures",
