@@ -1,6 +1,15 @@
 Changes
 =======
 
+20.0 (2018-04-13)
+-----------------
+
+* Reformat docutils messages into more human-friendly output. (#92)
+* Fix incorrect escaping of html entities in pre tags when using markdown. (#89)
+* Allow width, height, alt, and align attributes on img tags. (#91)
+* Fix check to not report success when there is invalid RST. (#90)
+
+
 19.0 (2018-04-10)
 -----------------
 
