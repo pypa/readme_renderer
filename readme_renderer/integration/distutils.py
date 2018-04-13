@@ -47,7 +47,7 @@ class _WarningStream(object):
             return
 
         self.output.write(
-            "line {line}: {level_text}: {message}\n".format(
+            u"line {line}: {level_text}: {message}\n".format(
                 level_text=matched.group('level').capitalize(),
                 line=matched.group('line'),
                 message=matched.group('message').rstrip('\r\n')))
