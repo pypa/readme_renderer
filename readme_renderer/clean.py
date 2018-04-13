@@ -42,7 +42,7 @@ ALLOWED_ATTRIBUTES = {
     # Custom Additions
     "*": ["id"],
     "hr": ["class"],
-    "img": ["src"],
+    "img": ["src", "width", "height", "alt", "align"],
     "span": ["class"],
     "th": ["align"],
     "td": ["align"],
