@@ -15,11 +15,45 @@ from __future__ import absolute_import, division, print_function
 
 import cgi
 import io
+import re
 
 import distutils.log
 from distutils.command.check import check as _check
+import six
 
 from ..rst import render
+
+
+# Regular expression used to capture and reformat doctuils warnings into
+# something that a human can understand. This is loosely borrowed from
+# Sphinx: https://github.com/sphinx-doc/sphinx/blob
+# /c35eb6fade7a3b4a6de4183d1dd4196f04a5edaf/sphinx/util/docutils.py#L199
+_REPORT_RE = re.compile(
+    r'^<string>:(?P<line>(?:\d+)?): '
+    r'\((?P<level>DEBUG|INFO|WARNING|ERROR|SEVERE)/(\d+)?\) '
+    r'(?P<message>.*)', re.DOTALL | re.MULTILINE)
+
+
+@six.python_2_unicode_compatible
+class _WarningStream(object):
+    def __init__(self):
+        self.output = io.StringIO()
+
+    def write(self, text):
+        matched = _REPORT_RE.search(text)
+
+        if not matched:
+            self.output.write(text)
+            return
+
+        self.output.write(
+            u"line {line}: {level_text}: {message}\n".format(
+                level_text=matched.group('level').capitalize(),
+                line=matched.group('line'),
+                message=matched.group('message').rstrip('\r\n')))
+
+    def __str__(self):
+        return self.output.getvalue()
 
 
 class Check(_check):
@@ -45,18 +79,14 @@ class Check(_check):
                 "The project's long_description is either missing or empty.")
             return
 
-        stream = io.StringIO()
+        stream = _WarningStream()
         markup = render(data, stream=stream)
-
-        for line in stream.getvalue().splitlines():
-            if line.startswith("<string>"):
-                line = line[8:]
-            self.warn(line)
 
         if markup is None:
             self.warn(
                 "The project's long_description has invalid markup which will "
-                "not be rendered on PyPI.")
+                "not be rendered on PyPI. The following syntax errors were "
+                "detected:\n%s" % stream)
             return
 
         self.announce(

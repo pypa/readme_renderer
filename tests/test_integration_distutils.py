@@ -29,11 +29,11 @@ def test_invalid_rst():
 
     # Should warn once for the syntax error, and finally to warn that the
     # overall syntax is invalid
-    checker.warn.call_count = 2
-    message_one = checker.warn.call_args_list[0][0][0]
-    assert 'start-string without end-string' in message_one
-    message_two = checker.warn.call_args_list[1][0][0]
-    assert 'invalid markup' in message_two
+    checker.warn.assert_called_once_with(mock.ANY)
+    message = checker.warn.call_args[0][0]
+    assert 'invalid markup' in message
+    assert 'line 1: Warning:' in message
+    assert 'start-string without end-string' in message
 
     # Should not have announced that it was valid.
     checker.announce.assert_not_called()
