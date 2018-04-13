@@ -23,6 +23,7 @@ def test_invalid_rst():
         long_description="Hello, I am some `totally borked< text."))
     checker = readme_renderer.integration.distutils.Check(dist)
     checker.warn = mock.Mock()
+    checker.announce = mock.Mock()
 
     checker.check_restructuredtext()
 
@@ -33,6 +34,9 @@ def test_invalid_rst():
     assert 'start-string without end-string' in message_one
     message_two = checker.warn.call_args_list[1][0][0]
     assert 'invalid markup' in message_two
+
+    # Should not have announced that it was valid.
+    checker.announce.assert_not_called()
 
 
 @pytest.mark.filterwarnings('ignore:::distutils.dist')

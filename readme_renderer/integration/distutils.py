@@ -57,6 +57,7 @@ class Check(_check):
             self.warn(
                 "The project's long_description has invalid markup which will "
                 "not be rendered on PyPI.")
+            return
 
         self.announce(
             "The project's long description is valid RST.",
