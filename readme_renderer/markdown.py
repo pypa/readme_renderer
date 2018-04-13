@@ -19,6 +19,7 @@ import cmarkgfm
 import pygments
 import pygments.lexers
 import pygments.formatters
+from six.moves import html_parser
 
 from .clean import clean
 
@@ -40,9 +41,9 @@ def render(raw, variant="GFM", **kwargs):
     if not rendered:
         return None
 
-    cleaned = clean(rendered)
-    highlighted = _highlight(cleaned)
-    return highlighted
+    highlighted = _highlight(rendered)
+    cleaned = clean(highlighted)
+    return cleaned
 
 
 def _highlight(html):
@@ -71,8 +72,16 @@ def _highlight(html):
         except ValueError:
             lexer = pygments.lexers.TextLexer()
 
-        highlighted = pygments.highlight(
-            match.group('code'), lexer, formatter)
+        code = match.group('code')
+
+        # Decode html entities in the code. cmark tries to be helpful and
+        # translate '"' to '&quot;', but it confuses pygments. Pygments will
+        # escape any html entities when re-writing the code, and we run
+        # everything through bleach after.
+        code = html_parser.HTMLParser().unescape(code)
+
+        highlighted = pygments.highlight(code, lexer, formatter)
+
         return '<pre>{}</pre>'.format(highlighted)
 
     result = code_expr.sub(replacer, html)
