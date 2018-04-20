@@ -25,10 +25,8 @@ from .clean import clean
 
 
 # Make code fences with `python` as the language default to highlighting as
-# Python 3. Add an extra alias for python2 to map to the Python 2 lexer
-# (`python`) so that users can explicitly use Python 2 highlighting.
+# Python 3.
 _LANG_ALIASES = {
-    'python2': 'python',
     'python': 'python3',
 }
 
