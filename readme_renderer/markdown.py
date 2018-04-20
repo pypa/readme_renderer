@@ -24,6 +24,13 @@ from six.moves import html_parser
 from .clean import clean
 
 
+# Make code fences with `python` as the language default to highlighting as
+# Python 3.
+_LANG_ALIASES = {
+    'python': 'python3',
+}
+
+
 variants = {
     "GFM": cmarkgfm.github_flavored_markdown_to_html,
     "CommonMark": cmarkgfm.markdown_to_html,
@@ -68,7 +75,9 @@ def _highlight(html):
 
     def replacer(match):
         try:
-            lexer = pygments.lexers.get_lexer_by_name(match.group('lang'))
+            lang = match.group('lang')
+            lang = _LANG_ALIASES.get(lang, lang)
+            lexer = pygments.lexers.get_lexer_by_name(lang)
         except ValueError:
             lexer = pygments.lexers.TextLexer()
 
