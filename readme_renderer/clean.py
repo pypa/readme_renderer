@@ -47,6 +47,7 @@ ALLOWED_ATTRIBUTES = {
     "th": ["align"],
     "td": ["align"],
     "code": ["class"],
+    "p": ["align"],
 }
 
 ALLOWED_STYLES = []
