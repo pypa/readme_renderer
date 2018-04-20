@@ -115,7 +115,7 @@ def render(raw, stream=None, **kwargs):
     except SystemMessage:
         rendered = None
     else:
-        rendered = parts.get("fragment")
+        rendered = parts.get("docinfo", "") + parts.get("fragment", "")
 
     if rendered:
         return clean(rendered)
