@@ -38,6 +38,33 @@ your Markdown description as Markdown if it has some invalid or incorrect
 syntax.
 
 
+Render Markup Locally
+---------------------
+
+You can render the HTML that will be generated from your ``long_description`` using:
+
+.. code-block:: console
+
+	$ python setup.py render_readme
+
+The rendered HTML will be output to the console by default.
+
+If you would like to send the output to a web browser instead, use the ``--preview`` flag:
+
+.. code-block:: console
+
+	$ python setup.py render_readme --preview
+
+You can also control the Pygments style used in syntax highlighting using the
+``--style`` flag, or eliminate syntax highlighting altogether by using the
+``--no-color`` flag:
+
+.. code-block:: console
+
+	$ python setup.py render_readme --style=monokai # <-- Pygments style name
+	$ python setup.py render_readme --no-color
+
+
 Code of Conduct
 ---------------
 
