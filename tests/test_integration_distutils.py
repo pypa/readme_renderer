@@ -77,8 +77,8 @@ def test_invalid_empty():
 
 
 def test_render_readme_default(capfd):
-    long_desc = "This is a simple README."
-    dist = distutils.dist.Distribution(attrs=dict(long_description=long_desc))
+    dist_opts = {'long_description': "This is a simple README."}
+    dist = distutils.dist.Distribution(attrs=dist_opts)
 
     renderer = readme_renderer.integration.distutils.RenderReadme(dist)
     renderer.no_color = True
@@ -89,10 +89,10 @@ def test_render_readme_default(capfd):
 
 
 @pytest.mark.filterwarnings('ignore:::distutils.dist')
-def test_render_readme_md(capfd):
-    long_desc = "This is a simple README."
-    dist = setuptools.dist.Distribution(attrs=dict(long_description=long_desc,
-                                                   long_description_content_type='text/x-rst'))
+def test_render_readme_rst(capfd):
+    dist_opts = {'long_description': "This is a simple README.",
+                 'long_description_content_type': 'text/x-rst'}
+    dist = setuptools.dist.Distribution(attrs=dist_opts)
 
     renderer = readme_renderer.integration.distutils.RenderReadme(dist)
     renderer.warn = mock.Mock()
@@ -105,9 +105,9 @@ def test_render_readme_md(capfd):
 
 @pytest.mark.filterwarnings('ignore:::distutils.dist')
 def test_render_readme_md(capfd):
-    long_desc = "This is a simple README."
-    dist = setuptools.dist.Distribution(attrs=dict(long_description=long_desc,
-                                                   long_description_content_type='text/markdown'))
+    dist_opts = {'long_description': "This is a simple README.",
+                 'long_description_content_type': 'text/markdown'}
+    dist = setuptools.dist.Distribution(attrs=dist_opts)
 
     renderer = readme_renderer.integration.distutils.RenderReadme(dist)
     renderer.warn = mock.Mock()
@@ -120,9 +120,9 @@ def test_render_readme_md(capfd):
 
 @pytest.mark.filterwarnings('ignore:::distutils.dist')
 def test_render_readme_txt(capfd):
-    long_desc = "This is a simple README."
-    dist = setuptools.dist.Distribution(attrs=dict(long_description=long_desc,
-                                                   long_description_content_type='text/plain'))
+    dist_opts = {'long_description': "This is a simple README.",
+                 'long_description_content_type': 'text/plain'}
+    dist = setuptools.dist.Distribution(attrs=dist_opts)
 
     renderer = readme_renderer.integration.distutils.RenderReadme(dist)
     renderer.warn = mock.Mock()

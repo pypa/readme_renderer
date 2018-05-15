@@ -71,7 +71,7 @@ setuptools.setup(
     entry_points={
         "distutils.commands": [
             "check = readme_renderer.integration.distutils:Check",
-            "render_readme = readme_renderer.integration.distutils:RenderReadme",
+            "render_readme = readme_renderer.integration.distutils:RenderReadme",  # noqa: E501
         ],
     },
 

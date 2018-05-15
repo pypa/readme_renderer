@@ -126,7 +126,7 @@ class RenderReadme(Command):
             self.distribution.metadata, 'long_description_content_type', None)
 
         RST_TYPE = 'text/x-rst'
-        MD_TYPE  = 'text/markdown'
+        MD_TYPE = 'text/markdown'
         PLAIN_TYPE = 'text/plain'
 
         if content_type == RST_TYPE:
@@ -136,7 +136,7 @@ class RenderReadme(Command):
             from ..markdown import render as md_render
             return md_render
         elif content_type == PLAIN_TYPE:
-            from ..txt import render as txt_render 
+            from ..txt import render as txt_render
             return txt_render
         else:
             from ..rst import render as rst_render
