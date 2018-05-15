@@ -45,7 +45,7 @@ You can render the HTML that will be generated from your ``long_description`` us
 
 .. code-block:: console
 
-	$ python setup.py render_readme
+    $ python setup.py render_readme
 
 The rendered HTML will be output to the console by default.
 
@@ -53,7 +53,7 @@ If you would like to send the output to a web browser instead, use the ``--previ
 
 .. code-block:: console
 
-	$ python setup.py render_readme --preview
+    $ python setup.py render_readme --preview
 
 You can also control the Pygments style used in syntax highlighting using the
 ``--style`` flag, or eliminate syntax highlighting altogether by using the
@@ -61,8 +61,8 @@ You can also control the Pygments style used in syntax highlighting using the
 
 .. code-block:: console
 
-	$ python setup.py render_readme --style=monokai # <-- Pygments style name
-	$ python setup.py render_readme --no-color
+    $ python setup.py render_readme --style=monokai # <-- Pygments style name
+    $ python setup.py render_readme --no-color
 
 
 Code of Conduct

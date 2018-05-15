@@ -42,6 +42,11 @@ _REPORT_RE = re.compile(
     r'(?P<message>.*)', re.DOTALL | re.MULTILINE)
 
 
+RST_TYPE = 'text/x-rst'
+MD_TYPE = 'text/markdown'
+PLAIN_TYPE = 'text/plain'
+
+
 @six.python_2_unicode_compatible
 class _WarningStream(object):
     def __init__(self):
@@ -124,10 +129,6 @@ class RenderReadme(Command):
     def get_renderer(self):
         content_type = getattr(
             self.distribution.metadata, 'long_description_content_type', None)
-
-        RST_TYPE = 'text/x-rst'
-        MD_TYPE = 'text/markdown'
-        PLAIN_TYPE = 'text/plain'
 
         if content_type == RST_TYPE:
             from ..rst import render as rst_render
