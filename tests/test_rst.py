@@ -3,6 +3,7 @@ import glob
 import os.path
 
 import pytest
+import six
 
 from readme_renderer.rst import render
 
@@ -42,3 +43,14 @@ def test_rst_002():
         '<p><a href="http://mymalicioussite.com/" rel="nofollow">'
         'http://mymalicioussite.com/</a></p>\n'
     )
+
+
+def test_rst_raw():
+    warnings = six.StringIO()
+    assert render("""
+.. raw:: html
+    <script>I am evil</script>
+
+""", stream=warnings) is None
+
+    assert '"raw" directive disabled' in warnings.getvalue()
