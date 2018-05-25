@@ -39,6 +39,29 @@ def test_invalid_rst():
     checker.announce.assert_not_called()
 
 
+def test_malicious_rst():
+    description = """
+.. raw:: html
+    <script>I am evil</script>
+"""
+    dist = distutils.dist.Distribution(attrs=dict(
+        long_description=description))
+    checker = readme_renderer.integration.distutils.Check(dist)
+    checker.warn = mock.Mock()
+    checker.announce = mock.Mock()
+
+    checker.check_restructuredtext()
+
+    # Should warn once for the syntax error, and finally to warn that the
+    # overall syntax is invalid
+    checker.warn.assert_called_once_with(mock.ANY)
+    message = checker.warn.call_args[0][0]
+    assert 'directive disabled' in message
+
+    # Should not have announced that it was valid.
+    checker.announce.assert_not_called()
+
+
 @pytest.mark.filterwarnings('ignore:::distutils.dist')
 def test_markdown():
     dist = setuptools.dist.Distribution(attrs=dict(
