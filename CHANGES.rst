@@ -1,6 +1,15 @@
 Changes
 =======
 
+21.0 (2018-05-28)
+-----------------
+
+* Allow <caption>. (#105)
+* Add specific tests for the raw directive. (#103)
+* Include docinfo when rendering rst. (#99)
+* Make Python 3 the default lexer for highlighting Python code in Markdown (#97)
+* Allow align attribute on <p> tags (#98)
+
 20.0 (2018-04-13)
 -----------------
 
