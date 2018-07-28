@@ -1,0 +1,1 @@
+<img src="https://example.com/badge.png" style="width: 20px; height: 20px; color:red;">
