@@ -14,7 +14,6 @@
 from __future__ import absolute_import, division, print_function
 
 import io
-import os.path
 
 from docutils.core import publish_parts
 from docutils.writers.html4css1 import HTMLTranslator, Writer
@@ -25,26 +24,9 @@ from .clean import clean
 
 class ReadMeHTMLTranslator(HTMLTranslator):
 
-    def depart_image(self, node):
-        uri = node["uri"]
-        ext = os.path.splitext(uri)[1].lower()
-        # we need to swap RST's use of `object` with `img` tags
-        # see http://git.io/5me3dA
-        if ext == ".svg":
-            # preserve essential attributes
-            atts = {}
-            for attribute, value in node.attributes.items():
-                # we have no time for empty values
-                if value:
-                    if attribute == "uri":
-                        atts["src"] = value
-                    else:
-                        atts[attribute] = value
-
-            # toss off `object` tag
-            self.body.pop()
-            # add on `img` with attributes
-            self.body.append(self.starttag(node, "img", **atts))
+    # We need to swap RST's use of `object` with `img` tags
+    # see http://git.io/5me3dA
+    object_image_types = {'.swf': 'application/x-shockwave-flash'}
 
 
 SETTINGS = {
