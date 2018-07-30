@@ -24,8 +24,7 @@ from .clean import clean
 
 class ReadMeHTMLTranslator(HTMLTranslator):
 
-    # We need to swap RST's use of `object` with `img` tags
-    # see http://git.io/5me3dA
+    # Overrides base class not to output `<object>` tag for SVG images.
     object_image_types = {'.swf': 'application/x-shockwave-flash'}
 
 
