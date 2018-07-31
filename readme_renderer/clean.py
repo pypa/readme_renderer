@@ -42,7 +42,7 @@ ALLOWED_ATTRIBUTES = {
     # Custom Additions
     "*": ["id"],
     "hr": ["class"],
-    "img": ["src", "width", "height", "alt", "align"],
+    "img": ["src", "width", "height", "alt", "align", "class", "style"],
     "span": ["class"],
     "th": ["align"],
     "td": ["align"],
@@ -50,7 +50,9 @@ ALLOWED_ATTRIBUTES = {
     "p": ["align"],
 }
 
-ALLOWED_STYLES = []
+ALLOWED_STYLES = [
+    "width", "height",
+]
 
 
 def clean(html, tags=None, attributes=None, styles=None):
