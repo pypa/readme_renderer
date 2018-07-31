@@ -25,7 +25,7 @@ from .clean import clean
 class ReadMeHTMLTranslator(HTMLTranslator):
 
     # Overrides base class not to output `<object>` tag for SVG images.
-    object_image_types = {'.swf': 'application/x-shockwave-flash'}
+    object_image_types = {}
 
 
 SETTINGS = {
