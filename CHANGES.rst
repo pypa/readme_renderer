@@ -1,6 +1,13 @@
 Changes
 =======
 
+22.0 (2018-09-17)
+-----------------
+
+* Unify handling of SVG and other images in RST. (#113)
+* Support width and alignment of images in RST (#114)
+
+
 21.0 (2018-05-28)
 -----------------
 
@@ -9,6 +16,7 @@ Changes
 * Include docinfo when rendering rst. (#99)
 * Make Python 3 the default lexer for highlighting Python code in Markdown (#97)
 * Allow align attribute on <p> tags (#98)
+
 
 20.0 (2018-04-13)
 -----------------
