@@ -63,12 +63,10 @@ ALLOWED_CLASSES = {
 
 
 class _CSSClassFilter(html5lib.filters.base.Filter):
-    def __init__(self, *args, allowed_classes=None, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs):
+        self.allowed_classes = kwargs.pop("allowed_classes", {})
 
-        if allowed_classes is None:
-            allowed_classes = {}
-        self.allowed_classes = allowed_classes
+        super().__init__(*args, **kwargs)
 
     def __iter__(self):
         for token in super().__iter__():
