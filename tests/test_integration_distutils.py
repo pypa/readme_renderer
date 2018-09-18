@@ -97,3 +97,60 @@ def test_invalid_empty():
 
     checker.warn.assert_called_once_with(mock.ANY)
     assert 'missing' in checker.warn.call_args[0][0]
+
+
+def test_render_readme_default(capfd):
+    dist_opts = {'long_description': "This is a simple README."}
+    dist = distutils.dist.Distribution(attrs=dist_opts)
+
+    renderer = readme_renderer.integration.distutils.RenderReadme(dist)
+    renderer.no_color = True
+    renderer.run()
+
+    expected = "<p>This is a simple README.</p>\n"
+    assert expected == capfd.readouterr().out
+
+
+@pytest.mark.filterwarnings('ignore:::distutils.dist')
+def test_render_readme_rst(capfd):
+    dist_opts = {'long_description': "This is a simple README.",
+                 'long_description_content_type': 'text/x-rst'}
+    dist = setuptools.dist.Distribution(attrs=dist_opts)
+
+    renderer = readme_renderer.integration.distutils.RenderReadme(dist)
+    renderer.warn = mock.Mock()
+    renderer.no_color = True
+    renderer.run()
+
+    expected = "<p>This is a simple README.</p>\n"
+    assert expected == capfd.readouterr().out
+
+
+@pytest.mark.filterwarnings('ignore:::distutils.dist')
+def test_render_readme_md(capfd):
+    dist_opts = {'long_description': "This is a simple README.",
+                 'long_description_content_type': 'text/markdown'}
+    dist = setuptools.dist.Distribution(attrs=dist_opts)
+
+    renderer = readme_renderer.integration.distutils.RenderReadme(dist)
+    renderer.warn = mock.Mock()
+    renderer.no_color = True
+    renderer.run()
+
+    expected = "<p>This is a simple README.</p>\n"
+    assert expected == capfd.readouterr().out
+
+
+@pytest.mark.filterwarnings('ignore:::distutils.dist')
+def test_render_readme_txt(capfd):
+    dist_opts = {'long_description': "This is a simple README.",
+                 'long_description_content_type': 'text/plain'}
+    dist = setuptools.dist.Distribution(attrs=dist_opts)
+
+    renderer = readme_renderer.integration.distutils.RenderReadme(dist)
+    renderer.warn = mock.Mock()
+    renderer.no_color = True
+    renderer.run()
+
+    expected = "This is a simple README."
+    assert expected == capfd.readouterr().out

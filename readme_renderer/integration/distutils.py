@@ -16,10 +16,18 @@ from __future__ import absolute_import, division, print_function
 import cgi
 import io
 import re
+import sys
+import webbrowser
 
 import distutils.log
 from distutils.command.check import check as _check
+from distutils.core import Command
+from tempfile import NamedTemporaryFile
 import six
+
+from pygments import highlight
+from pygments.formatters import Terminal256Formatter
+from pygments.lexers import HtmlLexer
 
 from ..rst import render
 
@@ -32,6 +40,11 @@ _REPORT_RE = re.compile(
     r'^<string>:(?P<line>(?:\d+)?): '
     r'\((?P<level>DEBUG|INFO|WARNING|ERROR|SEVERE)/(\d+)?\) '
     r'(?P<message>.*)', re.DOTALL | re.MULTILINE)
+
+
+RST_TYPE = 'text/x-rst'
+MD_TYPE = 'text/markdown'
+PLAIN_TYPE = 'text/plain'
 
 
 @six.python_2_unicode_compatible
@@ -92,3 +105,74 @@ class Check(_check):
         self.announce(
             "The project's long description is valid RST.",
             level=distutils.log.INFO)
+
+
+class RenderReadme(Command):
+
+    """Render and display the long description as HTML."""
+    description = ("render the long description as HTML")
+    user_options = [("preview", None,
+                     "Preview readme"),
+                    ("no-color", None,
+                     "Do not colorize..."),
+                    ("style=", None,
+                     "Pygments style to use to colorize HTML output.")]
+
+    def initialize_options(self):
+        self.preview = False
+        self.no_color = False
+        self.style = 'native'
+
+    def finalize_options(self):
+        pass
+
+    def get_renderer(self):
+        content_type = getattr(
+            self.distribution.metadata, 'long_description_content_type', None)
+
+        if content_type == RST_TYPE:
+            from ..rst import render as rst_render
+            return rst_render
+        elif content_type == MD_TYPE:
+            from ..markdown import render as md_render
+            return md_render
+        elif content_type == PLAIN_TYPE:
+            from ..txt import render as txt_render
+            return txt_render
+        else:
+            from ..rst import render as rst_render
+            return rst_render
+
+    def run(self):
+        """Runs the command."""
+
+        data = self.distribution.get_long_description()
+        stream = io.StringIO()
+        # TODO: this will only work for RST!!!
+        render = self.get_renderer()
+        markup = render(data, stream=stream)
+
+        for line in stream.getvalue().splitlines():
+            if line.startswith("<string>"):
+                line = line[8:]
+            self.warn(line)
+
+        if markup is None:
+            self.warn("Invalid markup which will not be rendered on PyPI.")
+
+        if self.preview:
+            with NamedTemporaryFile(
+                prefix='render_readme_',
+                suffix='.html',
+                delete=False,
+            ) as f:
+                print('Writing readme to {0}'.format(f.name))
+                f.write(markup.encode('utf-8'))
+
+            webbrowser.open('file://' + f.name.replace('\\', '/'))
+        else:
+            if not self.no_color:
+                lexer = HtmlLexer()
+                formatter = Terminal256Formatter(style=self.style)
+                markup = highlight(markup, lexer, formatter)
+            sys.stdout.write(markup)
