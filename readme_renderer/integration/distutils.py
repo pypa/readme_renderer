@@ -19,6 +19,7 @@ import re
 
 import distutils.log
 from distutils.command.check import check as _check
+from distutils.core import Command
 import six
 
 from ..rst import render
@@ -61,6 +62,14 @@ class Check(_check):
         """
         Checks if the long string fields are reST-compliant.
         """
+        # Warn that this command is deprecated
+        # Don't use self.warn() because it will cause the check to fail.
+        Command.warn(
+            self,
+            "This command has been deprecated. Use `twine check` instead: "
+            "https://github.com/pypa/twine#twine-check"
+        )
+
         data = self.distribution.get_long_description()
         content_type = getattr(
             self.distribution.metadata, 'long_description_content_type', None)
