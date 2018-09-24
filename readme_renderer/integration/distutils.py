@@ -67,7 +67,8 @@ class Check(_check):
         Command.warn(
             self,
             "This command has been deprecated. Use `twine check` instead: "
-            "https://github.com/pypa/twine#twine-check"
+            "https://packaging.python.org/guides/making-a-pypi-friendly-readme"
+            "#validating-restructuredtext-markup"
         )
 
         data = self.distribution.get_long_description()

@@ -24,5 +24,5 @@ chat rooms, and mailing lists is expected to follow the `PyPA Code of Conduct`_.
 
 
 .. |twine check| replace:: ``twine check``
-.. _twine check: https://github.com/pypa/twine#twine-check
+.. _twine check: https://packaging.python.org/guides/making-a-pypi-friendly-readme#validating-restructuredtext-markup
 .. _PyPA Code of Conduct: https://www.pypa.io/en/latest/code-of-conduct/
