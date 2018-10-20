@@ -19,6 +19,8 @@ matrix:
     - python: 2.7
       env: TOXENV=py2pep8
     - env: TOXENV=packaging
+    - python: 3.6
+      env: TOXENV=noextra
 
 install: pip install tox
 
