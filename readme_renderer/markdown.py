@@ -14,8 +14,8 @@
 from __future__ import absolute_import, division, print_function
 
 import re
+import warnings
 
-import cmarkgfm
 import pygments
 import pygments.lexers
 import pygments.formatters
@@ -23,6 +23,20 @@ from six.moves import html_parser
 
 from .clean import clean
 
+_EXTRA_WARNING = (
+    "Markdown renderers are not available. "
+    "Install 'readme_render[md]' to enable Markdown rendering."
+)
+
+try:
+    import cmarkgfm
+    variants = {
+        "GFM": cmarkgfm.github_flavored_markdown_to_html,
+        "CommonMark": cmarkgfm.markdown_to_html,
+    }
+except ImportError:
+    warnings.warn(_EXTRA_WARNING)
+    variants = {}
 
 # Make code fences with `python` as the language default to highlighting as
 # Python 3.
@@ -31,13 +45,11 @@ _LANG_ALIASES = {
 }
 
 
-variants = {
-    "GFM": cmarkgfm.github_flavored_markdown_to_html,
-    "CommonMark": cmarkgfm.markdown_to_html,
-}
-
-
 def render(raw, variant="GFM", **kwargs):
+    if not variants:
+        warnings.warn(_EXTRA_WARNING)
+        return None
+
     renderer = variants.get(variant)
 
     if not renderer:

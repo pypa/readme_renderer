@@ -61,7 +61,6 @@ setuptools.setup(
 
     install_requires=[
         "bleach>=2.1.0",
-        "cmarkgfm>=0.2.0",
         "docutils>=0.13.1",
         "future",
         "Pygments",
@@ -72,6 +71,10 @@ setuptools.setup(
         "distutils.commands": [
             "check = readme_renderer.integration.distutils:Check",
         ],
+    },
+
+    extras_require={
+        "md": "cmarkgfm>=0.2.0",
     },
 
     packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
