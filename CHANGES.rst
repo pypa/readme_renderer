@@ -1,6 +1,13 @@
 Changes
 =======
 
+23.0 (2018-10-22)
+-----------------
+
+* Breaking change: Move the cmarkgfm dependency into an extra (#130). Users
+  that want to render Markdown will need to install readme_render[md] instead.
+
+
 22.0 (2018-09-17)
 -----------------
 
