@@ -13,9 +13,17 @@
 # limitations under the License.
 from __future__ import absolute_import, division, print_function
 
-from html import escape as html_escape
+import sys
 
 from .clean import clean
+
+if sys.version_info >= (3,):
+    from html import escape as html_escape
+else:
+    from cgi import escape
+
+    def html_escape(s):
+        return escape(s, quote=True).replace("'", '&#x27;')
 
 
 def render(raw, **kwargs):
