@@ -15,11 +15,11 @@ from __future__ import absolute_import, division, print_function
 
 import re
 import warnings
+import html as html_manipulator
 
 import pygments
 import pygments.lexers
 import pygments.formatters
-from six.moves import html_parser
 
 from .clean import clean
 
@@ -99,7 +99,7 @@ def _highlight(html):
         # translate '"' to '&quot;', but it confuses pygments. Pygments will
         # escape any html entities when re-writing the code, and we run
         # everything through bleach after.
-        code = html_parser.HTMLParser().unescape(code)
+        code = html_manipulator.unescape(code)
 
         highlighted = pygments.highlight(code, lexer, formatter)
 
