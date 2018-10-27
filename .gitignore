@@ -12,3 +12,5 @@ htmlcov/
 *.eggs
 *.py[co]
 .pytest_cache/
+
+.idea/
