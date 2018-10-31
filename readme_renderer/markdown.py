@@ -25,7 +25,7 @@ from .clean import clean
 
 _EXTRA_WARNING = (
     "Markdown renderers are not available. "
-    "Install 'readme_render[md]' to enable Markdown rendering."
+    "Install 'readme_renderer[md]' to enable Markdown rendering."
 )
 
 try:
