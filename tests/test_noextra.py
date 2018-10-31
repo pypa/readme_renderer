@@ -11,5 +11,5 @@ def test_no_extra(variant):
     assert len(warnings) == 1
     assert warnings[0].message.args[0] == (
         "Markdown renderers are not available. "
-        "Install 'readme_render[md]' to enable Markdown rendering."
+        "Install 'readme_renderer[md]' to enable Markdown rendering."
     )
