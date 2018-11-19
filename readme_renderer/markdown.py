@@ -35,7 +35,6 @@ try:
         "CommonMark": cmarkgfm.markdown_to_html,
     }
 except ImportError:
-    warnings.warn(_EXTRA_WARNING)
     variants = {}
 
 # Make code fences with `python` as the language default to highlighting as
