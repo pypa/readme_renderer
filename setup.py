@@ -52,10 +52,10 @@ setuptools.setup(
         "Programming Language :: Python :: 2",
         "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.4",
         "Programming Language :: Python :: 3.5",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
     ],
@@ -63,7 +63,7 @@ setuptools.setup(
     install_requires=[
         "bleach>=2.1.0",
         "docutils>=0.13.1",
-        "Pygments",
+        "Pygments>=2.5.1",
         "six",
     ],
 
