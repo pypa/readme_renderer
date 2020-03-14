@@ -1,6 +1,14 @@
 Changes
 =======
 
+25.0 (2020-03-14)
+-----------------
+
+* Support Python 3.7 and 3.8
+* Drop support for Python 3.4
+* Require Pygments>=2.5.1
+
+
 24.0 (2018-10-27)
 -----------------
 
