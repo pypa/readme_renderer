@@ -1,6 +1,12 @@
 Changes
 =======
 
+26.0 (2020-04-22)
+-----------------
+
+* Fix regression with image width/height attributes (#164)
+
+
 25.0 (2020-03-14)
 -----------------
 
