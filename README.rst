@@ -20,9 +20,9 @@ Code of Conduct
 ---------------
 
 Everyone interacting in the readme_renderer project's codebases, issue trackers,
-chat rooms, and mailing lists is expected to follow the `PyPA Code of Conduct`_.
+chat rooms, and mailing lists is expected to follow the `PSF Code of Conduct`_.
 
 
 .. |twine check| replace:: ``twine check``
 .. _twine check: https://packaging.python.org/guides/making-a-pypi-friendly-readme#validating-restructuredtext-markup
-.. _PyPA Code of Conduct: https://www.pypa.io/en/latest/code-of-conduct/
+.. _PSF Code of Conduct: https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md
