@@ -27,6 +27,18 @@ class ReadMeHTMLTranslator(HTMLTranslator):
     # Overrides base class not to output `<object>` tag for SVG images.
     object_image_types = {}
 
+    def emptytag(self, node, tagname, suffix="\n", **attributes):
+        """Override this to add back the width/height attributes."""
+        if tagname == "img":
+            if "width" in node:
+                attributes["width"] = node["width"]
+            if "height" in node:
+                attributes["height"] = node["height"]
+
+        return super(ReadMeHTMLTranslator, self).emptytag(
+            node, tagname, suffix, **attributes
+        )
+
 
 SETTINGS = {
     # Cloaking email addresses provides a small amount of additional
