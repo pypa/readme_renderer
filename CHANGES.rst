@@ -1,6 +1,11 @@
 Changes
 =======
 
+27.0 (2020-10-09)
+-----------------
+
+* Add support for align attribute rendering Markdown headers (#173)
+
 26.0 (2020-04-22)
 -----------------
 
