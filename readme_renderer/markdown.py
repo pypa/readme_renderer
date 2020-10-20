@@ -19,7 +19,13 @@ import warnings
 import pygments
 import pygments.lexers
 import pygments.formatters
-from six.moves import html_parser
+
+try:
+    from six.moves.html_parser import unescape
+except ImportError:  # Python 2
+    from six.moves import html_parser
+
+    unescape = html_parser.HTMLParser().unescape
 
 from .clean import clean
 
@@ -99,7 +105,7 @@ def _highlight(html):
         # translate '"' to '&quot;', but it confuses pygments. Pygments will
         # escape any html entities when re-writing the code, and we run
         # everything through bleach after.
-        code = html_parser.HTMLParser().unescape(code)
+        code = unescape(code)
 
         highlighted = pygments.highlight(code, lexer, formatter)
 
