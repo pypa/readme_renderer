@@ -30,15 +30,12 @@ with open(os.path.join(base_dir, "README.rst")) as f:
 setuptools.setup(
     name=about["__title__"],
     version=about["__version__"],
-
     description=about["__summary__"],
     long_description=long_description,
     license=about["__license__"],
     url=about["__uri__"],
-
     author=about["__author__"],
     author_email=about["__email__"],
-
     classifiers=[
         "Intended Audience :: Developers",
         "License :: OSI Approved :: Apache Software License",
@@ -49,10 +46,8 @@ setuptools.setup(
         "Operating System :: POSIX :: Linux",
         "Operating System :: Microsoft :: Windows",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2",
-        "Programming Language :: Python :: 2.7",
         "Programming Language :: Python :: 3",
-        "Programming Language :: Python :: 3.5",
+        "Programming Language :: Python :: 3 :: Only",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
@@ -60,23 +55,10 @@ setuptools.setup(
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
     ],
-
-    install_requires=[
-        "bleach>=2.1.0",
-        "docutils>=0.13.1",
-        "Pygments>=2.5.1",
-        "six",
-    ],
-
+    install_requires=["bleach>=2.1.0", "docutils>=0.13.1", "Pygments>=2.5.1", "six"],
     entry_points={
-        "distutils.commands": [
-            "check = readme_renderer.integration.distutils:Check",
-        ],
+        "distutils.commands": ["check = readme_renderer.integration.distutils:Check"],
     },
-
-    extras_require={
-        "md": "cmarkgfm>=0.5.0,<0.6.0",
-    },
-
+    extras_require={"md": "cmarkgfm>=0.5.0,<0.6.0"},
     packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
 )
