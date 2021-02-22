@@ -36,9 +36,14 @@ _EXTRA_WARNING = (
 
 try:
     import cmarkgfm
+    from cmarkgfm.cmark import Options as cmarkgfmOptions
     variants = {
-        "GFM": cmarkgfm.github_flavored_markdown_to_html,
-        "CommonMark": cmarkgfm.markdown_to_html,
+        "GFM": lambda raw: cmarkgfm.github_flavored_markdown_to_html(
+            raw, options=cmarkgfmOptions.CMARK_OPT_UNSAFE
+        ),
+        "CommonMark": lambda raw: cmarkgfm.markdown_to_html(
+            raw, options=cmarkgfmOptions.CMARK_OPT_UNSAFE
+        ),
     }
 except ImportError:
     warnings.warn(_EXTRA_WARNING)
