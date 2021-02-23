@@ -16,16 +16,11 @@ from __future__ import absolute_import, division, print_function
 import re
 import warnings
 
+from html.parser import unescape
+
 import pygments
 import pygments.lexers
 import pygments.formatters
-
-try:
-    from six.moves.html_parser import unescape
-except ImportError:  # Python 2
-    from six.moves import html_parser
-
-    unescape = html_parser.HTMLParser().unescape
 
 from .clean import clean
 

@@ -3,7 +3,6 @@ import glob
 import os.path
 
 import pytest
-import six
 
 from readme_renderer.rst import render
 
@@ -46,7 +45,7 @@ def test_rst_002():
 
 
 def test_rst_raw():
-    warnings = six.StringIO()
+    warnings = io.StringIO()
     assert render("""
 .. raw:: html
     <script>I am evil</script>

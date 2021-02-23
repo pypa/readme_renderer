@@ -20,7 +20,6 @@ import re
 import distutils.log
 from distutils.command.check import check as _check
 from distutils.core import Command
-import six
 
 from ..rst import render
 
@@ -35,7 +34,6 @@ _REPORT_RE = re.compile(
     r'(?P<message>.*)', re.DOTALL | re.MULTILINE)
 
 
-@six.python_2_unicode_compatible
 class _WarningStream(object):
     def __init__(self):
         self.output = io.StringIO()
