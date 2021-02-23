@@ -1,17 +1,17 @@
 name: Release
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        ref: ${{ github.event.release.tag_name }}
     - name: Set up Python
       uses: actions/setup-python@v2
-      with:
-        python-version: '3.x'
     - name: Install build dependencies
       run: pip install -U setuptools wheel build
     - name: Build
@@ -19,5 +19,4 @@ jobs:
     - name: Publish
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
-        skip_existing: true
         password: ${{ secrets.pypi_password }}
