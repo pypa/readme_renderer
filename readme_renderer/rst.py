@@ -15,11 +15,43 @@ from __future__ import absolute_import, division, print_function
 
 import io
 
+from docutils import utils
 from docutils.core import publish_parts
 from docutils.writers.html4css1 import HTMLTranslator, Writer
 from docutils.utils import SystemMessage
 
 from .clean import clean
+
+
+def extract_extension_options(field_list, option_spec):
+    """
+    Overrides `utils.extract_extension_options` and inlines
+    `utils.assemble_option_dict` to make it ignore unknown options passed to
+    directives (i.e. ``:caption:`` for ``.. code-block:``).
+    """
+
+    dropped = set()
+    options = {}
+    for name, value in utils.extract_options(field_list):
+        convertor = option_spec.get(name)
+        if name in options or name in dropped:
+            raise utils.DuplicateOptionError('duplicate option "%s"' % name)
+
+        # silently drop unknown options as long as they are not duplicates
+        if convertor is None:
+            dropped.add(name)
+            continue
+
+        # continue as before
+        try:
+            options[name] = convertor(value)
+        except (ValueError, TypeError) as detail:
+            raise detail.__class__('(option: "%s"; value: %r)\n%s'
+                                   % (name, value, ' '.join(detail.args)))
+    return options
+
+
+utils.extract_extension_options = extract_extension_options
 
 
 class ReadMeHTMLTranslator(HTMLTranslator):
