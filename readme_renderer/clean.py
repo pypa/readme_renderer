@@ -70,6 +70,7 @@ ALLOWED_CLASSES = {
     )
 }
 
+
 ALLOWED_STYLES = [
 ]
 
