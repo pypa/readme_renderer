@@ -20,6 +20,16 @@ import bleach.callbacks
 import bleach.linkifier
 import bleach.sanitizer
 
+from bleach.html5lib_shim import Filter
+
+
+class DisableInputFilter(Filter):
+     def __iter__(self):
+         for token in Filter.__iter__(self):
+             if "name" in token and token["name"].lower() == "input":
+                token["data"][(None,"disabled")] = ""
+             yield token
+
 
 ALLOWED_TAGS = [
     # Bleach Defaults
@@ -28,7 +38,7 @@ ALLOWED_TAGS = [
 
     # Custom Additions
     "br", "caption", "cite", "col", "colgroup", "dd", "del", "details", "div",
-    "dl", "dt", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "img", "p", "pre",
+    "dl", "dt", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "img", "input", "p", "pre",
     "span", "sub", "summary", "sup", "table", "tbody", "td", "th", "thead",
     "tr", "tt", "kbd", "var",
 ]
@@ -42,6 +52,7 @@ ALLOWED_ATTRIBUTES = {
     # Custom Additions
     "*": ["id"],
     "hr": ["class"],
+    "input": ["type", "checked", "disabled"],
     "img": ["src", "width", "height", "alt", "align", "class"],
     "span": ["class"],
     "th": ["align"],
@@ -85,6 +96,8 @@ def clean(html, tags=None, attributes=None, styles=None):
                 skip_tags=["pre"],
                 parse_email=False,
             ),
+            # Mark any `input` fields as disabled
+            DisableInputFilter,
         ],
     )
     try:
