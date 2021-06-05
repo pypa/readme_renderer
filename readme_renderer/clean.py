@@ -54,16 +54,28 @@ ALLOWED_ATTRIBUTES = {
     "code": ["class"],
     "p": ["align"],
 }
+# Class is a specific attribute because not only do we want to allow it only
+# on certain tags, but we also want to control possible values.
+ALLOWED_CLASSES = {
+}
 
 ALLOWED_STYLES = [
 ]
+
+
+def is_attributes_allowed(tag, name, value):
+    if name == "class":
+        # In our case, there's no use-case where a single element may have
+        # multiple classes, so we don't have to split() to compare.
+        return value in ALLOWED_CLASSES.get(tag, ())
+    return name in ALLOWED_ATTRIBUTES.get(tag, []) + ALLOWED_ATTRIBUTES["*"]
 
 
 def clean(html, tags=None, attributes=None, styles=None):
     if tags is None:
         tags = ALLOWED_TAGS
     if attributes is None:
-        attributes = ALLOWED_ATTRIBUTES
+        attributes = is_attributes_allowed
     if styles is None:
         styles = ALLOWED_STYLES
 
