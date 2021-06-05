@@ -41,8 +41,8 @@ ALLOWED_ATTRIBUTES = {
 
     # Custom Additions
     "*": ["id"],
-    "img": ["src", "width", "height", "alt", "align", "class"],
     "span": ["class"],
+    "img": ["src", "width", "height", "alt", "align"],
     "th": ["align"],
     "td": ["align"],
     "h1": ["align"],
@@ -57,6 +57,7 @@ ALLOWED_ATTRIBUTES = {
 # Class is a specific attribute because not only do we want to allow it only
 # on certain tags, but we also want to control possible values.
 ALLOWED_CLASSES = {
+    "img": {"align-left", "align-right", "align-center"},
 }
 
 ALLOWED_STYLES = [
