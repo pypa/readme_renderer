@@ -41,7 +41,6 @@ ALLOWED_ATTRIBUTES = {
 
     # Custom Additions
     "*": ["id"],
-    "span": ["class"],
     "img": ["src", "width", "height", "alt", "align"],
     "th": ["align"],
     "td": ["align"],
@@ -58,6 +57,18 @@ ALLOWED_ATTRIBUTES = {
 # on certain tags, but we also want to control possible values.
 ALLOWED_CLASSES = {
     "img": {"align-left", "align-right", "align-center"},
+    "span": set(
+        # Classes for syntax coloring
+        # The original source for this list is
+        # https://github.com/pygments/pygments/blob/cfaa45dcc4103da8cf1700fd0d3e5708d894337b/pygments/token.py
+        # which is a superset from the list in
+        # https://github.com/pypa/warehouse/blob/master/warehouse/static/sass/blocks/_project-description.scss#L256
+        # This means that some classes are unused and it's most probably OK.
+        "bp c c1 ch cm cp cpf cs dl err esc fm g gd ge gh gi go gp gr gs gt "
+        "gu il k kc kd kn kp kr kt l ld m mb mf mh mi mo n na nb nc nd ne nf "
+        "ni nl nn no nt nv nx o ow p py s s1 s2 sa sb sc sd se sh si sr ss sx "
+        "vc vg vi vm w x".split()
+    )
 }
 
 ALLOWED_STYLES = [
