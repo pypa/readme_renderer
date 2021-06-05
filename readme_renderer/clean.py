@@ -50,7 +50,6 @@ ALLOWED_ATTRIBUTES = {
     "h4": ["align"],
     "h5": ["align"],
     "h6": ["align"],
-    "code": ["class"],
     "p": ["align"],
 }
 # Class is a specific attribute because not only do we want to allow it only
