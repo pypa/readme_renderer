@@ -61,4 +61,5 @@ setuptools.setup(
     },
     extras_require={"md": "cmarkgfm>=0.5.0,<0.6.0"},
     packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
+    python_requires=">=3.6",
 )
