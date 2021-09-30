@@ -88,7 +88,10 @@ def _highlight(html):
     formatter = pygments.formatters.HtmlFormatter(nowrap=True)
 
     code_expr = re.compile(
-        r'<pre><code class="language-(?P<lang>.+?)">(?P<code>.+?)'
+        # cmarkgfm<0.6.0: <pre><code class="language-python">print('hello')</code></pre>
+        # cmarkgfm>=0.6.0: <pre lang="python"><code>print('hello')</code></pre>
+        r'(<pre>(?P<in_code><code) class="language-|<pre lang=")(?P<lang>[^"]+?)">'
+        '(?(in_code)|<code>)(?P<code>.+?)'
         r'</code></pre>', re.DOTALL)
 
     def replacer(match):

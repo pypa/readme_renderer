@@ -59,6 +59,6 @@ setuptools.setup(
     entry_points={
         "distutils.commands": ["check = readme_renderer.integration.distutils:Check"],
     },
-    extras_require={"md": "cmarkgfm>=0.5.0,<0.6.0"},
+    extras_require={"md": "cmarkgfm>=0.5.0,<0.7.0"},
     packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
 )
