@@ -23,14 +23,54 @@ import bleach.sanitizer
 
 ALLOWED_TAGS = [
     # Bleach Defaults
-    "a", "abbr", "acronym", "b", "blockquote", "code", "em", "i", "li", "ol",
-    "strong", "ul",
+    "a",
+    "abbr",
+    "acronym",
+    "b",
+    "blockquote",
+    "code",
+    "em",
+    "i",
+    "li",
+    "ol",
+    "strong",
+    "ul",
 
     # Custom Additions
-    "br", "caption", "cite", "col", "colgroup", "dd", "del", "details", "div",
-    "dl", "dt", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "img", "p", "pre",
-    "span", "sub", "summary", "sup", "table", "tbody", "td", "th", "thead",
-    "tr", "tt", "kbd", "var",
+    "br",
+    "caption",
+    "cite",
+    "col",
+    "colgroup",
+    "dd",
+    "del",
+    "details",
+    "div",
+    "dl",
+    "dt",
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "hr",
+    "img",
+    "p",
+    "pre",
+    "span",
+    "sub",
+    "summary",
+    "sup",
+    "table",
+    "tbody",
+    "td",
+    "th",
+    "thead",
+    "tr",
+    "tt",
+    "kbd",
+    "var",
 ]
 
 ALLOWED_ATTRIBUTES = {
@@ -46,6 +86,7 @@ ALLOWED_ATTRIBUTES = {
     "span": ["class"],
     "th": ["align"],
     "td": ["align"],
+    "div": ["align"],
     "h1": ["align"],
     "h2": ["align"],
     "h3": ["align"],
@@ -56,8 +97,7 @@ ALLOWED_ATTRIBUTES = {
     "p": ["align"],
 }
 
-ALLOWED_STYLES = [
-]
+ALLOWED_STYLES = []
 
 
 def clean(html, tags=None, attributes=None, styles=None):
