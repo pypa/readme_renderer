@@ -46,6 +46,7 @@ ALLOWED_ATTRIBUTES = {
     "span": ["class"],
     "th": ["align"],
     "td": ["align"],
+    "div": ["align"],
     "h1": ["align"],
     "h2": ["align"],
     "h3": ["align"],
