@@ -61,6 +61,7 @@ ALLOWED_ATTRIBUTES = {
 ALLOWED_STYLES = [
 ]
 
+
 class DisabledCheckboxInputsFilter:
     def __init__(self, source):
         self.source = source
