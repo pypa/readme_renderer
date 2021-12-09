@@ -1,6 +1,11 @@
 Changes
 =======
 
+31.0 (2021-12-09)
+-----------------
+
+* Render disabled checkboxes from Markdown (#217)
+
 30.0 (2021-09-30)
 -----------------
 
