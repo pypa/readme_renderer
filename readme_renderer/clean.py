@@ -30,7 +30,7 @@ ALLOWED_TAGS = [
     "br", "caption", "cite", "col", "colgroup", "dd", "del", "details", "div",
     "dl", "dt", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "img", "p", "pre",
     "span", "sub", "summary", "sup", "table", "tbody", "td", "th", "thead",
-    "tr", "tt", "kbd", "var",
+    "tr", "tt", "kbd", "var", "input",
 ]
 
 ALLOWED_ATTRIBUTES = {
@@ -56,10 +56,37 @@ ALLOWED_ATTRIBUTES = {
     "code": ["class"],
     "p": ["align"],
     "ol": ["start"],
+    "input": ["type", "checked", "disabled"],
 }
 
 ALLOWED_STYLES = [
 ]
+
+
+class DisabledCheckboxInputsFilter:
+    def __init__(self, source):
+        self.source = source
+
+    def __iter__(self):
+        for token in self.source:
+            if token.get("name") == "input":
+                # only allow disabled checkbox inputs
+                is_checkbox, is_disabled, unsafe_attrs = False, False, False
+                for (_, attrname), value in token.get("data", {}).items():
+                    if attrname == "type" and value == "checkbox":
+                        is_checkbox = True
+                    elif attrname == "disabled":
+                        is_disabled = True
+                    elif attrname != "checked":
+                        unsafe_attrs = True
+                        break
+                if is_checkbox and is_disabled and not unsafe_attrs:
+                    yield token
+            else:
+                yield token
+
+    def __getattr__(self, name):
+        return getattr(self.source, name)
 
 
 def clean(html, tags=None, attributes=None, styles=None):
@@ -87,6 +114,7 @@ def clean(html, tags=None, attributes=None, styles=None):
                 skip_tags=["pre"],
                 parse_email=False,
             ),
+            DisabledCheckboxInputsFilter,
         ],
     )
     try:
