@@ -88,6 +88,10 @@ SETTINGS = {
     # Use the short form of syntax highlighting so that the generated
     # Pygments CSS can be used to style the output.
     "syntax_highlight": "short",
+
+    # Maximum width (in characters) for one-column field names.
+    # 0 means "no limit"
+    "field_name_limit": 0,
 }
 
 
