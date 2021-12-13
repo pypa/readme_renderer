@@ -1,6 +1,12 @@
 Changes
 =======
 
+32.0 (2021-12-13)
+-----------------
+
+* Allow start attribute in ordered lists (#216)
+* No limit rendering RST one column field names (#219)
+
 31.0 (2021-12-09)
 -----------------
 
