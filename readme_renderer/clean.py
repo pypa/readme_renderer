@@ -55,6 +55,7 @@ ALLOWED_ATTRIBUTES = {
     "h6": ["align"],
     "code": ["class"],
     "p": ["align"],
+    "ol": ["start"],
     "input": ["type", "checked", "disabled"],
 }
 
