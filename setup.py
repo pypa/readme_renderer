@@ -52,6 +52,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
         "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
     ],
@@ -59,7 +60,7 @@ setuptools.setup(
     entry_points={
         "distutils.commands": ["check = readme_renderer.integration.distutils:Check"],
     },
-    extras_require={"md": "cmarkgfm>=0.5.0,<0.7.0"},
+    extras_require={"md": "cmarkgfm>=0.8.0"},
     packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
     python_requires=">=3.6",
 )
