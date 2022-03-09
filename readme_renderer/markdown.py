@@ -16,7 +16,7 @@ from __future__ import absolute_import, division, print_function
 import re
 import warnings
 
-from html.parser import unescape
+from html import unescape
 
 import pygments
 import pygments.lexers
