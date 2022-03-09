@@ -59,9 +59,6 @@ ALLOWED_ATTRIBUTES = {
     "input": ["type", "checked", "disabled"],
 }
 
-ALLOWED_STYLES = [
-]
-
 
 class DisabledCheckboxInputsFilter:
     def __init__(self, source):
@@ -89,19 +86,16 @@ class DisabledCheckboxInputsFilter:
         return getattr(self.source, name)
 
 
-def clean(html, tags=None, attributes=None, styles=None):
+def clean(html, tags=None, attributes=None):
     if tags is None:
         tags = ALLOWED_TAGS
     if attributes is None:
         attributes = ALLOWED_ATTRIBUTES
-    if styles is None:
-        styles = ALLOWED_STYLES
 
     # Clean the output using Bleach
     cleaner = bleach.sanitizer.Cleaner(
         tags=tags,
         attributes=attributes,
-        styles=styles,
         filters=[
             # Bleach Linkify makes it easy to modify links, however, we will
             # not be using it to create additional links.
