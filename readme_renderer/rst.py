@@ -25,7 +25,7 @@ from .clean import clean
 class ReadMeHTMLTranslator(HTMLTranslator):
 
     # Overrides base class not to output `<object>` tag for SVG images.
-    object_image_types = {}
+    object_image_types = {}  # type: ignore
 
     def emptytag(self, node, tagname, suffix="\n", **attributes):
         """Override this to add back the width/height attributes."""
