@@ -24,10 +24,10 @@ from docutils.utils import SystemMessage
 from .clean import clean
 
 
-class ReadMeHTMLTranslator(HTMLTranslator):  # type: ignore
+class ReadMeHTMLTranslator(HTMLTranslator):  # type: ignore[misc] # docutils is incomplete, returns `Any` python/typeshed#7256 # noqa E501
 
     # Overrides base class not to output `<object>` tag for SVG images.
-    object_image_types = {}  # type: ignore
+    object_image_types = {}  # type: ignore[var-annotated] # intentnionally empty
 
     def emptytag(
         self,
