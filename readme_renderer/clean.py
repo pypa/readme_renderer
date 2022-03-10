@@ -62,6 +62,8 @@ ALLOWED_ATTRIBUTES = {
 
 
 class DisabledCheckboxInputsFilter:
+    # The typeshed for bleach (html5lib) filters is incomplete, use `typing.Any`
+    # See https://github.com/python/typeshed/blob/505ea726415016e53638c8b584b8fdc9c722cac1/stubs/bleach/bleach/html5lib_shim.pyi#L7-L8 # noqa E501
     def __init__(self, source: typing.Any) -> None:
         self.source = source
 
