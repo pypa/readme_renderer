@@ -105,7 +105,7 @@ SETTINGS = {
 
 def render(
     raw: str,
-    stream: typing.Optional[typing.Any] = None,
+    stream: typing.Optional[typing.IO[str]] = None,
     **kwargs: typing.Any
 ) -> typing.Optional[str]:
     if stream is None:
