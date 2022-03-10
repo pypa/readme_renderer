@@ -15,6 +15,7 @@ from __future__ import absolute_import, division, print_function
 
 import re
 import warnings
+from typing import Any, Match, Optional
 
 from html import unescape
 
@@ -51,7 +52,7 @@ _LANG_ALIASES = {
 }
 
 
-def render(raw, variant="GFM", **kwargs):
+def render(raw: str, variant: str = "GFM", **kwargs: Any) -> Optional[str]:
     if not variants:
         warnings.warn(_EXTRA_WARNING)
         return None
@@ -61,7 +62,8 @@ def render(raw, variant="GFM", **kwargs):
     if not renderer:
         return None
 
-    rendered = renderer(raw)
+    # The renderer is a lambda function, and mypy fails lambdas right now.
+    rendered = renderer(raw)  # type: ignore
 
     if not rendered:
         return None
@@ -71,7 +73,7 @@ def render(raw, variant="GFM", **kwargs):
     return cleaned
 
 
-def _highlight(html):
+def _highlight(html: str) -> str:
     """Syntax-highlights HTML-rendered Markdown.
 
     Plucks sections to highlight that conform the the GitHub fenced code info
@@ -94,7 +96,7 @@ def _highlight(html):
         '(?(in_code)|<code>)(?P<code>.+?)'
         r'</code></pre>', re.DOTALL)
 
-    def replacer(match):
+    def replacer(match: Match[Any]) -> str:
         try:
             lang = match.group('lang')
             lang = _LANG_ALIASES.get(lang, lang)
