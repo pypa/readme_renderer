@@ -3,6 +3,7 @@ requires = ["setuptools>=40.8.0", "wheel", "bleach>=2.1.0", "docutils>=0.13.1", 
 build-backend = "setuptools.build_meta:__legacy__"
 
 [tool.mypy]
+strict = true
 warn_unused_configs = true
 [[tool.mypy.overrides]]
 # These modules do not yet have types available.
