@@ -14,6 +14,7 @@
 from __future__ import absolute_import, division, print_function
 
 import functools
+import typing
 
 import bleach
 import bleach.callbacks
@@ -61,10 +62,10 @@ ALLOWED_ATTRIBUTES = {
 
 
 class DisabledCheckboxInputsFilter:
-    def __init__(self, source):
+    def __init__(self, source: typing.Any) -> None:
         self.source = source
 
-    def __iter__(self):
+    def __iter__(self) -> typing.Iterator[typing.Dict[str, typing.Optional[str]]]:
         for token in self.source:
             if token.get("name") == "input":
                 # only allow disabled checkbox inputs
@@ -82,11 +83,15 @@ class DisabledCheckboxInputsFilter:
             else:
                 yield token
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str) -> typing.Any:
         return getattr(self.source, name)
 
 
-def clean(html, tags=None, attributes=None):
+def clean(
+    html: str,
+    tags: typing.Optional[typing.List[str]] = None,
+    attributes: typing.Optional[typing.Dict[str, typing.List[str]]] = None
+) -> typing.Optional[str]:
     if tags is None:
         tags = ALLOWED_TAGS
     if attributes is None:
