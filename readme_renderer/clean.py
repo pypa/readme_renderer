@@ -14,6 +14,7 @@
 from __future__ import absolute_import, division, print_function
 
 import functools
+from typing import Any, Dict, Iterator, List, Optional
 
 import bleach
 import bleach.callbacks
@@ -59,15 +60,14 @@ ALLOWED_ATTRIBUTES = {
     "input": ["type", "checked", "disabled"],
 }
 
-ALLOWED_STYLES = [
-]
-
 
 class DisabledCheckboxInputsFilter:
-    def __init__(self, source):
+    # The typeshed for bleach (html5lib) filters is incomplete, use `typing.Any`
+    # See https://github.com/python/typeshed/blob/505ea726415016e53638c8b584b8fdc9c722cac1/stubs/bleach/bleach/html5lib_shim.pyi#L7-L8 # noqa E501
+    def __init__(self, source: Any) -> None:
         self.source = source
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[Dict[str, Optional[str]]]:
         for token in self.source:
             if token.get("name") == "input":
                 # only allow disabled checkbox inputs
@@ -85,23 +85,24 @@ class DisabledCheckboxInputsFilter:
             else:
                 yield token
 
-    def __getattr__(self, name):
+    def __getattr__(self, name: str) -> Any:
         return getattr(self.source, name)
 
 
-def clean(html, tags=None, attributes=None, styles=None):
+def clean(
+    html: str,
+    tags: Optional[List[str]] = None,
+    attributes: Optional[Dict[str, List[str]]] = None
+) -> Optional[str]:
     if tags is None:
         tags = ALLOWED_TAGS
     if attributes is None:
         attributes = ALLOWED_ATTRIBUTES
-    if styles is None:
-        styles = ALLOWED_STYLES
 
     # Clean the output using Bleach
     cleaner = bleach.sanitizer.Cleaner(
         tags=tags,
         attributes=attributes,
-        styles=styles,
         filters=[
             # Bleach Linkify makes it easy to modify links, however, we will
             # not be using it to create additional links.

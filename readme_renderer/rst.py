@@ -14,20 +14,28 @@
 from __future__ import absolute_import, division, print_function
 
 import io
+from typing import Any, Dict, IO, Optional, Union
 
 from docutils.core import publish_parts
+from docutils.nodes import colspec, image
 from docutils.writers.html4css1 import HTMLTranslator, Writer
 from docutils.utils import SystemMessage
 
 from .clean import clean
 
 
-class ReadMeHTMLTranslator(HTMLTranslator):
+class ReadMeHTMLTranslator(HTMLTranslator):  # type: ignore[misc] # docutils is incomplete, returns `Any` python/typeshed#7256 # noqa E501
 
     # Overrides base class not to output `<object>` tag for SVG images.
-    object_image_types = {}
+    object_image_types: Dict[str, str] = {}
 
-    def emptytag(self, node, tagname, suffix="\n", **attributes):
+    def emptytag(
+        self,
+        node: Union[colspec, image],
+        tagname: str,
+        suffix: str = "\n",
+        **attributes: Any
+    ) -> Any:
         """Override this to add back the width/height attributes."""
         if tagname == "img":
             if "width" in node:
@@ -95,7 +103,11 @@ SETTINGS = {
 }
 
 
-def render(raw, stream=None, **kwargs):
+def render(
+    raw: str,
+    stream: Optional[IO[str]] = None,
+    **kwargs: Any
+) -> Optional[str]:
     if stream is None:
         # Use a io.StringIO as the warning stream to prevent warnings from
         # being printed to sys.stderr.

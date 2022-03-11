@@ -14,6 +14,7 @@
 from __future__ import absolute_import, division, print_function
 
 import sys
+from typing import Any, Optional
 
 from .clean import clean
 
@@ -26,6 +27,6 @@ else:
         return escape(s, quote=True).replace("'", '&#x27;')
 
 
-def render(raw, **kwargs):
+def render(raw: str, **kwargs: Any) -> Optional[str]:
     rendered = html_escape(raw).replace("\n", "<br>")
     return clean(rendered, tags=["br"])

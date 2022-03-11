@@ -11,6 +11,13 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# The `distutils` integration is going to need to get updated to `setuptools``
+# soon enough, as `distutils` is deprecated and will be removed in Python 3.12.
+# There's currently some pass-through imports that allow this to work, but is
+# challenging for `mypy` in `strict` mode, so let's skip this file for now.
+# See https://peps.python.org/pep-0632/
+# mypy: ignore-errors
 from __future__ import absolute_import, division, print_function
 
 import cgi
