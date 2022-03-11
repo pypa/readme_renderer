@@ -14,7 +14,7 @@
 from __future__ import absolute_import, division, print_function
 
 import functools
-import typing
+from typing import Any, Dict, Iterator, List, Optional
 
 import bleach
 import bleach.callbacks
@@ -64,10 +64,10 @@ ALLOWED_ATTRIBUTES = {
 class DisabledCheckboxInputsFilter:
     # The typeshed for bleach (html5lib) filters is incomplete, use `typing.Any`
     # See https://github.com/python/typeshed/blob/505ea726415016e53638c8b584b8fdc9c722cac1/stubs/bleach/bleach/html5lib_shim.pyi#L7-L8 # noqa E501
-    def __init__(self, source: typing.Any) -> None:
+    def __init__(self, source: Any) -> None:
         self.source = source
 
-    def __iter__(self) -> typing.Iterator[typing.Dict[str, typing.Optional[str]]]:
+    def __iter__(self) -> Iterator[Dict[str, Optional[str]]]:
         for token in self.source:
             if token.get("name") == "input":
                 # only allow disabled checkbox inputs
@@ -85,15 +85,15 @@ class DisabledCheckboxInputsFilter:
             else:
                 yield token
 
-    def __getattr__(self, name: str) -> typing.Any:
+    def __getattr__(self, name: str) -> Any:
         return getattr(self.source, name)
 
 
 def clean(
     html: str,
-    tags: typing.Optional[typing.List[str]] = None,
-    attributes: typing.Optional[typing.Dict[str, typing.List[str]]] = None
-) -> typing.Optional[str]:
+    tags: Optional[List[str]] = None,
+    attributes: Optional[Dict[str, List[str]]] = None
+) -> Optional[str]:
     if tags is None:
         tags = ALLOWED_TAGS
     if attributes is None:

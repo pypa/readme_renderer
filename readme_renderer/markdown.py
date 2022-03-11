@@ -14,8 +14,8 @@
 from __future__ import absolute_import, division, print_function
 
 import re
-import typing
 import warnings
+from typing import Any, Match, Optional
 
 from html import unescape
 
@@ -55,8 +55,8 @@ _LANG_ALIASES = {
 def render(
     raw: str,
     variant: str = "GFM",
-    **kwargs: typing.Any
-) -> typing.Optional[str]:
+    **kwargs: Any
+) -> Optional[str]:
     if not variants:
         warnings.warn(_EXTRA_WARNING)
         return None
@@ -100,7 +100,7 @@ def _highlight(html: str) -> str:
         '(?(in_code)|<code>)(?P<code>.+?)'
         r'</code></pre>', re.DOTALL)
 
-    def replacer(match: typing.Match[typing.Any]) -> str:
+    def replacer(match: Match[Any]) -> str:
         try:
             lang = match.group('lang')
             lang = _LANG_ALIASES.get(lang, lang)
