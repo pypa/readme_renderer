@@ -15,7 +15,7 @@ from __future__ import absolute_import, division, print_function
 
 import re
 import warnings
-from typing import Any, Match, Optional
+from typing import Any, Dict, Callable, Match, Optional
 
 from html import unescape
 
@@ -33,7 +33,7 @@ _EXTRA_WARNING = (
 try:
     import cmarkgfm
     from cmarkgfm.cmark import Options as cmarkgfmOptions
-    variants = {
+    variants: Dict[str, Callable[[str], Any]] = {
         "GFM": lambda raw: cmarkgfm.github_flavored_markdown_to_html(
             raw, options=cmarkgfmOptions.CMARK_OPT_UNSAFE
         ),
@@ -66,8 +66,7 @@ def render(
     if not renderer:
         return None
 
-    # The renderer is a lambda function, and mypy fails lambdas right now.
-    rendered = renderer(raw)  # type: ignore[no-untyped-call]
+    rendered = renderer(raw)
 
     if not rendered:
         return None
