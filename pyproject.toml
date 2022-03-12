@@ -5,6 +5,11 @@ build-backend = "setuptools.build_meta:__legacy__"
 [tool.mypy]
 strict = true
 warn_unused_configs = true
+show_error_codes = true
+enable_error_code = [
+    "ignore-without-code"
+]
+
 [[tool.mypy.overrides]]
 # These modules do not yet have types available.
 module = [

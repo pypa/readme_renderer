@@ -67,7 +67,7 @@ def render(
         return None
 
     # The renderer is a lambda function, and mypy fails lambdas right now.
-    rendered = renderer(raw)  # type: ignore
+    rendered = renderer(raw)  # type: ignore[no-untyped-call]
 
     if not rendered:
         return None
