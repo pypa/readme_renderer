@@ -129,4 +129,5 @@ def render(
     if rendered:
         return clean(rendered)
     else:
+        stream.write("no output rendered")
         return None

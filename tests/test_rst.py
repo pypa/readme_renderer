@@ -53,3 +53,13 @@ def test_rst_raw():
 """, stream=warnings) is None
 
     assert '"raw" directive disabled' in warnings.getvalue()
+
+
+def test_rst_header_only():
+    warnings = io.StringIO()
+    assert render("""
+Header
+======
+""", stream=warnings) is None
+
+    assert "no output rendered" in warnings.getvalue()
