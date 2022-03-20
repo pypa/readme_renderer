@@ -55,6 +55,13 @@ def test_rst_raw():
     assert '"raw" directive disabled' in warnings.getvalue()
 
 
+def test_rst_empty_file():
+    warnings = io.StringIO()
+    assert render("", stream=warnings) is None
+
+    assert "No content rendered from RST source." in warnings.getvalue()
+
+
 def test_rst_header_only():
     warnings = io.StringIO()
     assert render("""
@@ -62,4 +69,17 @@ Header
 ======
 """, stream=warnings) is None
 
-    assert "no output rendered" in warnings.getvalue()
+    assert "No content rendered from RST source." in warnings.getvalue()
+
+
+def test_header_and_malformed_emits_docutils_warning_only():
+    warnings = io.StringIO()
+    assert render("""
+Header
+======
+
+======
+""", stream=warnings) is None
+
+    assert len(warnings.getvalue().splitlines()) == 1
+    assert "No content rendered from RST source." not in warnings.getvalue()
