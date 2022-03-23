@@ -14,7 +14,7 @@
 from __future__ import absolute_import, division, print_function
 
 import io
-from typing import Any, Dict, Optional, TextIO, Union, TYPE_CHECKING
+from typing import Any, Dict, IO, Optional, Union
 
 from docutils.core import publish_parts
 from docutils.nodes import colspec, image
@@ -22,10 +22,6 @@ from docutils.writers.html4css1 import HTMLTranslator, Writer
 from docutils.utils import SystemMessage
 
 from .clean import clean
-
-if TYPE_CHECKING:
-    # Prevent a circular import
-    from .integration.distutils import _WarningStream
 
 
 class ReadMeHTMLTranslator(HTMLTranslator):  # type: ignore[misc] # docutils is incomplete, returns `Any` python/typeshed#7256 # noqa E501
@@ -109,7 +105,7 @@ SETTINGS = {
 
 def render(
     raw: str,
-    stream: Optional[Union[io.StringIO, TextIO, "_WarningStream"]] = None,
+    stream: Optional[IO[str]] = None,
     **kwargs: Any
 ) -> Optional[str]:
     if stream is None:
@@ -134,16 +130,6 @@ def render(
         return clean(rendered)
     else:
         # If the warnings stream is empty, docutils had none, so add ours.
-
-        # We have to currently handle the legacy disutils integration check
-        # command, as it implements its own warnings stream structure.
-        # Once that code is removed, we can remove this conditional.
-        if hasattr(stream, "output"):
-            if not stream.output.getvalue():  # type: ignore[union-attr]
-                stream.write("No content rendered from RST source.")
-        elif isinstance(stream, io.StringIO) and not stream.getvalue():
-            stream.write("No content rendered from RST source.")
-        elif isinstance(stream, TextIO) and not stream.readlines():
-            # This is `sys.stderr` from using readme_renderer CLI
+        if not stream.tell():
             stream.write("No content rendered from RST source.")
         return None
