@@ -129,4 +129,7 @@ def render(
     if rendered:
         return clean(rendered)
     else:
+        # If the warnings stream is empty, docutils had none, so add ours.
+        if not stream.tell():
+            stream.write("No content rendered from RST source.")
         return None
