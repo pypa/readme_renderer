@@ -1,6 +1,17 @@
 Changes
 =======
 
+35.0 (2022-04-19)
+-----------------
+
+* Add py.typed to the built wheel (#228)
+* Use isolated build for tox (#229)
+* Fix renderer ignore (#230)
+* Remove legacy check command and distutils (#233)
+* Emit a warning when no content is rendered (#231)
+* Drop support for Python 3.6 (#236)
+* Update html attribute order in tests (#235)
+
 34.0 (2022-03-11)
 -----------------
 
