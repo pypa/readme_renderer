@@ -47,7 +47,7 @@ ALLOWED_ATTRIBUTES = {
     "span": ["class"],
     "th": ["align"],
     "td": ["align"],
-    "div": ["align"],
+    "div": ["align", "class"],
     "h1": ["align"],
     "h2": ["align"],
     "h3": ["align"],
@@ -55,7 +55,7 @@ ALLOWED_ATTRIBUTES = {
     "h5": ["align"],
     "h6": ["align"],
     "code": ["class"],
-    "p": ["align"],
+    "p": ["align", "class"],
     "ol": ["start"],
     "input": ["type", "checked", "disabled"],
 }
