@@ -1,0 +1,23 @@
+# See https://www.gitpod.io/docs/references/gitpod-yml for full reference
+
+tasks:
+  - name: Setup Development and run Tests
+
+    init: |
+      # Upgrade pyenv itself
+      pyenv update
+
+      export PY_VERSIONS="3.7 3.8 3.9 3.10"
+
+      # Install all supported Python versions
+      for py in $PY_VERSIONS;
+        do pyenv install "$py":latest --skip-existing ;
+      done
+
+      # Make versions available via $PATH, exclude GitPod default
+      pyenv global $(pyenv versions --bare | grep -v 3.8.13)
+
+      # Install `tox` test orchestrator
+      pip install tox
+
+    command: tox
