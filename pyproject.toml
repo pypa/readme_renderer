@@ -2,6 +2,10 @@
 requires = ["setuptools>=40.8.0", "wheel", "bleach>=2.1.0", "docutils>=0.13.1", "Pygments>=2.5.1"]
 build-backend = "setuptools.build_meta:__legacy__"
 
+# TODO: Remove when https://github.com/mgedmin/check-manifest/pull/155 released
+[tool.check-manifest]
+ignore = [".gitpod.yml"]
+
 [tool.mypy]
 strict = true
 warn_unused_configs = true
