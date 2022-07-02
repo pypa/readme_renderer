@@ -11,20 +11,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from __future__ import absolute_import, division, print_function
 
-import sys
 from typing import Any, Optional
 
 from .clean import clean
 
-if sys.version_info >= (3,):
-    from html import escape as html_escape
-else:
-    from cgi import escape
-
-    def html_escape(s):
-        return escape(s, quote=True).replace("'", '&#x27;')
+from html import escape as html_escape
 
 
 def render(raw: str, **kwargs: Any) -> Optional[str]:

@@ -1,4 +1,3 @@
-import io
 import glob
 import os.path
 
@@ -18,11 +17,11 @@ from readme_renderer.txt import render
 )
 def test_txt_fixtures(txt_filename, html_filename):
     # Get our Markup
-    with io.open(txt_filename, encoding='utf-8') as f:
+    with open(txt_filename, encoding='utf-8') as f:
         txt_markup = f.read()
 
     # Get our expected
-    with io.open(html_filename, encoding="utf-8") as f:
+    with open(html_filename, encoding="utf-8") as f:
         expected = f.read()
 
     out = render(txt_markup)

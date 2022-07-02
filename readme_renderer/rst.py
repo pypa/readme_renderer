@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from __future__ import absolute_import, division, print_function
 
 import io
 from typing import Any, Dict, IO, Optional, Union
@@ -43,7 +42,7 @@ class ReadMeHTMLTranslator(HTMLTranslator):  # type: ignore[misc] # docutils is 
             if "height" in node:
                 attributes["height"] = node["height"]
 
-        return super(ReadMeHTMLTranslator, self).emptytag(
+        return super().emptytag(
             node, tagname, suffix, **attributes
         )
 

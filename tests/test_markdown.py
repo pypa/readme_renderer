@@ -1,4 +1,3 @@
-import io
 import glob
 import os
 
@@ -26,11 +25,11 @@ MD_FIXTURES = [
 )
 def test_md_fixtures(md_filename, html_filename, variant):
     # Get our Markup
-    with io.open(md_filename, encoding='utf-8') as f:
+    with open(md_filename, encoding='utf-8') as f:
         md_markup = f.read()
 
     # Get our expected
-    with io.open(html_filename, encoding="utf-8") as f:
+    with open(html_filename, encoding="utf-8") as f:
         expected = f.read()
 
     assert render(md_markup, variant=variant) == expected

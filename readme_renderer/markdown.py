@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from __future__ import absolute_import, division, print_function
 
 import re
 import warnings
@@ -117,7 +116,7 @@ def _highlight(html: str) -> str:
 
         highlighted = pygments.highlight(code, lexer, formatter)
 
-        return '<pre>{}</pre>'.format(highlighted)
+        return f'<pre>{highlighted}</pre>'
 
     result = code_expr.sub(replacer, html)
 

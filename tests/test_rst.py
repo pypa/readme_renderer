@@ -18,11 +18,11 @@ from readme_renderer.rst import render
 )
 def test_rst_fixtures(rst_filename, html_filename):
     # Get our Markup
-    with io.open(rst_filename, encoding='utf-8') as f:
+    with open(rst_filename, encoding='utf-8') as f:
         rst_markup = f.read()
 
     # Get our expected
-    with io.open(html_filename, encoding="utf-8") as f:
+    with open(html_filename, encoding="utf-8") as f:
         expected = f.read()
 
     out = render(rst_markup)
