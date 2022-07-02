@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
+import pathlib
 
 import setuptools
 
-base_dir = os.path.dirname(__file__)
+base_dir = pathlib.Path(__file__).parent
 
-with open(os.path.join(base_dir, "readme_renderer", "__about__.py")) as f:
+with open(base_dir.joinpath("readme_renderer", "__about__.py")) as f:
     about = {}
     exec(f.read(), about)
 
-with open(os.path.join(base_dir, "README.rst")) as f:
+with open(base_dir.joinpath("README.rst")) as f:
     long_description = f.read()
 
 

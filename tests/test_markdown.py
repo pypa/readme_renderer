@@ -1,27 +1,17 @@
-import glob
-import os
+from pathlib import Path
 
 import pytest
 
 from readme_renderer.markdown import render, variants
 
 
-MD_FIXTURES = [
-    (fn, os.path.splitext(fn)[0] + ".html", variant)
-    for variant in variants
-    for fn in glob.iglob(
-        os.path.join(
-            os.path.dirname(__file__),
-            "fixtures",
-            "test_" + variant + "*.md"
-        )
-    )
-]
-
-
 @pytest.mark.parametrize(
     ("md_filename", "html_filename", "variant"),
-    MD_FIXTURES,
+    [
+        (pytest.param(fn, fn.with_suffix(".html"), variant, id=fn.name))
+        for variant in variants
+        for fn in Path(__file__).parent.glob(f"fixtures/test_{variant}*.md")
+    ],
 )
 def test_md_fixtures(md_filename, html_filename, variant):
     # Get our Markup

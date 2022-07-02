@@ -1,6 +1,5 @@
 import io
-import glob
-import os.path
+from pathlib import Path
 
 import pytest
 
@@ -10,10 +9,8 @@ from readme_renderer.rst import render
 @pytest.mark.parametrize(
     ("rst_filename", "html_filename"),
     [
-        (fn, os.path.splitext(fn)[0] + ".html")
-        for fn in glob.glob(
-            os.path.join(os.path.dirname(__file__), "fixtures", "test_*.rst")
-        )
+        (pytest.param(fn, fn.with_suffix(".html"), id=fn.name))
+        for fn in Path(__file__).parent.glob("fixtures/test_*.rst")
     ],
 )
 def test_rst_fixtures(rst_filename, html_filename):
