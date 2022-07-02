@@ -1,6 +1,12 @@
 Readme Renderer
 ===============
 
+.. image:: https://badge.fury.io/py/readme-renderer.svg
+    :target: https://badge.fury.io/py/readme-renderer
+
+.. image:: https://github.com/pypa/readme_renderer/actions/workflows/ci.yml/badge.svg
+    :target: https://github.com/pypa/readme_renderer/actions/workflows/ci.yml
+
 Readme Renderer is a library that will safely render arbitrary
 ``README`` files into HTML. It is designed to be used in Warehouse_ to
 render the ``long_description`` for packages. It can handle Markdown,
