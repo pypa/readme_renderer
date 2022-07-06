@@ -11,19 +11,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-from __future__ import absolute_import, division, print_function
 
-import os
+import pathlib
 
 import setuptools
 
-base_dir = os.path.dirname(__file__)
+base_dir = pathlib.Path(__file__).parent
 
-with open(os.path.join(base_dir, "readme_renderer", "__about__.py")) as f:
+with open(base_dir.joinpath("readme_renderer", "__about__.py")) as f:
     about = {}
     exec(f.read(), about)
 
-with open(os.path.join(base_dir, "README.rst")) as f:
+with open(base_dir.joinpath("README.rst")) as f:
     long_description = f.read()
 
 
