@@ -46,7 +46,7 @@ ALLOWED_ATTRIBUTES = {
     "img": ["src", "width", "height", "alt", "align", "class"],
     "span": ["class"],
     "th": ["align"],
-    "td": ["align"],
+    "td": ["align", "colspan", "rowspan"],
     "div": ["align", "class"],
     "h1": ["align"],
     "h2": ["align"],
