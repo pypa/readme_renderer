@@ -76,7 +76,8 @@ SETTINGS = {
 
     # Output math blocks as LaTeX that can be interpreted by MathJax for
     # a prettier display of Math formulas.
-    "math_output": "MathJax",
+    # Pass a dummy path to supress docutils warning and emit HTML.
+    "math_output": "MathJax /dummy.js",
 
     # Disable raw html as enabling it is a security risk, we do not want
     # people to be able to include any old HTML in the final output.
