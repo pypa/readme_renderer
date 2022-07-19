@@ -116,7 +116,7 @@ def _highlight(html: str) -> str:
 
         highlighted = pygments.highlight(code, lexer, formatter)
 
-        return f'<pre>{highlighted}</pre>'
+        return f'<pre lang="{lang}">{highlighted}</pre>'
 
     result = code_expr.sub(replacer, html)
 
