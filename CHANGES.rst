@@ -1,6 +1,17 @@
 Changes
 =======
 
+36.0 (2022-07-19)
+-----------------
+
+* Enable gitpod development (#238)
+* Allow rst admonitions to render (#242)
+* Add badges to README (#243)
+* Update codebase for modern Python (#244)
+* Fix table cell spans (#245)
+* Allow ``math`` directive in rst (#246)
+* Preserve ``lang`` attribute in ``pre`` (#247)
+
 35.0 (2022-04-19)
 -----------------
 

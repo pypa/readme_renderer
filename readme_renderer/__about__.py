@@ -29,7 +29,7 @@ __summary__ = (
 )
 __uri__ = "https://github.com/pypa/readme_renderer"
 
-__version__ = "35.0"
+__version__ = "36.0"
 
 __author__ = "The Python Packaging Authority"
 __email__ = "admin@mail.pypi.org"
