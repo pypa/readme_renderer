@@ -53,6 +53,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: Implementation :: CPython",
         "Programming Language :: Python :: Implementation :: PyPy",
+        "Typing :: Typed",
     ],
     install_requires=["bleach>=2.1.0", "docutils>=0.13.1", "Pygments>=2.5.1"],
     include_package_data=True,
