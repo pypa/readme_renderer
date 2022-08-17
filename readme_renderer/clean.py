@@ -30,7 +30,7 @@ ALLOWED_TAGS = [
     "br", "caption", "cite", "col", "colgroup", "dd", "del", "details", "div",
     "dl", "dt", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "img", "p", "pre",
     "span", "sub", "summary", "sup", "table", "tbody", "td", "th", "thead",
-    "tr", "tt", "kbd", "var", "input",
+    "tr", "tt", "kbd", "var", "input", "section", "aside",
 ]
 
 ALLOWED_ATTRIBUTES = {
@@ -44,7 +44,7 @@ ALLOWED_ATTRIBUTES = {
     "hr": ["class"],
     "img": ["src", "width", "height", "alt", "align", "class"],
     "span": ["class"],
-    "th": ["align"],
+    "th": ["align", "class"],
     "td": ["align", "colspan", "rowspan"],
     "div": ["align", "class"],
     "h1": ["align"],
@@ -58,6 +58,11 @@ ALLOWED_ATTRIBUTES = {
     "pre": ["lang"],
     "ol": ["start"],
     "input": ["type", "checked", "disabled"],
+    "aside": ["class"],
+    "dd": ["class"],
+    "dl": ["class"],
+    "dt": ["class"],
+    "ul": ["class"],
 }
 
 

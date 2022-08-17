@@ -17,7 +17,7 @@ from typing import Any, Dict, IO, Optional, Union
 
 from docutils.core import publish_parts
 from docutils.nodes import colspec, image
-from docutils.writers.html4css1 import HTMLTranslator, Writer
+from docutils.writers.html5_polyglot import HTMLTranslator, Writer
 from docutils.utils import SystemMessage
 
 from .clean import clean
