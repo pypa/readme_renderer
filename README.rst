@@ -22,14 +22,6 @@ To locally check whether your long descriptions will render on PyPI, first
 build your distributions, and then use the |twine check|_ command.
 
 
-Render rST Description Locally
-------------------------------
-
-You can use ``readme_renderer`` on the command line to render an rST file as
-HTML like this: ::
-
-    python -m readme_renderer README.rst -o /tmp/README.html
-
 Code of Conduct
 ---------------
 
