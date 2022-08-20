@@ -6,6 +6,9 @@ build-backend = "setuptools.build_meta"
 [tool.check-manifest]
 ignore = [".gitpod.yml"]
 
+[tool.coverage.run]
+branch = true
+
 [tool.mypy]
 strict = true
 warn_unused_configs = true
