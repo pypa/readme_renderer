@@ -11,7 +11,10 @@ jobs:
       with:
         ref: ${{ github.event.release.tag_name }}
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.x"
+        check-latest: true
     - name: Install build dependencies
       run: pip install -U setuptools wheel build
     - name: Build
