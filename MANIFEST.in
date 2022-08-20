@@ -1,5 +1,5 @@
 include LICENSE README.rst CHANGES.rst
-include tox.ini .coveragerc pytest.ini
+include tox.ini .coveragerc
 include readme_renderer/py.typed
 
 recursive-include tests *.html
