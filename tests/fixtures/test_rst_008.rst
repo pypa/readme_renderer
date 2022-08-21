@@ -20,3 +20,8 @@ and then here is some bash:
     fi
 
 or click `SurveyMonkey <http://www.surveymonkey.com>`_
+
+
+.. code-block:: abc
+
+    An unknown code fence block
