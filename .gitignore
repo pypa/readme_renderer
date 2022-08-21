@@ -12,5 +12,7 @@ htmlcov/
 *.eggs
 *.py[co]
 .pytest_cache/
+.python-version
 
 .idea/
+.vscode/

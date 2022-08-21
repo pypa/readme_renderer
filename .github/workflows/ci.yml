@@ -9,11 +9,12 @@ jobs:
         python-version: ["pypy-3.7", "3.7", "3.8", "3.9", "3.10"]
     steps:
       - name: Check out repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+          check-latest: true
       - name: Install dependencies
         run: python -m pip install tox
       - name: Run tests
@@ -23,11 +24,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       - name: Install Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: "3.x"
+          check-latest: true
       - name: Install dependencies
         run: python -m pip install tox
       - name: Run linting
@@ -39,11 +41,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
-        uses: actions/checkout@v1
+        uses: actions/checkout@v3
       - name: Install Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v4
         with:
           python-version: "3.x"
+          check-latest: true
       - name: Install dependencies
         run: python -m pip install tox
       - name: Test packaging
