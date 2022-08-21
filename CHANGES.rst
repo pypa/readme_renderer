@@ -1,7 +1,18 @@
 Changes
 =======
 
-36.0 (2022-07-19)
+37.0 (2022-08-21)
+-----------------
+
+* Remove command line example from docs (#197)
+* Multiple pyproject.toml fixes (#251)
+* Confirm handling multiple inline strong (#252)
+* Convert RST output to HTML5 (#253)
+* Add Typing to classifiers (#254)
+* Development tweaks - coverage reporting, actions updates (#255)
+* Add test confirming behavior with unknown lexers (#256)
+
+36.0 (2022-08-06)
 -----------------
 
 * Enable gitpod development (#238)
