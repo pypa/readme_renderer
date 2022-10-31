@@ -1,7 +1,13 @@
 Changes
 =======
 
+37.3 (2022-10-31)
+-----------------
+
+* Allow HTML5 `figure` tag through cleaner (#265)
+
 37.2 (2022-09-24)
+-----------------
 
 * Allow HTML5 `s` tag through cleaner (#261)
 
