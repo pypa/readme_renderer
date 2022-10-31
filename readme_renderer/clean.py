@@ -30,7 +30,7 @@ ALLOWED_TAGS = [
     "br", "caption", "cite", "col", "colgroup", "dd", "del", "details", "div",
     "dl", "dt", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "img", "p", "pre",
     "span", "sub", "summary", "sup", "table", "tbody", "td", "th", "thead",
-    "tr", "tt", "kbd", "var", "input", "section", "aside", "nav", "s",
+    "tr", "tt", "kbd", "var", "input", "section", "aside", "nav", "s", "figure",
 ]
 
 ALLOWED_ATTRIBUTES = {
@@ -64,6 +64,7 @@ ALLOWED_ATTRIBUTES = {
     "dt": ["class"],
     "ul": ["class"],
     "nav": ["class"],
+    "figure": ["class"],
 }
 
 
