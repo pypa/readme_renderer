@@ -13,21 +13,25 @@ def input_file(request):
 
 @pytest.mark.parametrize("output_file", [False, True])
 def test_cli_input_file(input_file, output_file):
-    if output_file:
-        with tempfile.TemporaryDirectory() as tmpdir:
-            output = pathlib.Path(tmpdir) / "output.html"
-            main(["-o", str(output), str(input_file)])
-            with output.open() as fp:
-                result = fp.read()
-    else:
-        with mock.patch("builtins.print") as print_:
+    with mock.patch("builtins.print") as print_:
+        if output_file:
+            with tempfile.TemporaryDirectory() as tmpdir:
+                output = pathlib.Path(tmpdir) / "output.html"
+                main(["-o", str(output), str(input_file)])
+                with output.open() as fp:
+                    result = fp.read()
+        else:
             main([str(input_file)])
-            print_.assert_called_once()
-            (result,), _ = print_.call_args
+
+    print_.assert_called_once()
+    (result,), kwargs = print_.call_args
 
     with input_file.with_suffix(".html").open() as fp:
         expected = fp.read()
     assert result.strip() == expected.strip()
+
+    if output_file:
+        assert kwargs["file"].name == str(output)
 
 
 def test_cli_invalid_format():
