@@ -1,6 +1,6 @@
 import pathlib
 import pytest
-from readme_renderer.__main__ import __main__
+from readme_renderer.__main__ import main
 import tempfile
 from unittest import mock
 
@@ -16,12 +16,12 @@ def test_cli_input_file(input_file, output_file):
     if output_file:
         with tempfile.TemporaryDirectory() as tmpdir:
             output = pathlib.Path(tmpdir) / "output.html"
-            __main__(["-o", str(output), str(input_file)])
+            main(["-o", str(output), str(input_file)])
             with output.open() as fp:
                 result = fp.read()
     else:
         with mock.patch("builtins.print") as print_:
-            __main__([str(input_file)])
+            main([str(input_file)])
             print_.assert_called_once()
             (result,), _ = print_.call_args
 
@@ -33,7 +33,7 @@ def test_cli_input_file(input_file, output_file):
 def test_cli_invalid_format():
     with mock.patch("pathlib.Path.open"), \
             pytest.raises(ValueError, match="invalid README format: invalid"):
-        __main__(["no-file.invalid"])
+        main(["no-file.invalid"])
 
 
 def test_cli_explicit_format(input_file):
@@ -41,7 +41,7 @@ def test_cli_explicit_format(input_file):
     with input_file.open() as fp, \
             mock.patch("pathlib.Path.open", return_value=fp), \
             mock.patch("builtins.print") as print_:
-        __main__(["-f", fmt, "no-file.invalid"])
+        main(["-f", fmt, "no-file.invalid"])
         print_.assert_called_once()
         (result,), _ = print_.call_args
 
@@ -55,7 +55,7 @@ def test_cli_explicit_format(input_file):
 ])
 def test_cli_package(package, contains):
     with mock.patch("builtins.print") as print_:
-        __main__(["-p", package])
+        main(["-p", package])
         print_.assert_called_once()
         (result,), _ = print_.call_args
     assert contains in result

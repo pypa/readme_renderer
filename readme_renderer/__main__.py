@@ -6,9 +6,10 @@ from readme_renderer.txt import render as render_txt
 import pathlib
 from pkg_resources import get_distribution
 import sys
+from typing import Optional, List
 
 
-def __main__(args=None):  # noqa: N807
+def main(cli_args: Optional[List[str]] = None) -> None:
     parser = argparse.ArgumentParser(
         description="Renders a .md, .rst, or .txt README to HTML",
     )
@@ -19,7 +20,7 @@ def __main__(args=None):  # noqa: N807
     parser.add_argument('input', help="Input README file or package name")
     parser.add_argument('-o', '--output', help="Output file (default: stdout)",
                         type=argparse.FileType('w'), default='-')
-    args = parser.parse_args(args)
+    args = parser.parse_args(cli_args)
 
     content_format = args.format
     if args.package:
@@ -47,19 +48,18 @@ def __main__(args=None):  # noqa: N807
             source = fp.read()
 
     if content_format == "md":
-        render = render_md
+        rendered = render_md(source, stream=sys.stderr)
     elif content_format == "rst":
-        render = render_rst
+        rendered = render_rst(source, stream=sys.stderr)
     elif content_format == "txt":
-        render = render_txt
+        rendered = render_txt(source, stream=sys.stderr)
     else:
         raise ValueError(f"invalid README format: {content_format} (expected `md`, "
                          "`rst`, or `txt`)")
-    rendered = render(source, stream=sys.stderr)
     if rendered is None:
         sys.exit(1)
     print(rendered, file=args.output)
 
 
 if __name__ == '__main__':
-    __main__()
+    main()
