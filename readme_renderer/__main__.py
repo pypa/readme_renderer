@@ -8,7 +8,7 @@ from pkg_resources import get_distribution
 import sys
 
 
-def __main__(args=None):
+def __main__(args=None):  # noqa: N807
     parser = argparse.ArgumentParser(
         description="Renders a .md, .rst, or .txt README to HTML",
     )
