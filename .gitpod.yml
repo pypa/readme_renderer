@@ -21,3 +21,9 @@ tasks:
       pip install tox
 
     command: tox
+
+vscode:
+  extensions:
+    - ms-python.python
+    - EditorConfig.EditorConfig
+    - bungcip.better-toml
