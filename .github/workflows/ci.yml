@@ -18,7 +18,9 @@ jobs:
       - name: Install dependencies
         run: python -m pip install tox
       - name: Run tests
-        run: python -m tox -e py
+        run: |
+          python -m tox -e py
+          python -m tox -e noextra
   lint:
     name: Lint
     runs-on: ubuntu-latest
