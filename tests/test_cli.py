@@ -8,7 +8,11 @@ from unittest import mock
 @pytest.fixture(params=["test_CommonMark_001.md", "test_rst_003.rst",
                         "test_GFM_001.md", "test_txt_001.txt"])
 def input_file(request):
-    return pathlib.Path("tests/fixtures", request.param)
+    path = pathlib.Path("tests/fixtures", request.param)
+    # Skip markdown tests if the cmarkgfm optional dependency is not installed.
+    if path.suffix == ".md":
+        pytest.importorskip("cmarkgfm")
+    return path
 
 
 @pytest.mark.parametrize("output_file", [False, True])
