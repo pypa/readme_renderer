@@ -1,6 +1,11 @@
 Changes
 =======
 
+Unreleased  (???)
+-----------------
+
+* Test against Python 3.11, update listed support in classifiers
+
 37.3 (2022-10-31)
 -----------------
 
