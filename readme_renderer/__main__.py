@@ -1,10 +1,9 @@
 import argparse
-import email
 from readme_renderer.markdown import render as render_md
 from readme_renderer.rst import render as render_rst
 from readme_renderer.txt import render as render_txt
 import pathlib
-from pkg_resources import get_distribution
+from importlib.metadata import metadata
 import sys
 from typing import Optional, List
 
@@ -24,14 +23,12 @@ def main(cli_args: Optional[List[str]] = None) -> None:
 
     content_format = args.format
     if args.package:
-        distribution = get_distribution(args.input)
-        pkg_info = distribution.get_metadata(distribution.PKG_INFO)
-        message = email.message_from_string(pkg_info)
-        source = message.get_payload()
+        message = metadata(args.input)
+        source = message.get_payload()  # type: ignore[attr-defined] # https://peps.python.org/pep-0566/
 
         # Infer the format of the description from package metadata.
         if not content_format:
-            content_type = message.get("Description-Content-Type", "text/x-rst")
+            content_type = message.get("Description-Content-Type", "text/x-rst")  # type: ignore[attr-defined] # noqa: F821 https://github.com/python/typeshed/issues/10021
             if content_type == "text/x-rst":
                 content_format = "rst"
             elif content_type == "text/markdown":
