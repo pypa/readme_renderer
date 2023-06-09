@@ -24,11 +24,11 @@ def main(cli_args: Optional[List[str]] = None) -> None:
     content_format = args.format
     if args.package:
         message = metadata(args.input)
-        source = message.get_payload()  # type: ignore[attr-defined] # https://peps.python.org/pep-0566/
+        source = message.get_payload()  # type: ignore[attr-defined] # noqa: E501 https://peps.python.org/pep-0566/
 
         # Infer the format of the description from package metadata.
         if not content_format:
-            content_type = message.get("Description-Content-Type", "text/x-rst")  # type: ignore[attr-defined] # noqa: F821 https://github.com/python/typeshed/issues/10021
+            content_type = message.get("Description-Content-Type", "text/x-rst")  # type: ignore[attr-defined] # noqa: E501 https://github.com/python/typeshed/issues/10021
             if content_type == "text/x-rst":
                 content_format = "rst"
             elif content_type == "text/markdown":
