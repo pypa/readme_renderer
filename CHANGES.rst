@@ -1,11 +1,14 @@
 Changes
 =======
 
-Unreleased  (???)
+40.0 (2023-06-16)
 -----------------
 
-* Test against Python 3.11, update listed support in classifiers
-* Drop support for Python 3.7
+* Add CLI option to render package README. (#271)
+* Adapt tests to pygments 2.14.0 (#272)
+* Update release process to use Trusted Publishing (#276)
+* Replace usage of deprecated `pkg_resources` with `importlib.metadata` (#281)
+* Drop support for Python 3.7 (#282), Test against Python 3.11 (#280)
 
 37.3 (2022-10-31)
 -----------------
