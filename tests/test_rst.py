@@ -80,3 +80,10 @@ Header
 
     assert len(warnings.getvalue().splitlines()) == 1
     assert "No content rendered from RST source." not in warnings.getvalue()
+
+
+def test_own_readme():
+    """Render the project's README.rst from root."""
+    readme = Path(__file__).parent.parent / "README.rst"
+    rendered = render(readme.read_text(encoding="utf-8"))
+    assert rendered is not None
