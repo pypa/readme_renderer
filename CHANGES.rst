@@ -1,6 +1,12 @@
 Changes
 =======
 
+41.0 (2023-08-18)
+-----------------
+
+* Allow HTML5 `figcaption` tag through cleaner (#291)
+* Test `README.rst` from this project (#288)
+
 40.0 (2023-06-16)
 -----------------
 
