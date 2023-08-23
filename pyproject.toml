@@ -1,3 +1,19 @@
+[project]
+name = "readme_renderer"
+description = '''readme_renderer is a library for rendering "readme" ' "descriptions for Warehouse'''
+authors = [
+  {email = "admin@mail.pypi.org"},
+]
+license = {file = "LICENSE"}
+dynamic = ["version", "classifiers"]
+
+[tool.setuptools.dynamic]
+version = {attr = "readme_renderer.__about__.__version__"}
+classifiers = {file = "classifiers.txt"}
+
+[project.urls]
+urls = "https://github.com/pypa/readme_renderer"
+
 [build-system]
 requires = ["setuptools>=40.8.0"]
 build-backend = "setuptools.build_meta"

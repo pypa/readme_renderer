@@ -13,26 +13,11 @@
 # limitations under the License.
 
 __all__ = [
-    "__title__",
-    "__summary__",
-    "__uri__",
     "__version__",
     "__author__",
-    "__email__",
-    "__license__",
     "__copyright__",
 ]
 
-__title__ = "readme_renderer"
-__summary__ = (
-    'readme_renderer is a library for rendering "readme" ' "descriptions for Warehouse"
-)
-__uri__ = "https://github.com/pypa/readme_renderer"
-
 __version__ = "41.0"
-
 __author__ = "The Python Packaging Authority"
-__email__ = "admin@mail.pypi.org"
-
-__license__ = "Apache License, Version 2.0"
 __copyright__ = "Copyright 2014 %s" % __author__
