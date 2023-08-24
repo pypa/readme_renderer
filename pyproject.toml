@@ -1,18 +1,29 @@
 [project]
 name = "readme_renderer"
+version = "41.0"
 description = '''readme_renderer is a library for rendering "readme" ' "descriptions for Warehouse'''
 authors = [
   {email = "admin@mail.pypi.org"},
+  {name = "The Python Packaging Authority"}
 ]
+readme = "README.rst"
 license = {file = "LICENSE"}
 dependencies = ["bleach>=2.1.0", "docutils>=0.13.1", "Pygments>=2.5.1"]
-dynamic = ["version", "classifiers"]
+dynamic = ["classifiers"]
 
 [project.optional-dependencies]
 md = ["cmarkgfm>=0.8.0"]
 
+[tool.poetry.dependencies]
+python = ">=3.8"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+exclude = ["tests", "tests.*"]
+
 [tool.setuptools.dynamic]
-version = {attr = "readme_renderer.__about__.__version__"}
 classifiers = {file = "classifiers.txt"}
 
 [project.urls]
