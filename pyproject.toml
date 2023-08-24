@@ -5,7 +5,11 @@ authors = [
   {email = "admin@mail.pypi.org"},
 ]
 license = {file = "LICENSE"}
+dependencies = ["bleach>=2.1.0", "docutils>=0.13.1", "Pygments>=2.5.1"]
 dynamic = ["version", "classifiers"]
+
+[project.optional-dependencies]
+md = ["cmarkgfm>=0.8.0"]
 
 [tool.setuptools.dynamic]
 version = {attr = "readme_renderer.__about__.__version__"}

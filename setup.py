@@ -29,9 +29,7 @@ with open(base_dir.joinpath("README.rst")) as f:
 setuptools.setup(
     author=about["__author__"],
     long_description=long_description,
-    install_requires=["bleach>=2.1.0", "docutils>=0.13.1", "Pygments>=2.5.1"],
     include_package_data=True,
-    extras_require={"md": "cmarkgfm>=0.8.0"},
     packages=setuptools.find_packages(exclude=["tests", "tests.*"]),
     python_requires=">=3.8",
 )
