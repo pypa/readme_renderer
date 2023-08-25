@@ -3,28 +3,41 @@ name = "readme_renderer"
 version = "41.0"
 description = '''readme_renderer is a library for rendering "readme" ' "descriptions for Warehouse'''
 authors = [
-  {email = "admin@mail.pypi.org"},
-  {name = "The Python Packaging Authority"}
+  {name = "The Python Packaging Authority", email = "admin@mail.pypi.org"}
 ]
 readme = "README.rst"
 license = {file = "LICENSE"}
 dependencies = ["bleach>=2.1.0", "docutils>=0.13.1", "Pygments>=2.5.1"]
-dynamic = ["classifiers"]
+classifiers = [
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: Apache Software License",
+  "Natural Language :: English",
+  "Operating System :: MacOS :: MacOS X",
+  "Operating System :: POSIX",
+  "Operating System :: POSIX :: BSD",
+  "Operating System :: POSIX :: Linux",
+  "Operating System :: Microsoft :: Windows",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Typing :: Typed"
+]
+requires-python = ">=3.8"
 
 [project.optional-dependencies]
 md = ["cmarkgfm>=0.8.0"]
-
-[tool.poetry.dependencies]
-python = ">=3.8"
 
 [tool.setuptools]
 include-package-data = true
 
 [tool.setuptools.packages.find]
 exclude = ["tests", "tests.*"]
-
-[tool.setuptools.dynamic]
-classifiers = {file = "classifiers.txt"}
 
 [project.urls]
 urls = "https://github.com/pypa/readme_renderer"
