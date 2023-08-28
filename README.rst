@@ -32,3 +32,5 @@ chat rooms, and mailing lists is expected to follow the `PSF Code of Conduct`_.
 .. |twine check| replace:: ``twine check``
 .. _twine check: https://packaging.python.org/guides/making-a-pypi-friendly-readme#validating-restructuredtext-markup
 .. _PSF Code of Conduct: https://github.com/pypa/.github/blob/main/CODE_OF_CONDUCT.md
+
+Copyright © 2014, [The Python Packaging Authority].
