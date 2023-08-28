@@ -6,7 +6,7 @@ authors = [
   {name = "The Python Packaging Authority", email = "admin@mail.pypi.org"}
 ]
 readme = "README.rst"
-license = {file = "LICENSE"}
+license = {text = "Apache License, Version 2.0"}
 dependencies = ["bleach>=2.1.0", "docutils>=0.13.1", "Pygments>=2.5.1"]
 classifiers = [
   "Intended Audience :: Developers",
@@ -40,7 +40,7 @@ include-package-data = true
 exclude = ["tests", "tests.*"]
 
 [project.urls]
-urls = "https://github.com/pypa/readme_renderer"
+Home-page = "https://github.com/pypa/readme_renderer"
 
 [build-system]
 requires = ["setuptools>=40.8.0"]
