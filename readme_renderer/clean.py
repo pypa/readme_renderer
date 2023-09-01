@@ -12,13 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import functools
-from typing import Any, Dict, Iterator, List, Optional
+from typing import Dict, List, Optional, Set
 
-import bleach
-import bleach.callbacks
-import bleach.linkifier
-import bleach.sanitizer
+import nh3
 
 
 ALLOWED_TAGS = {
@@ -69,65 +65,25 @@ ALLOWED_ATTRIBUTES = {
 }
 
 
-class DisabledCheckboxInputsFilter:
-    # The typeshed for bleach (html5lib) filters is incomplete, use `typing.Any`
-    # See https://github.com/python/typeshed/blob/505ea726415016e53638c8b584b8fdc9c722cac1/stubs/bleach/bleach/html5lib_shim.pyi#L7-L8 # noqa E501
-    def __init__(self, source: Any) -> None:
-        self.source = source
-
-    def __iter__(self) -> Iterator[Dict[str, Optional[str]]]:
-        for token in self.source:
-            if token.get("name") == "input":
-                # only allow disabled checkbox inputs
-                is_checkbox, is_disabled, unsafe_attrs = False, False, False
-                for (_, attrname), value in token.get("data", {}).items():
-                    if attrname == "type" and value == "checkbox":
-                        is_checkbox = True
-                    elif attrname == "disabled":
-                        is_disabled = True
-                    elif attrname != "checked":
-                        unsafe_attrs = True
-                        break
-                if is_checkbox and is_disabled and not unsafe_attrs:
-                    yield token
-            else:
-                yield token
-
-    def __getattr__(self, name: str) -> Any:
-        return getattr(self.source, name)
-
-
 def clean(
     html: str,
-    tags: Optional[List[str]] = None,
-    attributes: Optional[Dict[str, List[str]]] = None
+    tags: Optional[Set[str]] = None,
+    attributes: Optional[Dict[str, Set[str]]] = None
 ) -> Optional[str]:
     if tags is None:
         tags = ALLOWED_TAGS
     if attributes is None:
         attributes = ALLOWED_ATTRIBUTES
 
-    # Clean the output using Bleach
-    cleaner = bleach.sanitizer.Cleaner(
-        tags=tags,
-        attributes=attributes,
-        filters=[
-            # Bleach Linkify makes it easy to modify links, however, we will
-            # not be using it to create additional links.
-            functools.partial(
-                bleach.linkifier.LinkifyFilter,
-                callbacks=[
-                    lambda attrs, new: attrs if not new else None,
-                    bleach.callbacks.nofollow,
-                ],
-                skip_tags=["pre"],
-                parse_email=False,
-            ),
-            DisabledCheckboxInputsFilter,
-        ],
-    )
     try:
-        cleaned = cleaner.clean(html)
+        cleaned = nh3.clean(
+            html,
+            tags=ALLOWED_TAGS,
+            attributes=ALLOWED_ATTRIBUTES,
+            link_rel="nofollow",
+            url_schemes={"http", "https", "mailto"},
+        )
+
         return cleaned
     except ValueError:
         return None

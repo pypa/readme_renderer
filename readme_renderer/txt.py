@@ -21,4 +21,4 @@ from html import escape as html_escape
 
 def render(raw: str, **kwargs: Any) -> Optional[str]:
     rendered = html_escape(raw).replace("\n", "<br>")
-    return clean(rendered, tags=["br"])
+    return clean(rendered, tags={"br"})
