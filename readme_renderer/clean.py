@@ -21,7 +21,7 @@ import bleach.linkifier
 import bleach.sanitizer
 
 
-ALLOWED_TAGS = [
+ALLOWED_TAGS = {
     # Bleach Defaults
     "a", "abbr", "acronym", "b", "blockquote", "code", "em", "i", "li", "ol",
     "strong", "ul",
@@ -32,40 +32,40 @@ ALLOWED_TAGS = [
     "span", "sub", "summary", "sup", "table", "tbody", "td", "th", "thead",
     "tr", "tt", "kbd", "var", "input", "section", "aside", "nav", "s", "figure",
     "figcaption",
-]
+}
 
 ALLOWED_ATTRIBUTES = {
     # Bleach Defaults
-    "a": ["href", "title"],
-    "abbr": ["title"],
-    "acronym": ["title"],
+    "a": {"href", "title"},
+    "abbr": {"title"},
+    "acronym": {"title"},
 
     # Custom Additions
-    "*": ["id"],
-    "hr": ["class"],
-    "img": ["src", "width", "height", "alt", "align", "class"],
-    "span": ["class"],
-    "th": ["align", "class"],
-    "td": ["align", "colspan", "rowspan"],
-    "div": ["align", "class"],
-    "h1": ["align"],
-    "h2": ["align"],
-    "h3": ["align"],
-    "h4": ["align"],
-    "h5": ["align"],
-    "h6": ["align"],
-    "code": ["class"],
-    "p": ["align", "class"],
-    "pre": ["lang"],
-    "ol": ["start"],
-    "input": ["type", "checked", "disabled"],
-    "aside": ["class"],
-    "dd": ["class"],
-    "dl": ["class"],
-    "dt": ["class"],
-    "ul": ["class"],
-    "nav": ["class"],
-    "figure": ["class"],
+    "*": {"id"},
+    "hr": {"class"},
+    "img": {"src", "width", "height", "alt", "align", "class"},
+    "span": {"class"},
+    "th": {"align", "class"},
+    "td": {"align", "colspan", "rowspan"},
+    "div": {"align", "class"},
+    "h1": {"align"},
+    "h2": {"align"},
+    "h3": {"align"},
+    "h4": {"align"},
+    "h5": {"align"},
+    "h6": {"align"},
+    "code": {"class"},
+    "p": {"align", "class"},
+    "pre": {"lang"},
+    "ol": {"start"},
+    "input": {"type", "checked", "disabled"},
+    "aside": {"class"},
+    "dd": {"class"},
+    "dl": {"class"},
+    "dt": {"class"},
+    "ul": {"class"},
+    "nav": {"class"},
+    "figure": {"class"},
 }
 
 
