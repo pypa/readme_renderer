@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Dict, List, Optional, Set
+from typing import Dict, Optional, Set
 
 import nh3
 
