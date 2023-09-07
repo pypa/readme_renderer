@@ -1,6 +1,6 @@
 [project]
 name = "readme_renderer"
-version = "41.0"
+version = "42.0"
 description = "readme_renderer is a library for rendering readme descriptions for Warehouse"
 authors = [
   {name = "The Python Packaging Authority", email = "admin@mail.pypi.org"}
