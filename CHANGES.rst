@@ -1,11 +1,17 @@
 Changes
 =======
 
+42.0 (2023-09-07)
+-----------------
+
+- Migrate from ``bleach`` to ``nh3`` (#295)
+- Migrate from ``setup.py`` to ``pyproject.toml``
+
 41.0 (2023-08-18)
 -----------------
 
-* Allow HTML5 `figcaption` tag through cleaner (#291)
-* Test `README.rst` from this project (#288)
+* Allow HTML5 ``figcaption`` tag through cleaner (#291)
+* Test ``README.rst`` from this project (#288)
 
 40.0 (2023-06-16)
 -----------------
@@ -13,23 +19,23 @@ Changes
 * Add CLI option to render package README. (#271)
 * Adapt tests to pygments 2.14.0 (#272)
 * Update release process to use Trusted Publishing (#276)
-* Replace usage of deprecated `pkg_resources` with `importlib.metadata` (#281)
+* Replace usage of deprecated ``pkg_resources`` with ``importlib.metadata`` (#281)
 * Drop support for Python 3.7 (#282), Test against Python 3.11 (#280)
 
 37.3 (2022-10-31)
 -----------------
 
-* Allow HTML5 `figure` tag through cleaner (#265)
+* Allow HTML5 ``figure`` tag through cleaner (#265)
 
 37.2 (2022-09-24)
 -----------------
 
-* Allow HTML5 `s` tag through cleaner (#261)
+* Allow HTML5 ``s`` tag through cleaner (#261)
 
 37.1 (2022-09-03)
 -----------------
 
-* Allow HTML5 `nav` tag through cleaner (#259)
+* Allow HTML5 ``nav`` tag through cleaner (#259)
 
 37.0 (2022-08-21)
 -----------------
