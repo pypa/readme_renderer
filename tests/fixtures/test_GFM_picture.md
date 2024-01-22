@@ -1,0 +1,3 @@
+<picture>
+  <img src="/media/cc0-images/painted-hand-298-332.jpg" alt="" />
+</picture>

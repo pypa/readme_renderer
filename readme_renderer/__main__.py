@@ -28,7 +28,7 @@ def main(cli_args: Optional[List[str]] = None) -> None:
 
         # Infer the format of the description from package metadata.
         if not content_format:
-            content_type = message.get("Description-Content-Type", "text/x-rst")  # type: ignore[attr-defined] # noqa: E501 https://github.com/python/typeshed/issues/10021
+            content_type = message.get("Description-Content-Type", "text/x-rst")
             if content_type == "text/x-rst":
                 content_format = "rst"
             elif content_type == "text/markdown":
