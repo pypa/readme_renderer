@@ -27,7 +27,7 @@ ALLOWED_TAGS = {
     "dl", "dt", "h1", "h2", "h3", "h4", "h5", "h6", "hr", "img", "p", "pre",
     "span", "sub", "summary", "sup", "table", "tbody", "td", "th", "thead",
     "tr", "tt", "kbd", "var", "input", "section", "aside", "nav", "s", "figure",
-    "figcaption",
+    "figcaption", "picture",
 }
 
 ALLOWED_ATTRIBUTES = {
