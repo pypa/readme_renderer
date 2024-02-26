@@ -1,6 +1,11 @@
 Changes
 =======
 
+43.0 (2024-02-26)
+-----------------
+- Allow HTML5 ``picture`` tag through cleaner (#299)
+- Test against Python 3.12 (#300)
+
 42.0 (2023-09-07)
 -----------------
 
