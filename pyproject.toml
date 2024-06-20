@@ -47,9 +47,7 @@ Home-page = "https://github.com/pypa/readme_renderer"
 requires = ["setuptools>=40.8.0"]
 build-backend = "setuptools.build_meta"
 
-# TODO: Remove when https://github.com/mgedmin/check-manifest/pull/155 released
 [tool.check-manifest]
-ignore = [".gitpod.yml"]
 
 [tool.coverage.run]
 branch = true
