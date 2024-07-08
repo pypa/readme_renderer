@@ -18,7 +18,7 @@ def main(cli_args: Optional[List[str]] = None) -> None:
                         help="README format (inferred from input file name or package)")
     parser.add_argument('input', help="Input README file or package name")
     parser.add_argument('-o', '--output', help="Output file (default: stdout)",
-                        type=argparse.FileType('w'), default='-')
+                        default='-')
     args = parser.parse_args(cli_args)
 
     content_format = args.format
@@ -55,7 +55,11 @@ def main(cli_args: Optional[List[str]] = None) -> None:
                          "`rst`, or `txt`)")
     if rendered is None:
         sys.exit(1)
-    print(rendered, file=args.output)
+    if args.output == "-":
+        print(rendered, file=sys.stdout)
+    else:
+        with open(args.output, "w") as fp:
+            print(rendered, file=fp)
 
 
 if __name__ == '__main__':
