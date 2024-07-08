@@ -1,16 +1,31 @@
 Changes
 =======
 
+44.0 (2024-07-08)
+-----------------
+
+* Drop support for Python 3.8 (#315)
+* Require docutils 0.21.2 and higher (#315)
+* Remove HTML5 ``<s>`` tag from the list of allowed HTML tags (#315)
+* Test all supported CPython and PyPy versions in CI (#315)
+* Resolve Node 16 deprecation warnings in CI (#309)
+* Lint specific directories (#312)
+* Build a wheel once for all tox test environments (#308)
+* Lazy open output files, and always close them (#314)
+* Gitpod: Migrate to the Even Better TOML extension (#306)
+* check-manifest: Remove a now-default ``.gitpod.yml`` exclusion (#307)
+
 43.0 (2024-02-26)
 -----------------
-- Allow HTML5 ``picture`` tag through cleaner (#299)
-- Test against Python 3.12 (#300)
+
+* Allow HTML5 ``picture`` tag through cleaner (#299)
+* Test against Python 3.12 (#300)
 
 42.0 (2023-09-07)
 -----------------
 
-- Migrate from ``bleach`` to ``nh3`` (#295)
-- Migrate from ``setup.py`` to ``pyproject.toml``
+* Migrate from ``bleach`` to ``nh3`` (#295)
+* Migrate from ``setup.py`` to ``pyproject.toml``
 
 41.0 (2023-08-18)
 -----------------
