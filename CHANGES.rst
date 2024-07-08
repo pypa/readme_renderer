@@ -3,14 +3,15 @@ Changes
 
 43.0 (2024-02-26)
 -----------------
-- Allow HTML5 ``picture`` tag through cleaner (#299)
-- Test against Python 3.12 (#300)
+
+* Allow HTML5 ``picture`` tag through cleaner (#299)
+* Test against Python 3.12 (#300)
 
 42.0 (2023-09-07)
 -----------------
 
-- Migrate from ``bleach`` to ``nh3`` (#295)
-- Migrate from ``setup.py`` to ``pyproject.toml``
+* Migrate from ``bleach`` to ``nh3`` (#295)
+* Migrate from ``setup.py`` to ``pyproject.toml``
 
 41.0 (2023-08-18)
 -----------------
