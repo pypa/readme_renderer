@@ -51,6 +51,10 @@ Home-page = "https://github.com/pypa/readme_renderer"
 requires = ["setuptools>=40.8.0"]
 build-backend = "setuptools.build_meta"
 
+[tool.check-manifest]
+ignore = [
+  ".devcontainer/*",
+]
 
 [tool.coverage.run]
 branch = true
