@@ -6,7 +6,7 @@ authors = [
   {name = "The Python Packaging Authority", email = "admin@mail.pypi.org"}
 ]
 readme = "README.rst"
-license = {text = "Apache License, Version 2.0"}
+license = "Apache-2.0"
 dependencies = [
   "nh3>=0.2.14",
   "docutils>=0.21.2",
@@ -14,7 +14,6 @@ dependencies = [
 ]
 classifiers = [
   "Intended Audience :: Developers",
-  "License :: OSI Approved :: Apache Software License",
   "Natural Language :: English",
   "Operating System :: MacOS :: MacOS X",
   "Operating System :: POSIX",
@@ -48,7 +47,7 @@ exclude = ["tests", "tests.*"]
 Home-page = "https://github.com/pypa/readme_renderer"
 
 [build-system]
-requires = ["setuptools>=40.8.0"]
+requires = ["setuptools>=77.0.1"]
 build-backend = "setuptools.build_meta"
 
 
