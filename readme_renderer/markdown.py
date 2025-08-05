@@ -14,7 +14,7 @@
 
 import re
 import warnings
-from typing import cast, Any, Dict, Callable, Match, Optional
+from typing import cast, Any, Callable, Match, Optional
 
 from html import unescape
 
@@ -43,7 +43,7 @@ try:
     common_render_options = comrak.RenderOptions()
     common_render_options.unsafe_ = True  # handled by nh3
 
-    variants: Dict[str, Callable[[str], str]] = {
+    variants: dict[str, Callable[[str], str]] = {
         "GFM": lambda raw: cast(
             str,
             comrak.render_markdown(
