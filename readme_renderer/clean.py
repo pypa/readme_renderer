@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Dict, Optional, Set
+from typing import Optional
 
 import nh3
 
@@ -67,8 +67,8 @@ ALLOWED_ATTRIBUTES = {
 
 def clean(
     html: str,
-    tags: Optional[Set[str]] = None,
-    attributes: Optional[Dict[str, Set[str]]] = None
+    tags: Optional[set[str]] = None,
+    attributes: Optional[dict[str, set[str]]] = None
 ) -> Optional[str]:
     if tags is None:
         tags = ALLOWED_TAGS
