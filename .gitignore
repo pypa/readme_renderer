@@ -5,6 +5,7 @@ dist/
 htmlcov/
 
 .tox/
+.venv/
 .cache/
 .coverage
 *.egg-info/

@@ -1,0 +1,30 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+    "name": "Python 3",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    // "features": {
+    // 	// Rust is necessary for the `nh3` package if wheels are unavailable.
+    //  // The current Python versions tested have wheels, so this is commented out.
+    //    "ghcr.io/devcontainers/features/rust:1": {}
+    // },
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "bash .devcontainer/post-create.sh",
+    // Configure tool-specific properties.
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "EditorConfig.EditorConfig",
+                "ms-python.python",
+                "ms-python.mypy-type-checker",
+                "tamasfe.even-better-toml"
+            ]
+        },
+        "settings": {
+            "python.defaultInterpreterPath": ".venv/bin/python",
+            "python.terminal.activateEnvInCurrentTerminal": true
+        }
+    }
+}
