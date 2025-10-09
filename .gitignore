@@ -13,6 +13,8 @@ htmlcov/
 *.py[co]
 .pytest_cache/
 .python-version
+venv/
+.venv/
 
 .idea/
 .vscode/
