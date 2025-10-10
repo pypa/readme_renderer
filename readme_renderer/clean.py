@@ -83,7 +83,7 @@ def clean(
             link_rel="nofollow",
             url_schemes={"http", "https", "mailto"},
         )
-
-        return cleaned
     except ValueError:
         return None
+    else:
+        return cleaned
