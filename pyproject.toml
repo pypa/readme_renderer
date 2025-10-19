@@ -36,7 +36,7 @@ classifiers = [
 requires-python = ">=3.9"
 
 [project.optional-dependencies]
-md = ["cmarkgfm>=0.8.0"]
+md = ["comrak>=0.0.6"]
 
 [tool.setuptools]
 include-package-data = true
@@ -66,6 +66,6 @@ enable_error_code = [
 [[tool.mypy.overrides]]
 # These modules do not yet have types available.
 module = [
-    "cmarkgfm.*"
+    "comrak.*"
 ]
 ignore_missing_imports = true
