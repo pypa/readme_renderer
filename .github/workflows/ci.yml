@@ -14,8 +14,7 @@ jobs:
           - "3.11"
           - "3.12"
           - "3.13"
-          # TODO: Revert when comrak supports 3.14
-          # - "3.14"
+          - "3.14"
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -39,10 +38,8 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v5
         with:
-          # TODO: Revert to "3.x" when comrak supports 3.14
-          # python-version: "3.x"
-          # check-latest: true
-          python-version: "3.13"
+          python-version: "3.x"
+          check-latest: true
       - name: Install dependencies
         run: python -m pip install tox
       - name: Run linting
@@ -58,10 +55,8 @@ jobs:
       - name: Install Python
         uses: actions/setup-python@v5
         with:
-          # TODO: Revert to "3.x" when comrak supports 3.14
-          # python-version: "3.x"
-          # check-latest: true
-          python-version: "3.13"
+          python-version: "3.x"
+          check-latest: true
       - name: Install dependencies
         run: python -m pip install tox
       - name: Test packaging
