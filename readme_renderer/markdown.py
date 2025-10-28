@@ -14,7 +14,8 @@
 
 import re
 import warnings
-from typing import cast, Any, Dict, Callable, Match, Optional
+from typing import cast, Any, Callable, Optional
+from re import Match
 
 from html import unescape
 
@@ -32,7 +33,7 @@ _EXTRA_WARNING = (
 try:
     import cmarkgfm
     from cmarkgfm.cmark import Options as cmarkgfmOptions
-    variants: Dict[str, Callable[[str], str]] = {
+    variants: dict[str, Callable[[str], str]] = {
         "GFM": lambda raw: cast(str, cmarkgfm.github_flavored_markdown_to_html(
             raw, options=cmarkgfmOptions.CMARK_OPT_UNSAFE
         )),
