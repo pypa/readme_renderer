@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import io
-from typing import Any, Dict, IO, Optional
+from typing import Any, ClassVar, Dict, IO, Optional
 
 from docutils.core import publish_parts
 from docutils.nodes import Element
@@ -26,7 +26,7 @@ from .clean import clean
 class ReadMeHTMLTranslator(HTMLTranslator):
 
     # Overrides base class not to output `<object>` tag for SVG images.
-    object_image_types: Dict[str, str] = {}
+    object_image_types: ClassVar[Dict[str, str]] = {}
 
     def emptytag(
         self,
