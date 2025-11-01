@@ -13,24 +13,24 @@
 # limitations under the License.
 
 import io
-from typing import Any, Dict, IO, Optional, Union
+from typing import Any, Dict, IO, Optional
 
 from docutils.core import publish_parts
-from docutils.nodes import colspec, image
+from docutils.nodes import Element
 from docutils.writers.html5_polyglot import HTMLTranslator, Writer
 from docutils.utils import SystemMessage
 
 from .clean import clean
 
 
-class ReadMeHTMLTranslator(HTMLTranslator):  # type: ignore[misc] # docutils is incomplete, returns `Any` python/typeshed#7256 # noqa E501
+class ReadMeHTMLTranslator(HTMLTranslator):
 
     # Overrides base class not to output `<object>` tag for SVG images.
     object_image_types: Dict[str, str] = {}
 
     def emptytag(
         self,
-        node: Union[colspec, image],
+        node: Element,
         tagname: str,
         suffix: str = "\n",
         **attributes: Any
