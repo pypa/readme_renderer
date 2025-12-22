@@ -46,6 +46,16 @@ class ReadMeHTMLTranslator(HTMLTranslator):
             node, tagname, suffix, **attributes
         )
 
+    def visit_classifier(self, node: Any) -> None:
+        """Add colon and space before classifier span.
+        This overrides the default behavior to insert a visual separator
+        (colon and spaces) that would normally be added via CSS ::before,
+        ensuring the classifier is properly separated from the term even
+        without CSS support.
+        """
+        self.body.append(' : ')
+        super().visit_classifier(node)
+
 
 SETTINGS = {
     # Cloaking email addresses provides a small amount of additional
