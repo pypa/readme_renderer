@@ -36,7 +36,7 @@ classifiers = [
 requires-python = ">=3.10"
 
 [project.optional-dependencies]
-md = ["comrak>=0.0.8"]
+md = ["comrak>=0.0.10"]
 
 [tool.setuptools]
 include-package-data = true
