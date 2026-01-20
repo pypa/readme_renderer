@@ -1,6 +1,35 @@
 Changes
 =======
 
+45.0 (Unreleased)
+-----------------
+* Replace ``cmarkgfm`` with ``comrak`` (#340)
+* Support footnotes in Markdown (#324)
+* Support inline link anchors (#351)
+* Allow ``class`` attribute on ``<pre>`` tags (#365)
+
+* Advertise support for Python 3.13 (#319), Python 3.14 (#333), pypy 3.11 (#334)
+* Remove support for Python 3.9, pypy 3.9, 3.10 (#342)
+* Remove `python3` alias from Pygments (#320)
+* Fix test suite for Pygments update (#325)
+* Fix mypy annotations (#328)
+* Fix test failure with docutils 0.22 (#332)
+* Fix package metadata (#327), (#337), (#356)
+* Fix ignored allowlists on ``clean()`` (#368)
+* Don't abort reStructuredText rendering when a ``:scale:`` image can't be sized (#359)
+* Disable active input controls in rendered output (#370)
+* Remove executable bit from tests (#329)
+* Update Dependabot config (#338, #358), update workflows (#343), prevent dual run (#344)
+* CI: security updates (#354)
+* Split apart build and release in CI (#363)
+* Speed up test execution (#349)
+* Fix documentation typos and formatting (#352)
+* Replace Gitpod with devcontainer (#326)
+* Convert package data config from exclude to include (#364)
+* Apply ruff/pyupgrade rules (UP) (#330)
+* Apply ruff (RUF) and tryceratops (TRY) rules (#336)
+* Run ruff in addition to flake8 during CI (#355)
+
 44.0 (2024-07-08)
 -----------------
 
