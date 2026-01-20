@@ -9,9 +9,9 @@ from unittest import mock
                         "test_GFM_001.md", "test_txt_001.txt"])
 def input_file(request):
     path = pathlib.Path("tests/fixtures", request.param)
-    # Skip markdown tests if the cmarkgfm optional dependency is not installed.
+    # Skip markdown tests if the comrak optional dependency is not installed.
     if path.suffix == ".md":
-        pytest.importorskip("cmarkgfm")
+        pytest.importorskip("comrak")
     return path
 
 
