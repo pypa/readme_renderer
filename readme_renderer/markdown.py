@@ -30,27 +30,39 @@ _EXTRA_WARNING = (
 )
 
 try:
-    import cmarkgfm
-    from cmarkgfm.cmark import Options as cmarkgfmOptions
+    import comrak
+
+    gfm_extension_options = comrak.ExtensionOptions()
+    gfm_extension_options.autolink = True
+    gfm_extension_options.strikethrough = True
+    gfm_extension_options.table = True
+    gfm_extension_options.tagfilter = True
+    gfm_extension_options.tasklist = True
+
+    common_render_options = comrak.RenderOptions()
+    common_render_options.unsafe_ = True  # handled by nh3
+
     variants: Dict[str, Callable[[str], str]] = {
-        "GFM": lambda raw: cast(str, cmarkgfm.github_flavored_markdown_to_html(
-            raw, options=(
-                cmarkgfmOptions.CMARK_OPT_UNSAFE | cmarkgfmOptions.CMARK_OPT_FOOTNOTES)
-        )),
-        "CommonMark": lambda raw: cast(str, cmarkgfm.markdown_to_html(
-            raw, options=(
-                cmarkgfmOptions.CMARK_OPT_UNSAFE | cmarkgfmOptions.CMARK_OPT_FOOTNOTES)
-        )),
+        "GFM": lambda raw: cast(
+            str,
+            comrak.render_markdown(
+                raw,
+                extension_options=gfm_extension_options,
+                render_options=common_render_options,
+            ),
+        ),
+        "CommonMark": lambda raw: cast(
+            str,
+            comrak.render_markdown(
+                raw,
+                render_options=common_render_options,
+            ),
+        ),
     }
+
 except ImportError:
     warnings.warn(_EXTRA_WARNING)
     variants = {}
-
-# Make code fences with `python` as the language default to highlighting as
-# Python 3.
-_LANG_ALIASES = {
-    'python': 'python3',
-}
 
 
 def render(
@@ -103,7 +115,6 @@ def _highlight(html: str) -> str:
     def replacer(match: Match[Any]) -> str:
         try:
             lang = match.group('lang')
-            lang = _LANG_ALIASES.get(lang, lang)
             lexer = pygments.lexers.get_lexer_by_name(lang)
         except ValueError:
             lexer = pygments.lexers.TextLexer()
