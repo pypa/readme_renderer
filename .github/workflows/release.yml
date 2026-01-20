@@ -2,6 +2,9 @@ name: Release
 on:
   release:
     types: [published]
+
+permissions: {}
+
 jobs:
   build-and-publish:
     runs-on: ubuntu-latest
@@ -10,11 +13,12 @@ jobs:
       id-token: write
     steps:
     - name: Checkout
-      uses: actions/checkout@v6
+      uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       with:
         ref: ${{ github.event.release.tag_name }}
+        persist-credentials: false
     - name: Set up Python
-      uses: actions/setup-python@v6
+      uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
       with:
         python-version: "3.x"
         check-latest: true
@@ -23,4 +27,4 @@ jobs:
     - name: Build
       run: python -m build .
     - name: Publish
-      uses: pypa/gh-action-pypi-publish@release/v1
+      uses: pypa/gh-action-pypi-publish@ed0c53931b1dc9bd32cbe73a98c7f6766f8a527e # v1.13.0
