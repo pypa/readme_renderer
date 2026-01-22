@@ -100,6 +100,10 @@ SETTINGS = {
     # Maximum width (in characters) for one-column field names.
     # 0 means "no limit"
     "field_name_limit": 0,
+
+    # Add self-referential links to section headings, allowing users to
+    # easily link to specific sections.
+    "section_self_link": True,
 }
 
 
