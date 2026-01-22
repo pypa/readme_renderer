@@ -35,6 +35,7 @@ try:
     gfm_extension_options = comrak.ExtensionOptions()
     gfm_extension_options.autolink = True
     gfm_extension_options.footnotes = True
+    gfm_extension_options.header_ids = ""  # intentionally blank
     gfm_extension_options.strikethrough = True
     gfm_extension_options.table = True
     gfm_extension_options.tagfilter = True
