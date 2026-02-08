@@ -93,7 +93,7 @@ def render(
 def _highlight(html: str) -> str:
     """Syntax-highlights HTML-rendered Markdown.
 
-    Plucks sections to highlight that conform the the GitHub fenced code info
+    Plucks sections to highlight that conform to the GitHub fenced code info
     string as defined at https://github.github.com/gfm/#info-string.
 
     Args:
