@@ -46,6 +46,10 @@ class ReadMeHTMLTranslator(HTMLTranslator):
             node, tagname, suffix, **attributes
         )
 
+    def visit_classifier(self, node: Element) -> None:
+        self.body.append(' <span class="classifier-delimiter">:</span> ')
+        self.body.append(self.starttag(node, "span", "", CLASS="classifier"))
+
 
 SETTINGS = {
     # Cloaking email addresses provides a small amount of additional
