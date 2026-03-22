@@ -104,6 +104,9 @@ SETTINGS = {
     # Add self-referential links to section headings, allowing users to
     # easily link to specific sections.
     "section_self_link": True,
+
+    # Prefix generated IDs and anchors with a string
+    "id_prefix": "user-content-"
 }
 
 
