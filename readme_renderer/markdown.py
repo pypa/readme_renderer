@@ -29,12 +29,17 @@ _EXTRA_WARNING = (
     "Install 'readme_renderer[md]' to enable Markdown rendering."
 )
 
+# Prefix for header IDs to avoid conflicts with page elements.
+# Must match the value passed to comrak's header_ids option.
+_HEADER_ID_PREFIX = "user-content-"
+
 try:
     import comrak
 
     gfm_extension_options = comrak.ExtensionOptions()
     gfm_extension_options.autolink = True
     gfm_extension_options.footnotes = True
+    gfm_extension_options.header_ids = _HEADER_ID_PREFIX
     gfm_extension_options.strikethrough = True
     gfm_extension_options.table = True
     gfm_extension_options.tagfilter = True
@@ -84,6 +89,11 @@ def render(
 
     if not rendered:
         return None
+
+    # GFM uses header_ids which prefixes generated IDs. We need to also
+    # prefix relative links so they correctly point to those IDs.
+    if variant == "GFM":
+        rendered = _prefix_relative_links(rendered, _HEADER_ID_PREFIX)
 
     highlighted = _highlight(rendered)
     cleaned = clean(highlighted)
@@ -135,3 +145,31 @@ def _highlight(html: str) -> str:
     result = code_expr.sub(replacer, html)
 
     return result
+
+
+def _prefix_relative_links(html: str, prefix: str) -> str:
+    """Add prefix to relative anchor links to match prefixed header IDs.
+
+    When header_ids is set in comrak, the generated id attributes get the
+    prefix, but href attributes pointing to anchors do not. This function
+    rewrites relative links (href="#...") to include the prefix so they
+    correctly link to the prefixed header IDs.
+
+    Note: Footnote links (fn-*, fnref-*) are excluded since comrak does not
+    prefix footnote IDs with header_ids.
+
+    Args:
+        html: The rendered HTML.
+        prefix: The prefix to add to relative links.
+
+    Returns:
+        The HTML with prefixed relative anchor links.
+    """
+    def replacer(match: Match[str]) -> str:
+        anchor = match.group(1)
+        # Don't prefix footnote links - comrak doesn't prefix footnote IDs
+        if anchor.startswith(("fn-", "fnref-")):
+            return match.group(0)
+        return f'href="#{prefix}{anchor}"'
+
+    return re.sub(r'href="#([^"]+)"', replacer, html)
