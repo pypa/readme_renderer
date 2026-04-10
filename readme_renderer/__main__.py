@@ -23,7 +23,7 @@ def main(cli_args: list[str] | None = None) -> None:
     content_format = args.format
     if args.package:
         message = metadata(args.input)
-        source = message.get_payload()  # type: ignore[attr-defined] # noqa: E501 https://peps.python.org/pep-0566/
+        source = message.get_payload()  # type: ignore[attr-defined] # noqa: E501,RUF100 https://peps.python.org/pep-0566/
 
         # Infer the format of the description from package metadata.
         if not content_format:
