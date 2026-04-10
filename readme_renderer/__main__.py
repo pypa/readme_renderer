@@ -5,10 +5,9 @@ from readme_renderer.txt import render as render_txt
 import pathlib
 from importlib.metadata import metadata
 import sys
-from typing import Optional
 
 
-def main(cli_args: Optional[list[str]] = None) -> None:
+def main(cli_args: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         description="Renders a .md, .rst, or .txt README to HTML",
     )

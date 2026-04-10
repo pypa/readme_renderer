@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import io
-from typing import Any, ClassVar, IO, Optional
+from typing import Any, ClassVar, IO
 
 from docutils.core import publish_parts
 from docutils.nodes import Element
@@ -112,9 +112,9 @@ SETTINGS = {
 
 def render(
     raw: str,
-    stream: Optional[IO[str]] = None,
+    stream: IO[str] | None = None,
     **kwargs: Any
-) -> Optional[str]:
+) -> str | None:
     if stream is None:
         # Use a io.StringIO as the warning stream to prevent warnings from
         # being printed to sys.stderr.
