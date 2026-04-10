@@ -52,6 +52,26 @@ requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
 
+[tool.ruff.lint]
+extend-select = [
+  "B",
+  "C4",
+  "ISC",
+  "PIE",
+  "PYI",
+  "SIM",
+  "FLY",
+  "PERF",
+  "W",
+  "PGH",
+  "UP",
+  "FURB",
+  "RUF",
+]
+ignore = [
+  "B028",   # No explicit `stacklevel` keyword argument found
+]
+
 [tool.coverage.run]
 branch = true
 source = ["readme_renderer"]
