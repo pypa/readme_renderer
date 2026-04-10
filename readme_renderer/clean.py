@@ -69,7 +69,7 @@ def clean(
     html: str,
     tags: Optional[set[str]] = None,
     attributes: Optional[dict[str, set[str]]] = None
-) -> Optional[str]:
+) -> str:
     if tags is None:
         tags = ALLOWED_TAGS
     if attributes is None:
