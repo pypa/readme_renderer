@@ -46,6 +46,16 @@ class ReadMeHTMLTranslator(HTMLTranslator):
             node, tagname, suffix, **attributes
         )
 
+    def read_size_with_PIL(self, node: Element) -> None:  # noqa: N802
+        """
+        We disable ``file_insertion_enabled`` for security,
+        which means docutils can't read images to compute ``:scale:`` dimensions
+        and emits a WARNING/2 that our ``halt_level=2`` would turn fatal.
+        Skip the probe so the image renders at natural size
+        instead of aborting render.
+        """
+        return None
+
 
 SETTINGS = {
     # Cloaking email addresses provides a small amount of additional
