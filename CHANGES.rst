@@ -1,6 +1,27 @@
 Changes
 =======
 
+45.0 (Unreleased)
+-----------------
+* Replace ``cmarkgfm`` with ``comrak`` (#340)
+* Support footnotes in Markdown (#324)
+* Support inline link anchors (#351)
+
+* Advertise support for Python 3.13 (#319), Python 3.14 (#333), pypy 3.11 (#334)
+* Remove support for Python 3.9, pypy 3.9, 3.10 (#342)
+* Remove `python3` alias from Pygments (#320)
+* Fix test suite for Pygments update (#325)
+* Fix mypy annotations (#328)
+* Fix test failure with docutils 0.22 (#332)
+* Fix package metadata (#327), (#337), (#356)
+* Remove executable bit from tests (#329)
+* Update Dependabot config (#338), update workflows (#343), prevent dual run (#344)
+* CI: security updates (#354)
+* Speed up test execution (#349)
+* Fix documentation typos and formatting (#352)
+* Apply ruff/pyupgrade rules (UP) (#330)
+* Apply ruff (RUF) and tryceratops (TRY) rules (#336)
+
 44.0 (2024-07-08)
 -----------------
 
