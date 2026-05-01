@@ -54,7 +54,7 @@ jobs:
       - name: Install dependencies
         run: python -m pip install tox
       - name: Run linting
-        run: python -m tox -e pep8
+        run: python -m tox -e pep8 -e ruff
       - name: Run mypy
         run: python -m tox -e mypy
   packaging:
