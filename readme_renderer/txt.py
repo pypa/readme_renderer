@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Any, Optional
+from typing import Any
 
 from .clean import clean
 
 from html import escape as html_escape
 
 
-def render(raw: str, **kwargs: Any) -> Optional[str]:
+def render(raw: str, **kwargs: Any) -> str | None:
     rendered = html_escape(raw).replace("\n", "<br>")
     return clean(rendered, tags={"br"})
