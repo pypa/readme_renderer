@@ -45,7 +45,7 @@ include-package-data = true
 exclude = ["tests", "tests.*"]
 
 [project.urls]
-Home-page = "https://github.com/pypa/readme_renderer"
+Homepage = "https://github.com/pypa/readme_renderer"
 
 [build-system]
 requires = ["setuptools>=77.0.3"]
