@@ -5,10 +5,9 @@ from readme_renderer.txt import render as render_txt
 import pathlib
 from importlib.metadata import metadata
 import sys
-from typing import Optional
 
 
-def main(cli_args: Optional[list[str]] = None) -> None:
+def main(cli_args: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(
         description="Renders a .md, .rst, or .txt README to HTML",
     )
@@ -24,7 +23,7 @@ def main(cli_args: Optional[list[str]] = None) -> None:
     content_format = args.format
     if args.package:
         message = metadata(args.input)
-        source = message.get_payload()  # type: ignore[attr-defined] # noqa: E501 https://peps.python.org/pep-0566/
+        source = message.get_payload()  # type: ignore[attr-defined] # noqa: E501,RUF100 https://peps.python.org/pep-0566/
 
         # Infer the format of the description from package metadata.
         if not content_format:

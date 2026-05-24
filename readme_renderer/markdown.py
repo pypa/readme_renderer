@@ -14,7 +14,7 @@
 
 import re
 import warnings
-from typing import cast, Any, Optional
+from typing import cast, Any
 from collections.abc import Callable
 from re import Match
 
@@ -77,7 +77,7 @@ def render(
     raw: str,
     variant: str = "GFM",
     **kwargs: Any
-) -> Optional[str]:
+) -> str | None:
     if not variants:
         warnings.warn(_EXTRA_WARNING)
         return None
