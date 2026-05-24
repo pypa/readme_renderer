@@ -42,7 +42,7 @@ md = ["comrak>=0.0.11"]
 include-package-data = true
 
 [tool.setuptools.packages.find]
-exclude = ["tests", "tests.*"]
+include = ["readme_renderer*"]
 
 [project.urls]
 Homepage = "https://github.com/pypa/readme_renderer"
