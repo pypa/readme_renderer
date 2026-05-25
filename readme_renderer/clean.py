@@ -50,7 +50,7 @@ ALLOWED_ATTRIBUTES = {
     "h6": {"align"},
     "code": {"class"},
     "p": {"align", "class"},
-    "pre": {"lang"},
+    "pre": {"class", "lang"},
     "ol": {"start"},
     "input": {"type", "checked", "disabled"},
     "aside": {"class"},
