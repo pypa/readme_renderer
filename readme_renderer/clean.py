@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from html.parser import HTMLParser
+
 import nh3
 
 
@@ -63,10 +65,82 @@ ALLOWED_ATTRIBUTES = {
 }
 
 
+class _InvalidInputFilter(HTMLParser):
+    """Collect sanitized input start tags that are not GFM task-list checkboxes."""
+
+    def __init__(self, html: str) -> None:
+        super().__init__(convert_charrefs=False)
+        self.invalid_spans: list[tuple[int, int]] = []
+        self._line_offsets = _line_offsets(html)
+
+    def handle_starttag(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+    ) -> None:
+        self._record_invalid_input(tag, attrs)
+
+    def handle_startendtag(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+    ) -> None:
+        self._record_invalid_input(tag, attrs)
+
+    def _record_invalid_input(
+        self,
+        tag: str,
+        attrs: list[tuple[str, str | None]],
+    ) -> None:
+        if tag != "input" or _valid_input_attrs(attrs):
+            return
+
+        start_tag = self.get_starttag_text()
+        if start_tag is None:
+            return
+
+        line, offset = self.getpos()
+        start = self._line_offsets[line - 1] + offset
+        self.invalid_spans.append((start, start + len(start_tag)))
+
+
+def _line_offsets(html: str) -> list[int]:
+    """Return absolute offsets for the start of each line in an HTML fragment."""
+
+    offsets = [0]
+    for index, char in enumerate(html):
+        if char == "\n":
+            offsets.append(index + 1)
+    return offsets
+
+
+def _valid_input_attrs(attrs: list[tuple[str, str | None]]) -> bool:
+    """Return whether an input tag has only the allowed task-list attributes."""
+
+    attr_map = dict(attrs)
+    if attr_map.get("type") != "checkbox":
+        return False
+    if "disabled" not in attr_map:
+        return False
+    return set(attr_map) <= {"type", "checked", "disabled"}
+
+
+def _remove_invalid_inputs(html: str) -> str:
+    """Strip input tags that are not disabled checkbox task-list controls."""
+
+    parser = _InvalidInputFilter(html)
+    parser.feed(html)
+
+    cleaned = html
+    for start, end in reversed(parser.invalid_spans):
+        cleaned = cleaned[:start] + cleaned[end:]
+    return cleaned
+
+
 def clean(
     html: str,
     tags: set[str] | None = None,
-    attributes: dict[str, set[str]] | None = None
+    attributes: dict[str, set[str]] | None = None,
 ) -> str | None:
     if tags is None:
         tags = ALLOWED_TAGS
@@ -83,4 +157,4 @@ def clean(
         )
     except ValueError:
         return None
-    return cleaned
+    return _remove_invalid_inputs(cleaned)
