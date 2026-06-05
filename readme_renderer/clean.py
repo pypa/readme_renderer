@@ -76,8 +76,8 @@ def clean(
     try:
         cleaned = nh3.clean(
             html,
-            tags=ALLOWED_TAGS,
-            attributes=ALLOWED_ATTRIBUTES,
+            tags=tags,
+            attributes=attributes,
             link_rel="nofollow",
             url_schemes={"http", "https", "mailto"},
         )
