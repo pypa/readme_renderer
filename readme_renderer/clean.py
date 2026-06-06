@@ -63,19 +63,6 @@ ALLOWED_ATTRIBUTES = {
 }
 
 
-def _restrict_input_type(tag: str, attr: str, value: str) -> str | None:
-    """Drop any input ``type`` other than ``checkbox``.
-
-    Combined with forcing ``disabled`` on every input, this ensures the only
-    input control that survives sanitization is a non-interactive task-list
-    checkbox. No active control (submit buttons, text fields, enabled
-    checkboxes) can be rendered.
-    """
-    if tag == "input" and attr == "type" and value != "checkbox":
-        return None
-    return value
-
-
 def clean(
     html: str,
     tags: set[str] | None = None,
@@ -94,7 +81,6 @@ def clean(
             link_rel="nofollow",
             url_schemes={"http", "https", "mailto"},
             set_tag_attribute_values={"input": {"disabled": ""}},
-            attribute_filter=_restrict_input_type,
         )
     except ValueError:
         return None

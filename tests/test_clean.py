@@ -22,16 +22,16 @@ def test_custom_attributes_are_respected():
 
 
 def test_active_input_controls_are_disabled():
-    # Every input is forced disabled, and non-checkbox types are dropped, so
-    # nothing interactive survives.
+    # Every input is forced disabled, so nothing interactive survives even
+    # though the type is preserved.
     assert clean(
         '<input type="submit">'
         '<input type="text">'
         '<input type="checkbox" checked>'
         '<input type="checkbox">'
     ) == (
-        '<input disabled="">'
-        '<input disabled="">'
+        '<input type="submit" disabled="">'
+        '<input type="text" disabled="">'
         '<input type="checkbox" checked="" disabled="">'
         '<input type="checkbox" disabled="">'
     )
