@@ -1,0 +1,57 @@
+<p>Looking for <a href="https://pygments.org/docs/lexers/#pygments.lexers.python.PythonConsoleLexer" rel="nofollow">https://pygments.org/docs/lexers/#pygments.lexers.python.PythonConsoleLexer</a></p>
+<section id="user-content-docutils">
+<h2>docutils<a title="link to this section" href="#user-content-docutils" rel="nofollow"></a></h2>
+<section id="user-content-raw">
+<h3>raw<a title="link to this section" href="#user-content-raw" rel="nofollow"></a></h3>
+<p>No indentation, no directive, just the code block of a repl session.</p>
+<pre class="code python doctest">&gt;&gt;&gt; a = 'foo'
+&gt;&gt;&gt; print(a)
+foo
+&gt;&gt;&gt; 1 / 0
+Traceback (most recent call last):
+    File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+ZeroDivisionError: integer division or modulo by zero
+</pre>
+</section>
+<section id="user-content-code">
+<h3>code<a title="link to this section" href="#user-content-code" rel="nofollow"></a></h3>
+<p>With the “code” directive, the content is indented and a lexer is specified.</p>
+<pre class="code pycon literal-block"><code><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="s1">'foo'</span><span class="w">
+</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w">
+</span><span class="go">foo
+</span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span><span class="w">
+</span><span class="gt">Traceback (most recent call last):
+</span>  File <span class="nb">"&lt;stdin&gt;"</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span><span class="w">
+</span><span class="gr">ZeroDivisionError</span>: <span class="n">integer division or modulo by zero</span></code></pre>
+<p>References:</p>
+<ul class="simple">
+<li><p><a href="https://docutils.sourceforge.io/docs/ref/rst/directives.html#code" rel="nofollow">https://docutils.sourceforge.io/docs/ref/rst/directives.html#code</a></p></li>
+</ul>
+<p>And without a lexer:</p>
+<pre class="code literal-block"><code>&gt;&gt;&gt; a = 'foo'
+&gt;&gt;&gt; print(a)
+foo
+&gt;&gt;&gt; 1 / 0
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+ZeroDivisionError: integer division or modulo by zero</code></pre>
+</section>
+</section>
+<section id="user-content-sphinx">
+<h2>sphinx<a title="link to this section" href="#user-content-sphinx" rel="nofollow"></a></h2>
+<p>raw - expect the same, as not using any sphinx extension.</p>
+<section id="user-content-code-block">
+<h3>code-block<a title="link to this section" href="#user-content-code-block" rel="nofollow"></a></h3>
+<pre class="code pycon literal-block"><code><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="s1">'foo'</span><span class="w">
+</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w">
+</span><span class="go">foo
+</span><span class="gp">&gt;&gt;&gt; </span><span class="mi">1</span> <span class="o">/</span> <span class="mi">0</span><span class="w">
+</span><span class="gt">Traceback (most recent call last):
+</span>  File <span class="nb">"&lt;stdin&gt;"</span>, line <span class="m">1</span>, in <span class="n">&lt;module&gt;</span><span class="w">
+</span><span class="gr">ZeroDivisionError</span>: <span class="n">integer division or modulo by zero</span></code></pre>
+<p>References:</p>
+<ul class="simple">
+<li><p><a href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#directive-code-block" rel="nofollow">https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#directive-code-block</a></p></li>
+</ul>
+</section>
+</section>
