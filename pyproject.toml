@@ -61,17 +61,18 @@ ignore = [
 extend-select = [
   "B",
   "C4",
+  "FLY",
+  "FURB",
   "ISC",
+  "N",
+  "PERF",
+  "PGH",
   "PIE",
   "PYI",
-  "SIM",
-  "FLY",
-  "PERF",
-  "W",
-  "PGH",
-  "UP",
-  "FURB",
   "RUF",
+  "SIM",
+  "UP",
+  "W",
 ]
 ignore = [
   "B028",   # No explicit `stacklevel` keyword argument found

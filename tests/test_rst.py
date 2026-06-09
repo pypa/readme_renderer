@@ -87,3 +87,42 @@ def test_own_readme():
     readme = Path(__file__).parent.parent / "README.rst"
     rendered = render(readme.read_text(encoding="utf-8"))
     assert rendered is not None
+
+
+def test_image_with_scale_and_url_does_not_abort_render():
+    """
+    Issue #304: an rST image with :scale: and a remote URL must not abort
+    the render. docutils tries to read the image to compute scaled size;
+    with file_insertion_enabled=False that emits a WARNING/2 which our
+    halt_level=2 turns into a fatal SystemMessage. The image should
+    render without scale-derived dimensions instead.
+    """
+    warnings = io.StringIO()
+    rendered = render(
+        ".. image:: https://example.com/badge.svg\n"
+        "    :scale: 50%\n",
+        stream=warnings,
+    )
+    assert rendered is not None
+    assert '<img' in rendered
+    assert 'https://example.com/badge.svg' in rendered
+
+
+def test_image_with_scale_and_explicit_dimensions_renders():
+    """
+    Regression guard for the scale-with-full-dims path, which bypasses
+    read_size_with_PIL entirely (image_size short-circuits when both
+    width and height are present). Locks in "renders without crashing";
+    does not assert how :scale: is applied to the dimensions.
+    """
+    warnings = io.StringIO()
+    rendered = render(
+        ".. image:: https://example.com/badge.png\n"
+        "    :width: 200px\n"
+        "    :height: 100px\n"
+        "    :scale: 50%\n",
+        stream=warnings,
+    )
+    assert rendered is not None
+    assert '<img' in rendered
+    assert 'https://example.com/badge.png' in rendered
