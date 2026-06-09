@@ -51,6 +51,11 @@ Homepage = "https://github.com/pypa/readme_renderer"
 requires = ["setuptools>=77.0.3"]
 build-backend = "setuptools.build_meta"
 
+[tool.check-manifest]
+ignore = [
+  ".devcontainer/*",
+  ".vscode/*",
+]
 
 [tool.ruff.lint]
 extend-select = [
