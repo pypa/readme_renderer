@@ -80,6 +80,7 @@ def clean(
             attributes=attributes,
             link_rel="nofollow",
             url_schemes={"http", "https", "mailto"},
+            set_tag_attribute_values={"input": {"disabled": ""}},
         )
     except ValueError:
         return None

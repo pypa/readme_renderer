@@ -5,3 +5,4 @@
 - <input type="submit" />
 - <input method="PUT" />
 - <input type="checkbox" checked />
+- <input type="radio" checked />
