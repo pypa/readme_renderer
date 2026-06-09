@@ -1,7 +1,7 @@
 Changes
 =======
 
-45.0 (Unreleased)
+45.0 (2026-06-09)
 -----------------
 * Replace ``cmarkgfm`` with ``comrak`` (#340)
 * Support footnotes in Markdown (#324)
