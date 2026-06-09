@@ -5,6 +5,7 @@ dist/
 htmlcov/
 
 .tox/
+.venv/
 .cache/
 .coverage
 *.egg-info/
@@ -17,4 +18,5 @@ venv/
 .venv/
 
 .idea/
-.vscode/
+.vscode/*
+!.vscode/launch.json
