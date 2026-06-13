@@ -39,6 +39,7 @@ try:
     import comrak
 
     gfm_extension_options = comrak.ExtensionOptions()
+    gfm_extension_options.alerts = True
     gfm_extension_options.autolink = True
     gfm_extension_options.footnotes = True
     gfm_extension_options.header_ids = _HEADER_ID_PREFIX
