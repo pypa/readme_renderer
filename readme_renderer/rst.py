@@ -63,17 +63,17 @@ SETTINGS = {
     "cloak_email_addresses": True,
 
     # Prevent a lone top level heading from being promoted to document
-    # title, and thus second level headings from being promoted to top
-    # level.
-    "doctitle_xform": True,
+    # title (and thus dropped from the rendered output), and second
+    # level headings from being promoted to top level. Keeps heading
+    # levels literal, consistent with how Markdown renders headings.
+    "doctitle_xform": False,
 
-    # Prevent a lone subsection heading from being promoted to section
-    # title, and thus second level headings from being promoted to top
-    # level.
-    "sectsubtitle_xform": True,
+    # Prevent a lone subsection heading from being demoted to a
+    # non-heading subtitle paragraph. See doctitle_xform above.
+    "sectsubtitle_xform": False,
 
-    # Set our initial header level
-    "initial_header_level": 2,
+    # Render the top-level heading as <h1>, consistent with Markdown.
+    "initial_header_level": 1,
 
     # Prevent local files from being included into the rendered output.
     # This is a security concern because people can insert files
