@@ -19,6 +19,7 @@ from collections.abc import Callable
 from re import Match
 
 from html import unescape
+from html.parser import HTMLParser
 
 import pygments
 import pygments.lexers
@@ -94,10 +95,14 @@ def render(
     if not rendered:
         return None
 
-    # GFM uses header_ids which prefixes generated IDs. We need to also
-    # prefix relative links so they correctly point to those IDs.
     if variant == "GFM":
+        # GFM uses header_ids which prefixes generated IDs. We need to also
+        # prefix relative links so they correctly point to those IDs.
         rendered = _prefix_relative_links(rendered, _HEADER_ID_PREFIX)
+        # Comrak's HTML output doesn't match docutils's so we unify them.
+        # Can be replaced with an option once comrak supports this output:
+        # https://github.com/kivikakk/comrak/issues/821
+        rendered = _rewrite_gfm_alerts(rendered)
 
     highlighted = _highlight(rendered)
     cleaned = clean(highlighted)
@@ -149,6 +154,82 @@ def _highlight(html: str) -> str:
     result = code_expr.sub(replacer, html)
 
     return result
+
+
+def _rewrite_gfm_alerts(html: str) -> str:
+    r"""Rewrites GFM alert ``<div>``\ s into docutils-style ``<aside>``\ s.
+
+    Args:
+        html: The rendered HTML.
+
+    Returns:
+        The HTML with GFM alerts rewritten as admonitions.
+    """
+    rewriter = _GFMAlertRewriter()
+    rewriter.feed(html)
+    rewriter.close()
+    return "".join(rewriter.out)
+
+
+class _GFMAlertRewriter(HTMLParser):
+    def __init__(self) -> None:
+        super().__init__(convert_charrefs=False)
+        self.out: list[str] = []
+        # Tracks (original_tag, emitted_tag) for each open start tag,
+        # so a later end tag can be rewritten to match (e.g. div -> aside).
+        self._stack: list[tuple[str, str]] = []
+
+    def _emit_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> str:
+        classes = (dict(attrs).get("class") or "").split()
+
+        if tag == "div" and "markdown-alert" in classes:
+            alert_type = next((
+                c.removeprefix("markdown-alert-")
+                for c in classes
+                if c.startswith("markdown-alert-")
+            ), None)
+            if alert_type is not None:
+                self.out.append(f'<aside class="admonition {alert_type}">')
+                return "aside"
+
+        if tag == "p" and "markdown-alert-title" in classes:
+            self.out.append('<p class="admonition-title">')
+            return "p"
+
+        self.out.append(self.get_starttag_text() or f"<{tag}>")
+        return tag
+
+    def handle_starttag(
+        self, tag: str, attrs: list[tuple[str, str | None]]
+    ) -> None:
+        emitted = self._emit_starttag(tag, attrs)
+        self._stack.append((tag, emitted))
+
+    def handle_startendtag(
+        self, tag: str, attrs: list[tuple[str, str | None]]
+    ) -> None:
+        self.out.append(self.get_starttag_text() or f"<{tag}/>")
+
+    def handle_endtag(self, tag: str) -> None:
+        # Find matching start tag while ignoring unclosed/void tags
+        for i, (t, emitted) in reversed(list(enumerate(self._stack))):
+            if t == tag:
+                del self._stack[i:]
+                self.out.append(f"</{emitted}>")
+                return
+        self.out.append(f"</{tag}>")
+
+    def handle_data(self, data: str) -> None:
+        self.out.append(data)
+
+    def handle_entityref(self, name: str) -> None:
+        self.out.append(f"&{name};")
+
+    def handle_charref(self, name: str) -> None:
+        self.out.append(f"&#{name};")
+
+    def handle_comment(self, data: str) -> None:
+        self.out.append(f"<!--{data}-->")
 
 
 def _prefix_relative_links(html: str, prefix: str) -> str:
