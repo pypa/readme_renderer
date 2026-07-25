@@ -1,10 +1,11 @@
 import argparse
+import pathlib
+import sys
+from importlib.metadata import metadata
+
 from readme_renderer.markdown import render as render_md
 from readme_renderer.rst import render as render_rst
 from readme_renderer.txt import render as render_txt
-import pathlib
-from importlib.metadata import metadata
-import sys
 
 
 def main(cli_args: list[str] | None = None) -> None:

@@ -14,7 +14,6 @@
 
 import nh3
 
-
 ALLOWED_TAGS = {
     # Bleach Defaults
     "a", "abbr", "acronym", "b", "blockquote", "code", "em", "i", "li", "ol",

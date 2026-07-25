@@ -12,11 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from html import escape as html_escape
 from typing import Any
 
 from .clean import clean
-
-from html import escape as html_escape
 
 
 def render(raw: str, **kwargs: Any) -> str | None:

@@ -14,15 +14,14 @@
 
 import re
 import warnings
-from typing import cast, Any
 from collections.abc import Callable
-from re import Match
-
 from html import unescape
+from re import Match
+from typing import Any, cast
 
 import pygments
-import pygments.lexers
 import pygments.formatters
+import pygments.lexers
 
 from .clean import clean
 
