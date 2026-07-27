@@ -14,15 +14,14 @@
 
 import re
 import warnings
-from typing import cast, Any
 from collections.abc import Callable
-from re import Match
-
 from html import unescape
+from re import Match
+from typing import Any, cast
 
 import pygments
-import pygments.lexers
 import pygments.formatters
+import pygments.lexers
 
 from .clean import clean
 
@@ -51,6 +50,7 @@ try:
 
     common_render_options = comrak.RenderOptions()
     common_render_options.unsafe_ = True  # handled by nh3
+    common_render_options.alert_style = comrak.AlertStyle.Semantic
 
     variants: dict[str, Callable[[str], str]] = {
         "GFM": lambda raw: cast(

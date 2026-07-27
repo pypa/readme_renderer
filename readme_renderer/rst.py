@@ -13,12 +13,12 @@
 # limitations under the License.
 
 import io
-from typing import Any, ClassVar, IO
+from typing import IO, Any, ClassVar
 
 from docutils.core import publish_parts
 from docutils.nodes import Element
-from docutils.writers.html5_polyglot import HTMLTranslator, Writer
 from docutils.utils import SystemMessage
+from docutils.writers.html5_polyglot import HTMLTranslator, Writer
 
 from .clean import clean
 
@@ -54,7 +54,7 @@ class ReadMeHTMLTranslator(HTMLTranslator):
         Skip the probe so the image renders at natural size
         instead of aborting render.
         """
-        return None
+        return
 
 
 SETTINGS = {
