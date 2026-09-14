@@ -60,13 +60,16 @@ def test_rst_empty_file():
 
 
 def test_rst_header_only():
+    """A document consisting of only a top-level heading renders that
+    heading, rather than being treated as empty."""
     warnings = io.StringIO()
-    assert render("""
+    rendered = render("""
 Header
 ======
-""", stream=warnings) is None
+""", stream=warnings)
 
-    assert "No content rendered from RST source." in warnings.getvalue()
+    assert rendered is not None
+    assert warnings.getvalue() == ""
 
 
 def test_header_and_malformed_emits_docutils_warning_only():

@@ -1,8 +1,10 @@
 import pathlib
-import pytest
-from readme_renderer.__main__ import main
 import tempfile
 from unittest import mock
+
+import pytest
+
+from readme_renderer.__main__ import main
 
 
 @pytest.fixture(params=["test_CommonMark_001.md", "test_rst_003.rst",

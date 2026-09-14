@@ -1,6 +1,18 @@
 Changes
 =======
 
+46.0 (2026-08-28)
+-----------------
+
+* Render Markdown GFM alerts as semantic HTML admonitions (#374, #379)
+* Support GitHub emoji shortcodes in Markdown (#374)
+* Don't drop reStructuredText's top-level heading, and render headings at
+  their literal levels starting at ``<h1>``, consistent with Markdown (#377)
+* Require ``comrak`` 0.0.13 and higher for the ``md`` extra (#379)
+* Handle expected warnings in the test suite (#373)
+* Fix the 45.0 changelog date (#372)
+* Update workflows (#376, #381)
+
 45.0 (2026-06-09)
 -----------------
 * Replace ``cmarkgfm`` with ``comrak`` (#340)

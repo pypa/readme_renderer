@@ -1,6 +1,6 @@
 [project]
 name = "readme_renderer"
-version = "45.0"
+version = "46.0"
 description = "readme_renderer is a library for rendering readme descriptions for Warehouse"
 authors = [
   {name = "The Python Packaging Authority", email = "admin@mail.pypi.org"}
@@ -37,7 +37,7 @@ classifiers = [
 requires-python = ">=3.10"
 
 [project.optional-dependencies]
-md = ["comrak>=0.0.11"]
+md = ["comrak>=0.0.13"]
 
 [tool.setuptools]
 include-package-data = true

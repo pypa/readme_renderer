@@ -14,15 +14,14 @@
 
 import re
 import warnings
-from typing import cast, Any
 from collections.abc import Callable
-from re import Match
-
 from html import unescape
+from re import Match
+from typing import Any
 
 import pygments
-import pygments.lexers
 import pygments.formatters
+import pygments.lexers
 
 from .clean import clean
 
@@ -32,16 +31,18 @@ _EXTRA_WARNING = (
 )
 
 # Prefix for header IDs to avoid conflicts with page elements.
-# Must match the value passed to comrak's header_ids option.
+# Must match the value passed to comrak's header_id_prefix option.
 _HEADER_ID_PREFIX = "user-content-"
 
 try:
     import comrak
 
     gfm_extension_options = comrak.ExtensionOptions()
+    gfm_extension_options.alerts = True
     gfm_extension_options.autolink = True
     gfm_extension_options.footnotes = True
-    gfm_extension_options.header_ids = _HEADER_ID_PREFIX
+    gfm_extension_options.header_id_prefix = _HEADER_ID_PREFIX
+    gfm_extension_options.shortcodes = True
     gfm_extension_options.strikethrough = True
     gfm_extension_options.table = True
     gfm_extension_options.tagfilter = True
@@ -49,22 +50,17 @@ try:
 
     common_render_options = comrak.RenderOptions()
     common_render_options.unsafe_ = True  # handled by nh3
+    common_render_options.alert_style = comrak.AlertStyle.Semantic
 
     variants: dict[str, Callable[[str], str]] = {
-        "GFM": lambda raw: cast(
-            str,
-            comrak.render_markdown(
-                raw,
-                extension_options=gfm_extension_options,
-                render_options=common_render_options,
-            ),
+        "GFM": lambda raw: comrak.render_markdown(
+            raw,
+            extension_options=gfm_extension_options,
+            render_options=common_render_options,
         ),
-        "CommonMark": lambda raw: cast(
-            str,
-            comrak.render_markdown(
-                raw,
-                render_options=common_render_options,
-            ),
+        "CommonMark": lambda raw: comrak.render_markdown(
+            raw,
+            render_options=common_render_options,
         ),
     }
 
@@ -92,7 +88,7 @@ def render(
     if not rendered:
         return None
 
-    # GFM uses header_ids which prefixes generated IDs. We need to also
+    # GFM uses header_id_prefix which prefixes generated IDs. We need to also
     # prefix relative links so they correctly point to those IDs.
     if variant == "GFM":
         rendered = _prefix_relative_links(rendered, _HEADER_ID_PREFIX)
@@ -152,13 +148,13 @@ def _highlight(html: str) -> str:
 def _prefix_relative_links(html: str, prefix: str) -> str:
     """Add prefix to relative anchor links to match prefixed header IDs.
 
-    When header_ids is set in comrak, the generated id attributes get the
+    When header_id_prefix is set in comrak, the generated id attributes get the
     prefix, but href attributes pointing to anchors do not. This function
     rewrites relative links (href="#...") to include the prefix so they
     correctly link to the prefixed header IDs.
 
     Note: Footnote links (fn-*, fnref-*) are excluded since comrak does not
-    prefix footnote IDs with header_ids.
+    prefix footnote IDs with header_id_prefix.
 
     Args:
         html: The rendered HTML.
