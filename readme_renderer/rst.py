@@ -13,6 +13,7 @@
 # limitations under the License.
 
 import io
+from collections.abc import Mapping
 from typing import IO, Any, ClassVar
 
 from docutils.core import publish_parts
@@ -123,6 +124,8 @@ SETTINGS = {
 def render(
     raw: str,
     stream: IO[str] | None = None,
+    *,
+    settings_overrides: Mapping[str, Any] | None = None,
     **kwargs: Any
 ) -> str | None:
     if stream is None:
@@ -131,6 +134,11 @@ def render(
         stream = io.StringIO()
 
     settings = SETTINGS.copy()
+    if settings_overrides is not None:
+        for setting in ("file_insertion_enabled", "raw_enabled"):
+            if settings_overrides.get(setting):
+                raise ValueError(f"{setting} cannot be enabled")
+        settings.update(settings_overrides)
     settings["warning_stream"] = stream
 
     writer = Writer()
