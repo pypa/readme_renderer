@@ -72,6 +72,9 @@ except ImportError:
 def render(
     raw: str,
     variant: str = "GFM",
+    *,
+    extension_options: "comrak.ExtensionOptions | None" = None,
+    render_options: "comrak.RenderOptions | None" = None,
     **kwargs: Any
 ) -> str | None:
     if not variants:
@@ -83,15 +86,34 @@ def render(
     if not renderer:
         return None
 
-    rendered = renderer(raw)
+    if extension_options is None and render_options is None:
+        rendered = renderer(raw)
+    else:
+        extensions = extension_options
+        if extensions is None:
+            extensions = (
+                gfm_extension_options if variant == "GFM"
+                else comrak.ExtensionOptions()
+            )
+        rendered = comrak.render_markdown(
+            raw,
+            extension_options=extensions,
+            render_options=(
+                common_render_options if render_options is None
+                else render_options
+            ),
+        )
 
     if not rendered:
         return None
 
-    # GFM uses header_id_prefix which prefixes generated IDs. We need to also
-    # prefix relative links so they correctly point to those IDs.
-    if variant == "GFM":
-        rendered = _prefix_relative_links(rendered, _HEADER_ID_PREFIX)
+    # Match anchor links to the effective header IDs, including custom options.
+    prefix = (
+        extension_options.header_id_prefix if extension_options is not None
+        else (_HEADER_ID_PREFIX if variant == "GFM" else None)
+    )
+    if prefix:
+        rendered = _prefix_relative_links(rendered, prefix)
 
     highlighted = _highlight(rendered)
     cleaned = clean(highlighted)
