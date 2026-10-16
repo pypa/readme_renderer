@@ -1,5 +1,6 @@
 import pathlib
 import tempfile
+from email.message import Message
 from unittest import mock
 
 import pytest
@@ -70,3 +71,58 @@ def test_cli_package(package, contains):
         print_.assert_called_once()
         (result,), _ = print_.call_args
     assert contains in result
+
+
+@pytest.mark.parametrize(("content_type", "source", "contains"), [
+    ("text/x-rst; charset=UTF-8", "A paragraph.", "<p>A paragraph.</p>"),
+    ("text/plain; charset=UTF-8", "A paragraph.", "A paragraph."),
+])
+def test_cli_package_parameterized_content_type(content_type, source, contains):
+    message = Message()
+    message["Description-Content-Type"] = content_type
+    message.set_payload(source)
+
+    with mock.patch("readme_renderer.__main__.metadata", return_value=message), \
+            mock.patch("builtins.print") as print_:
+        main(["--package", "fixture"])
+        (result,), _ = print_.call_args
+
+    assert contains in result
+
+
+@pytest.mark.parametrize(("content_type", "contains", "explicit_format"), [
+    ("text/markdown; charset=UTF-8; variant=GFM", "<del>strike</del>", False),
+    ("TEXT/MARKDOWN; CHARSET=\"UTF-8\"; VARIANT=\"CommonMark\"", "~~strike~~", False),
+    ("text/markdown; charset=UTF-8; variant=CommonMark", "~~strike~~", True),
+    ("text/markdown; charset=UTF-8; variant=Unsupported", "<del>strike</del>", False),
+    ("text/markdown; charset=UTF-8; variant=commonmark", "<del>strike</del>", False),
+])
+def test_cli_package_markdown_variant(content_type, contains, explicit_format):
+    pytest.importorskip("comrak")
+    message = Message()
+    message["Description-Content-Type"] = content_type
+    message.set_payload("~~strike~~")
+    cli_args = ["--package", "fixture"]
+    if explicit_format:
+        cli_args.extend(["--format", "md"])
+
+    with mock.patch("readme_renderer.__main__.metadata", return_value=message), \
+            mock.patch("builtins.print") as print_:
+        main(cli_args)
+        (result,), _ = print_.call_args
+
+    assert contains in result
+
+
+@pytest.mark.parametrize("content_type", [
+    "text/markdown; charset=ISO-8859-1",
+    "not a media type",
+])
+def test_cli_package_rejects_invalid_content_type(content_type):
+    message = Message()
+    message["Description-Content-Type"] = content_type
+    message.set_payload("README")
+
+    with mock.patch("readme_renderer.__main__.metadata", return_value=message), \
+            pytest.raises(ValueError, match="invalid content type"):
+        main(["--package", "fixture"])
