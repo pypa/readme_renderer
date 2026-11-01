@@ -125,13 +125,11 @@ def render(
     stream: IO[str] | None = None,
     **kwargs: Any
 ) -> str | None:
-    if stream is None:
-        # Use a io.StringIO as the warning stream to prevent warnings from
-        # being printed to sys.stderr.
-        stream = io.StringIO()
-
+    # Capture diagnostics independently of the caller's stream position.
+    # Terminal and pipe streams need not support tell() or seek().
+    warnings = io.StringIO()
     settings = SETTINGS.copy()
-    settings["warning_stream"] = stream
+    settings["warning_stream"] = warnings
 
     writer = Writer()
     writer.translator_class = ReadMeHTMLTranslator
@@ -142,11 +140,14 @@ def render(
         rendered = None
     else:
         rendered = parts.get("docinfo", "") + parts.get("fragment", "")
+    finally:
+        if stream is not None:
+            stream.write(warnings.getvalue())
 
     if rendered:
         return clean(rendered)
     else:
         # If the warnings stream is empty, docutils had none, so add ours.
-        if not stream.tell():
+        if stream is not None and not warnings.getvalue():
             stream.write("No content rendered from RST source.")
         return None

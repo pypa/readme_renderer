@@ -1,4 +1,6 @@
 import pathlib
+import subprocess
+import sys
 import tempfile
 from unittest import mock
 
@@ -70,3 +72,15 @@ def test_cli_package(package, contains):
         print_.assert_called_once()
         (result,), _ = print_.call_args
     assert contains in result
+
+
+def test_cli_empty_rst_reports_diagnostic_without_traceback(tmp_path):
+    source = tmp_path / "README.rst"
+    source.write_text("", encoding="utf-8")
+    result = subprocess.run(
+        [sys.executable, "-m", "readme_renderer", str(source)],
+        capture_output=True, check=False,
+    )
+    assert result.returncode == 1
+    assert b"No content rendered from RST source." in result.stderr
+    assert b"Traceback" not in result.stderr
