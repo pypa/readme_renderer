@@ -41,7 +41,7 @@ def main(cli_args: list[str] | None = None) -> None:
     else:
         filename = pathlib.Path(args.input)
         content_format = content_format or filename.suffix.lstrip(".")
-        with filename.open() as fp:
+        with filename.open(encoding="utf-8") as fp:
             source = fp.read()
 
     if content_format == "md":
@@ -58,7 +58,7 @@ def main(cli_args: list[str] | None = None) -> None:
     if args.output == "-":
         print(rendered, file=sys.stdout)
     else:
-        with open(args.output, "w") as fp:
+        with open(args.output, "w", encoding="utf-8") as fp:
             print(rendered, file=fp)
 
 
