@@ -1,4 +1,7 @@
+import os
 import pathlib
+import subprocess
+import sys
 import tempfile
 from unittest import mock
 
@@ -70,3 +73,45 @@ def test_cli_package(package, contains):
         print_.assert_called_once()
         (result,), _ = print_.call_args
     assert contains in result
+
+
+def non_utf8_environment():
+    env = os.environ.copy()
+    env.update(PYTHONUTF8="0", PYTHONCOERCECLOCALE="0", LC_ALL="C",
+               PYTHONIOENCODING="utf-8")
+    return env
+
+
+@pytest.mark.parametrize("fmt", ["txt", "rst", "md"])
+def test_cli_reads_utf8_with_non_utf8_locale(tmp_path, fmt):
+    if fmt == "md":
+        pytest.importorskip("comrak")
+    source = "Unicode: \u4f60\u597d \U0001f40d"
+    path = tmp_path / ("README." + fmt)
+    path.write_text(source, encoding="utf-8")
+    result = subprocess.run(
+        [sys.executable, "-X", "utf8=0", "-m", "readme_renderer", str(path)],
+        env=non_utf8_environment(), capture_output=True, check=True,
+    )
+    assert source in result.stdout.decode("utf-8")
+
+
+def test_cli_writes_utf8_with_non_utf8_locale(tmp_path):
+    source = "Unicode: \u4f60\u597d \U0001f40d"
+    output = tmp_path / "output.html"
+    # Package metadata is already Unicode, so this isolates output encoding.
+    code = (
+        "from email.message import Message; "
+        "import readme_renderer.__main__ as cli; "
+        "message = Message(); "
+        "message['Description-Content-Type'] = 'text/plain'; "
+        f"message.set_payload({source!a}); "
+        "cli.metadata = lambda _: message; "
+        "cli.main()"
+    )
+    subprocess.run(
+        [sys.executable, "-X", "utf8=0", "-c", code,
+         "--package", "unicode-package", "--output", str(output)],
+        env=non_utf8_environment(), capture_output=True, check=True,
+    )
+    assert source in output.read_text(encoding="utf-8")
