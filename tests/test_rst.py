@@ -129,3 +129,29 @@ def test_image_with_scale_and_explicit_dimensions_renders():
     assert rendered is not None
     assert '<img' in rendered
     assert 'https://example.com/badge.png' in rendered
+
+
+class WriteOnlyStream(io.TextIOBase):
+    def __init__(self):
+        self.parts = []
+
+    def writable(self):
+        return True
+
+    def write(self, text):
+        self.parts.append(text)
+        return len(text)
+
+
+@pytest.mark.parametrize("source, diagnostic", [
+    ("", "No content rendered from RST source."),
+    (".. unknown-directive::", 'Unknown directive type "unknown-directive"'),
+])
+def test_nonseekable_warning_stream(source, diagnostic):
+    warnings = WriteOnlyStream()
+    assert not warnings.seekable()
+    assert render(source, stream=warnings) is None
+    text = "".join(warnings.parts)
+    assert diagnostic in text
+    if source:
+        assert "No content rendered from RST source." not in text
