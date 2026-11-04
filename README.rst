@@ -22,6 +22,42 @@ To locally check whether your long descriptions will render on PyPI, first
 build your distributions, and then use the |twine check|_ command.
 
 
+Configure Rendering
+-------------------
+
+Markdown callers can pass ``comrak.ExtensionOptions`` and
+``comrak.RenderOptions`` as keyword-only ``extension_options`` and
+``render_options`` arguments::
+
+    import comrak
+    from readme_renderer.markdown import render
+
+    extensions = comrak.ExtensionOptions()
+    extensions.strikethrough = True
+    html = render("~~removed~~", extension_options=extensions)
+
+Each supplied object replaces that category of options. A fresh Comrak options
+object has Comrak's defaults, not the renderer's GFM defaults. Omitted arguments
+retain the selected variant's existing defaults. Caller objects and module
+options are not modified, and the resulting HTML is still sanitized. Custom
+``header_id_prefix`` values are also applied to relative heading links.
+
+For reStructuredText, pass a ``settings_overrides`` mapping to override individual
+Docutils settings for one call::
+
+    from readme_renderer.rst import render
+
+    html = render("Heading\n=======\n", settings_overrides={
+        "initial_header_level": 3,
+    })
+
+Omitted settings retain their defaults. Enabling ``file_insertion_enabled`` or
+``raw_enabled`` raises ``ValueError`` to preserve the renderer's safety
+restrictions. The explicit ``stream`` argument takes precedence over a
+``warning_stream`` setting. Treat rendering options as application configuration,
+not as options supplied by untrusted documents.
+
+
 Code of Conduct
 ---------------
 

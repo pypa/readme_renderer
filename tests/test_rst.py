@@ -129,3 +129,43 @@ def test_image_with_scale_and_explicit_dimensions_renders():
     assert rendered is not None
     assert '<img' in rendered
     assert 'https://example.com/badge.png' in rendered
+
+
+def test_settings_overrides_are_per_call():
+    settings = {'initial_header_level': 3}
+    result = render('Heading\n=======\n', settings_overrides=settings)
+    assert '<h3' in result
+    assert '<h1' in render('Heading\n=======\n')
+    assert settings == {'initial_header_level': 3}
+
+
+def test_settings_overrides_keep_security_defaults():
+    warnings = io.StringIO()
+    assert render('.. raw:: html\n\n    <b>raw</b>\n', stream=warnings,
+                  settings_overrides={'smart_quotes': False}) is None
+    assert '"raw" directive disabled' in warnings.getvalue()
+
+
+def test_explicit_stream_takes_precedence_over_settings():
+    warnings = io.StringIO()
+    overridden = io.StringIO()
+    assert render('.. unknown::\n', stream=warnings,
+                  settings_overrides={'warning_stream': overridden}) is None
+    assert 'Unknown directive' in warnings.getvalue()
+    assert overridden.getvalue() == ''
+
+
+@pytest.mark.parametrize('setting', ['file_insertion_enabled', 'raw_enabled'])
+def test_settings_cannot_enable_unsafe_directives(setting):
+    with pytest.raises(ValueError, match=f'{setting} cannot be enabled'):
+        render('Hello', settings_overrides={setting: True})
+
+
+def test_settings_overrides_keep_file_insertion_disabled(tmp_path):
+    secret = tmp_path / 'secret.txt'
+    secret.write_text('private test value', encoding='utf-8')
+    warnings = io.StringIO()
+    assert render(f'.. include:: {secret}\n', stream=warnings,
+                  settings_overrides={'smart_quotes': False}) is None
+    assert 'private test value' not in warnings.getvalue()
+    assert 'disabled' in warnings.getvalue()
