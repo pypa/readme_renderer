@@ -18,6 +18,7 @@ from collections.abc import Callable
 from html import unescape
 from re import Match
 from typing import Any
+from urllib.parse import unquote
 
 import pygments
 import pygments.formatters
@@ -153,8 +154,9 @@ def _prefix_relative_links(html: str, prefix: str) -> str:
     rewrites relative links (href="#...") to include the prefix so they
     correctly link to the prefixed header IDs.
 
-    Note: Footnote links (fn-*, fnref-*) are excluded since comrak does not
-    prefix footnote IDs with header_id_prefix.
+    Note: Generated footnote links are excluded since comrak does not prefix
+    footnote IDs with header_id_prefix. Ordinary links starting with fn-* or
+    fnref-* can still point to headings.
 
     Args:
         html: The rendered HTML.
@@ -163,11 +165,30 @@ def _prefix_relative_links(html: str, prefix: str) -> str:
     Returns:
         The HTML with prefixed relative anchor links.
     """
+    heading_ids = {
+        unescape(value) for value in re.findall(r'<h[1-6] id="([^"]+)"', html)
+    }
+
     def replacer(match: Match[str]) -> str:
-        anchor = match.group(1)
-        # Don't prefix footnote links - comrak doesn't prefix footnote IDs
-        if anchor.startswith(("fn-", "fnref-")):
+        if match.group("footnote"):
+            return match.group(0)
+        anchor = match.group("anchor")
+        target = prefix + unquote(unescape(anchor))
+        # Preserve manual footnote links unless they target a heading.
+        if anchor.startswith(("fn-", "fnref-")) and target not in heading_ids:
             return match.group(0)
         return f'href="#{prefix}{anchor}"'
 
-    return re.sub(r'href="#([^"]+)"', replacer, html)
+    # Consume whole attributes, so marker words in titles are not attributes.
+    attribute = (
+        r'''[^\s"'<>/=]+'''
+        r'''(?:\s*=\s*(?:"[^"]*"|'[^']*'|[^\s"'=<>`]+))?'''
+    )
+    return re.sub(
+        rf'(?P<footnote><a(?:\s+{attribute})*'
+        r'\s+data-footnote-(?:ref|backref)(?=[\s>])'
+        rf'(?:\s+{attribute})*\s*>)'
+        r'|href="#(?P<anchor>[^"]+)"',
+        replacer,
+        html,
+    )
