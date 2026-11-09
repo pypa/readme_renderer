@@ -38,7 +38,7 @@ ALLOWED_ATTRIBUTES = {
     "hr": {"class"},
     "img": {"src", "width", "height", "alt", "align", "class"},
     "span": {"class"},
-    "th": {"align", "class"},
+    "th": {"align", "class", "colspan", "rowspan"},
     "td": {"align", "colspan", "rowspan"},
     "div": {"align", "class"},
     "h1": {"align"},

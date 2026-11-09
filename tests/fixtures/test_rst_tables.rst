@@ -26,3 +26,11 @@
 +---------------+---------------+
 | singlerow     | cell3         |
 +---------------+---------------+
+
+.. A header cell that spans columns, which docutils writes as <th colspan>
+
++---------------+---------------+
+| spanning header               |
++===============+===============+
+| left          | right         |
++---------------+---------------+
